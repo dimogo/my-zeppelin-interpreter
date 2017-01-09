@@ -32,6 +32,9 @@ public class JDBCEChartsInterpreter extends Interpreter {
 
 	@Override
 	public InterpreterResult interpret(String cmd, InterpreterContext interpreterContext) {
+		StringBuilder content = new StringBuilder();
+		content.append("<script type=\"text/javascript\" src=\"").append(getEchartsURL()).append("\"></script>");
+		content.append(cmd);
 		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, cmd);
 	}
 
@@ -68,6 +71,14 @@ public class JDBCEChartsInterpreter extends Interpreter {
 			return Integer.valueOf(getProperty(CONCURRENT_EXECUTION_COUNT));
 		} catch (Exception e) {
 			return 10;
+		}
+	}
+
+	String getEchartsURL() {
+		try {
+			return getProperty(ECHARTS_PLUGIN_EXECUTION_KEY);
+		} catch (Exception e) {
+			return "/plugins/echarts/echarts.min.3.3.2.js";
 		}
 	}
 }
