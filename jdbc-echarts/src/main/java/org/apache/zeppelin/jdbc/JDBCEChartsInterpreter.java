@@ -35,7 +35,7 @@ public class JDBCEChartsInterpreter extends Interpreter {
 		StringBuilder content = new StringBuilder();
 		content.append("<script type=\"text/javascript\" src=\"").append(getEchartsURL()).append("\"></script>");
 		content.append(cmd);
-		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, cmd);
+		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, content.toString());
 	}
 
 	@Override
