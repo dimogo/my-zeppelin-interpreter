@@ -14,6 +14,7 @@ import java.util.Properties;
 public class JDBCEChartsInterpreter extends Interpreter {
 	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.jdbc.echarts.concurrent.use";
 	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.jdbc.echarts.concurrent.max_connection";
+	private final String ECHARTS_PLUGIN_EXECUTION_KEY = "zeppelin.jdbc.echarts.plugin.url";
 
 	public JDBCEChartsInterpreter(Properties property) {
 		super(property);
@@ -31,7 +32,7 @@ public class JDBCEChartsInterpreter extends Interpreter {
 
 	@Override
 	public InterpreterResult interpret(String cmd, InterpreterContext interpreterContext) {
-		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, "<h1>Input Command:" + cmd + "</h1>");
+		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, cmd);
 	}
 
 	@Override

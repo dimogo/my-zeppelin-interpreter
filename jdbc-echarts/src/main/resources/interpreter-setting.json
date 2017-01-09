@@ -15,6 +15,12 @@
         "propertyName": "zeppelin.jdbc.echarts.concurrent.max_connection",
         "defaultValue": "10",
         "description": "Number of concurrent execution"
+      },
+      "zeppelin.jdbc.echarts.plugin.url": {
+        "envName": null,
+        "propertyName": "zeppelin.jdbc.echarts.plugin.url",
+        "defaultValue": "/plugins/echarts/echarts.min.3.3.2.js",
+        "description": "Plugin URL of ECharts"
       }
     },
     "editor": {
