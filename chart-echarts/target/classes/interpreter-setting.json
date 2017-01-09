@@ -1,0 +1,14 @@
+[
+  {
+    "group": "jdbc",
+    "name": "echarts",
+    "className": "org.apache.zeppelin.jdbc.JDBCEChartsInterpreter",
+    "properties": {
+
+    },
+    "editor": {
+      "language": "sql",
+      "editOnDblClick": false
+    }
+  }
+]

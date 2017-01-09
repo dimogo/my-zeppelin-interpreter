@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jdbc-echarts</artifactId>
+    <artifactId>chart-echarts</artifactId>
     <packaging>jar</packaging>
-    <name>Zeppelin: JDBC Interpreter for ECharts</name>
+    <name>Zeppelin: ECharts Interpreter</name>
 
     <properties>
     </properties>

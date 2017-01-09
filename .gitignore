@@ -1,3 +1,5 @@
 .idea/*
+zeppelin-echarts.iml
 echarts-interpreter.iml
-jdbc-echarts/target/*
+chart-echarts/chart-echarts.iml
+chart-echarts/target/*
