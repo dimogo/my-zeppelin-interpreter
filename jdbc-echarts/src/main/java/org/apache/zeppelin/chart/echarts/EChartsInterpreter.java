@@ -1,4 +1,4 @@
-package org.apache.zeppelin.jdbc;
+package org.apache.zeppelin.chart.echarts;
 
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
@@ -11,16 +11,16 @@ import java.util.Properties;
 /**
  * Created by Ethan Xiao on 2017/1/9.
  */
-public class JDBCEChartsInterpreter extends Interpreter {
-	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.jdbc.echarts.concurrent.use";
-	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.jdbc.echarts.concurrent.max_connection";
-	private final String ECHARTS_PLUGIN_EXECUTION_KEY = "zeppelin.jdbc.echarts.plugin.url.echarts";
-	private final String JQUERY_PLUGIN_EXECUTION_KEY = "zeppelin.jdbc.echarts.plugin.url.jquery";
-	private final String BOOTSTRAP_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.jdbc.echarts.plugin.url.bootstrap.style";
-	private final String BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.jdbc.echarts.plugin.url.bootstrap.theme.style";
-	private final String BOOTSTRAP_PLUGIN_EXECUTION_KEY = "zeppelin.jdbc.echarts.plugin.url.bootstrap";
+public class EChartsInterpreter extends Interpreter {
+	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.chart.echarts.concurrent.use";
+	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.chart.echarts.concurrent.max_connection";
+	private final String ECHARTS_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.echarts";
+	private final String JQUERY_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.jquery";
+	private final String BOOTSTRAP_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.bootstrap.style";
+	private final String BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.bootstrap.theme.style";
+	private final String BOOTSTRAP_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.bootstrap";
 
-	public JDBCEChartsInterpreter(Properties property) {
+	public EChartsInterpreter(Properties property) {
 		super(property);
 	}
 
@@ -66,7 +66,7 @@ public class JDBCEChartsInterpreter extends Interpreter {
 
 	@Override
 	public Scheduler getScheduler() {
-		String schedulerName = JDBCEChartsInterpreter.class.getName() + this.hashCode();
+		String schedulerName = EChartsInterpreter.class.getName() + this.hashCode();
 		return isConcurrentExecution() ?
 				SchedulerFactory.singleton().createOrGetParallelScheduler(schedulerName,
 						getMaxConcurrentConnection())

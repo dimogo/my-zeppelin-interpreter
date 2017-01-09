@@ -1,48 +1,48 @@
 [
   {
-    "group": "jdbc",
+    "group": "chart",
     "name": "echarts",
-    "className": "org.apache.zeppelin.jdbc.JDBCEChartsInterpreter",
+    "className": "org.apache.zeppelin.chart.echarts.EChartsInterpreter",
     "properties": {
-      "zeppelin.jdbc.echarts.concurrent.use": {
+      "zeppelin.chart.echarts.concurrent.use": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.concurrent.use",
+        "propertyName": "zeppelin.chart.echarts.concurrent.use",
         "defaultValue": "true",
         "description": "Use parallel scheduler"
       },
-      "zeppelin.jdbc.echarts.concurrent.max_connection": {
+      "zeppelin.chart.echarts.concurrent.max_connection": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.concurrent.max_connection",
+        "propertyName": "zeppelin.chart.echarts.concurrent.max_connection",
         "defaultValue": "10",
         "description": "Number of concurrent execution"
       },
-      "zeppelin.jdbc.echarts.plugin.url.echarts": {
+      "zeppelin.chart.echarts.plugin.url.echarts": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.plugin.url.echarts",
+        "propertyName": "zeppelin.chart.echarts.plugin.url.echarts",
         "defaultValue": "/plugins/echarts/echarts-3.3.2.min.js",
         "description": "Javascript file URL of ECharts"
       },
-      "zeppelin.jdbc.echarts.plugin.url.jquery": {
+      "zeppelin.chart.echarts.plugin.url.jquery": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.plugin.url.jquery",
+        "propertyName": "zeppelin.chart.echarts.plugin.url.jquery",
         "defaultValue": "/plugins/jquery/jquery-3.1.1.min.js",
         "description": "Javascript file URL of JQuery"
       },
-      "zeppelin.jdbc.echarts.plugin.url.bootstrap.style": {
+      "zeppelin.chart.echarts.plugin.url.bootstrap.style": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.plugin.url.bootstrap.style",
+        "propertyName": "zeppelin.chart.echarts.plugin.url.bootstrap.style",
         "defaultValue": "/plugins/bootstrap/3.3.0/css/bootstrap.min.css",
         "description": "CSS file URL of Bootstrap"
       },
-      "zeppelin.jdbc.echarts.plugin.url.bootstrap.theme.style": {
+      "zeppelin.chart.echarts.plugin.url.bootstrap.theme.style": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.plugin.url.bootstrap.theme.style",
+        "propertyName": "zeppelin.chart.echarts.plugin.url.bootstrap.theme.style",
         "defaultValue": "/plugins/bootstrap/3.3.0/css/bootstrap-theme.min.css",
         "description": "CSS file URL of Bootstrap Theme"
       },
-      "zeppelin.jdbc.echarts.plugin.url.bootstrap": {
+      "zeppelin.chart.echarts.plugin.url.bootstrap": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.plugin.url.bootstrap",
+        "propertyName": "zeppelin.chart.echarts.plugin.url.bootstrap",
         "defaultValue": "/plugins/bootstrap/3.3.0/js/bootstrap.min.js",
         "description": "Javascript file URL of Bootstrap"
       }
