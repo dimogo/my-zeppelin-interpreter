@@ -12,6 +12,9 @@ import java.util.Properties;
  * Created by Ethan Xiao on 2017/1/9.
  */
 public class JDBCEChartsInterpreter extends Interpreter {
+	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.jdbc.echarts.concurrent.use";
+	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.jdbc.echarts.concurrent.max_connection";
+
 	public JDBCEChartsInterpreter(Properties property) {
 		super(property);
 	}
@@ -27,8 +30,8 @@ public class JDBCEChartsInterpreter extends Interpreter {
 	}
 
 	@Override
-	public InterpreterResult interpret(String s, InterpreterContext interpreterContext) {
-		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, "<h1>Hello, ECharts!</h1>");
+	public InterpreterResult interpret(String cmd, InterpreterContext interpreterContext) {
+		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, "<h1>Input Command:" + cmd + "</h1>");
 	}
 
 	@Override
@@ -48,7 +51,22 @@ public class JDBCEChartsInterpreter extends Interpreter {
 
 	@Override
 	public Scheduler getScheduler() {
-		return SchedulerFactory.singleton().createOrGetParallelScheduler(
-				JDBCEChartsInterpreter.class.getName() + this.hashCode(), 10);
+		String schedulerName = JDBCEChartsInterpreter.class.getName() + this.hashCode();
+		return isConcurrentExecution() ?
+				SchedulerFactory.singleton().createOrGetParallelScheduler(schedulerName,
+						getMaxConcurrentConnection())
+				: SchedulerFactory.singleton().createOrGetFIFOScheduler(schedulerName);
+	}
+
+	boolean isConcurrentExecution() {
+		return Boolean.valueOf(getProperty(CONCURRENT_EXECUTION_KEY));
+	}
+
+	int getMaxConcurrentConnection() {
+		try {
+			return Integer.valueOf(getProperty(CONCURRENT_EXECUTION_COUNT));
+		} catch (Exception e) {
+			return 10;
+		}
 	}
 }

@@ -1,2 +1,3 @@
 .idea/*
 echarts-interpreter.iml
+jdbc-echarts/target/*
