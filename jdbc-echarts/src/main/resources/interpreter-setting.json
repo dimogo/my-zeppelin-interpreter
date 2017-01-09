@@ -16,11 +16,35 @@
         "defaultValue": "10",
         "description": "Number of concurrent execution"
       },
-      "zeppelin.jdbc.echarts.plugin.url": {
+      "zeppelin.jdbc.echarts.plugin.url.echarts": {
         "envName": null,
-        "propertyName": "zeppelin.jdbc.echarts.plugin.url",
-        "defaultValue": "/plugins/echarts/echarts.min.3.3.2.js",
-        "description": "Plugin URL of ECharts"
+        "propertyName": "zeppelin.jdbc.echarts.plugin.url.echarts",
+        "defaultValue": "/plugins/echarts/echarts-3.3.2.min.js",
+        "description": "Javascript file URL of ECharts"
+      },
+      "zeppelin.jdbc.echarts.plugin.url.jquery": {
+        "envName": null,
+        "propertyName": "zeppelin.jdbc.echarts.plugin.url.jquery",
+        "defaultValue": "/plugins/jquery/jquery-3.1.1.min.js",
+        "description": "Javascript file URL of JQuery"
+      },
+      "zeppelin.jdbc.echarts.plugin.url.bootstrap.style": {
+        "envName": null,
+        "propertyName": "zeppelin.jdbc.echarts.plugin.url.bootstrap.style",
+        "defaultValue": "/plugins/bootstrap/3.3.0/css/bootstrap.min.css",
+        "description": "CSS file URL of Bootstrap"
+      },
+      "zeppelin.jdbc.echarts.plugin.url.bootstrap.theme.style": {
+        "envName": null,
+        "propertyName": "zeppelin.jdbc.echarts.plugin.url.bootstrap.theme.style",
+        "defaultValue": "/plugins/bootstrap/3.3.0/css/bootstrap-theme.min.css",
+        "description": "CSS file URL of Bootstrap Theme"
+      },
+      "zeppelin.jdbc.echarts.plugin.url.bootstrap": {
+        "envName": null,
+        "propertyName": "zeppelin.jdbc.echarts.plugin.url.bootstrap",
+        "defaultValue": "/plugins/bootstrap/3.3.0/js/bootstrap.min.js",
+        "description": "Javascript file URL of Bootstrap"
       }
     },
     "editor": {
