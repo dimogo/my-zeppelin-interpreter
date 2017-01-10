@@ -1,4 +1,4 @@
-package org.apache.zeppelin.chart.echarts;
+package org.apache.zeppelin.echarts;
 
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
@@ -12,13 +12,13 @@ import java.util.Properties;
  * Created by Ethan Xiao on 2017/1/9.
  */
 public class EChartsInterpreter extends Interpreter {
-	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.chart.echarts.concurrent.use";
-	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.chart.echarts.concurrent.max_connection";
-	private final String ECHARTS_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.echarts";
-	private final String JQUERY_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.jquery";
-	private final String BOOTSTRAP_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.bootstrap.style";
-	private final String BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.bootstrap.theme.style";
-	private final String BOOTSTRAP_PLUGIN_EXECUTION_KEY = "zeppelin.chart.echarts.plugin.url.bootstrap";
+	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.echarts.concurrent.use";
+	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.echarts.concurrent.max_connection";
+	private final String ECHARTS_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.echarts";
+	private final String JQUERY_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.jquery";
+	private final String BOOTSTRAP_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap.style";
+	private final String BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap.theme.style";
+	private final String BOOTSTRAP_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap";
 
 	public EChartsInterpreter(Properties property) {
 		super(property);

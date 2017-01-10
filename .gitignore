@@ -1,4 +1,4 @@
 .idea/*
 my-zeppelin-interpreter.iml
-chart-echarts/chart-echarts.iml
-chart-echarts/target/*
+zeppelin-echarts/zeppelin-echarts.iml
+zeppelin-echarts/target/*
