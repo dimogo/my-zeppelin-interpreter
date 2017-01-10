@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chart-echarts</artifactId>
+    <artifactId>zeppelin-echarts</artifactId>
     <packaging>jar</packaging>
     <name>Zeppelin: ECharts Interpreter</name>
 
