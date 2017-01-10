@@ -39,7 +39,7 @@ public class EChartsInterpreter extends Interpreter {
 		StringBuilder content = new StringBuilder();
 		content.append("<script type=\"text/javascript\" src=\"").append(getEchartsURL()).append("\"></script>");
 		content.append("<script type=\"text/javascript\" src=\"").append(getJqeuryURL()).append("\"></script>");
-		content.append("<link rel=\"stylesheet\" href=\"").append(getBootstrapStyleURL()).append("\" />");
+		//content.append("<link rel=\"stylesheet\" href=\"").append(getBootstrapStyleURL()).append("\" />");
 		//content.append("<link rel=\"stylesheet\" href=\"").append(getBootstrapThemeStyleURL()).append("\" />");
 		content.append("<script type=\"text/javascript\" src=\"").append(getBootstrapURL()).append("\"></script>");
 
