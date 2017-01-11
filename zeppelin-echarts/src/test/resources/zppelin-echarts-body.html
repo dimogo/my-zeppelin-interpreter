@@ -1,0 +1,370 @@
+%echarts
+<div class="container-fluid zeppelin-echarts-example">
+    <form class="form-horizontal" role="form">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
+
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="zeppelin-echarts-title" placeholder="图表的主标题">
+            </div>
+            <label for="inputEmail3" class="col-sm-1 control-label">副标题</label>
+
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="zeppelin-echarts-subtitle" placeholder="图表的副标题">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 control-label">图表类型</label>
+
+            <div class="col-sm-2">
+                <select id="zeppelin-echarts-type" class="form-control">
+                    <option value=""></option>
+                    <option value="bar">柱状图</option>
+                    <option value="line">折线图</option>
+                    <option value="scatter">散点图</option>
+                </select>
+            </div>
+            <label for="inputEmail3" class="col-sm-2 control-label">系列名称</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="zeppelin-echarts-serie-name" placeholder="图表系列名称">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 control-label">宽度</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="图表的宽度">
+            </div>
+            <label for="inputEmail3" class="col-sm-2 control-label">横坐标字段</label>
+
+            <div class="col-sm-2">
+                <select id="zeppelin-echarts-xaxis" class="form-control">
+                </select>
+            </div>
+            <label for="inputEmail3" class="col-sm-2 control-label">横坐标类型</label>
+
+            <div class="col-sm-2">
+                <select id="zeppelin-echarts-xaxis-type" class="form-control">
+                    <option value="value">数值</option>
+                    <option value="category" selected>类目</option>
+                    <option value="time">时间</option>
+                    <option value="log">对数</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="图表的高度">
+            </div>
+            <label for="inputEmail3" class="col-sm-2 control-label">纵坐标字段</label>
+
+            <div class="col-sm-2">
+                <select id="zeppelin-echarts-yaxis" class="form-control">
+                </select>
+            </div>
+            <label for="inputEmail3" class="col-sm-2 control-label">纵坐标类型</label>
+
+            <div class="col-sm-2">
+                <select id="zeppelin-echarts-yaxis-type" class="form-control">
+                    <option value="value" selected>数值</option>
+                    <option value="category">类目</option>
+                    <option value="time">时间</option>
+                    <option value="log">对数</option>
+                </select>
+            </div>
+        </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table id="zeppelin-echarts-series" class="table table-bordered">
+            <tr>
+                <td>#
+                <td>名称
+                <td>类型
+                <td>横坐标字段
+                <td>纵坐标字段
+                <td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-12">
+            <button type="button" id="zeppin-echarts-add-serie" class="btn btn-success">增加系列</button>
+            <button type="button" id="zeppin-echarts-refresh-graphic" class="btn btn-success">刷新图表</button>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="row">
+    <div id="zeppelin-echarts-graphic-container" class="col-sm-12">
+        <div id="zeppelin-echarts-graphic-body" class="zeppelin-echarts-main"></div>
+    </div>
+</div>
+</div>
+<script language="javascript">
+
+    var orginData = [
+        {
+            "Country": "Australia",
+            "1990PerGdp": 28604,
+            "2015PerGdp": 44056,
+            "1990PerAge": 77,
+            "2015PerAge": 81.8,
+            "1990GDP": 17096869,
+            "2015GDP": 23968973
+        },
+        {
+            "Country": "Canada",
+            "1990PerGdp": 31163,
+            "2015PerGdp": 43294,
+            "1990PerAge": 77.4,
+            "2015PerAge": 81.7,
+            "1990GDP": 27662440,
+            "2015GDP": 35939927
+        },
+        {
+            "Country": "China",
+            "1990PerGdp": 1516,
+            "2015PerGdp": 13334,
+            "1990PerAge": 68,
+            "2015PerAge": 76.9,
+            "1990GDP": 1154605773,
+            "2015GDP": 1376048943
+        }
+    ];
+    var data = [[], []];
+    var graphicBody = null;
+    var graphicBodyObj = null;
+
+    var serieConfigs = new Array();
+
+    function fillOriginDataOptionsFromStruct(data) {
+        $("#zeppelin-echarts-xaxis").append("<option value=''></option>");
+        $("#zeppelin-echarts-yaxis").append("<option value=''></option>");
+        for (var key in data) {
+            $("#zeppelin-echarts-xaxis").append("<option value='" + key + "'>" + key + "</option>");
+            $("#zeppelin-echarts-yaxis").append("<option value='" + key + "'>" + key + "</option>");
+        }
+    }
+
+    function buildLegendDataBySerieConfigs() {
+        var legendData = new Array();
+        for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs.length; serieConfigIndex++) {
+            legendData.push(serieConfigs[serieConfigIndex].name);
+        }
+        return legendData;
+    }
+
+    function buildSerieDataByOrigin(originData) {
+        var seriesData = new Array();
+        for (var dataIndex in originData) {
+            var data = originData[dataIndex];
+            for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs.length; serieConfigIndex++) {
+                var serieConfig = serieConfigs[serieConfigIndex]
+                var serie = undefined;
+                if (seriesData.length < serieConfig.index + 1) {
+                    seriesData.push({
+                        "name": serieConfig.name,
+                        "type": serieConfig.type,
+                        "data": new Array()
+                    });
+                }
+                serie = seriesData[serieConfig.index];
+                var objData = new Array();
+                objData.push(data[serieConfig.xAxis]);
+                objData.push(data[serieConfig.yAxis]);
+                serie.data.push(objData);
+            }
+        }
+        return seriesData;
+    }
+
+    fillOriginDataOptionsFromStruct(orginData[0]);
+
+    function buildGraphicOption(option) {
+        var title = $("#zeppelin-echarts-title").val();
+        var subtitle = $("#zeppelin-echarts-subtitle").val();
+        option.title.text = title;
+        option.title.subtext = subtitle;
+        option.xAxis.type = $("#zeppelin-echarts-xaxis-type").val();
+        option.yAxis.type = $("#zeppelin-echarts-yaxis-type").val();
+        option.series = buildSerieDataByOrigin(orginData);
+        option.legend.data = buildLegendDataBySerieConfigs(serieConfigs);
+        return option;
+    }
+
+    Array.prototype.del = function (index) {
+        if (isNaN(index) || index >= this.length) {
+            return false;
+        }
+        for (var i = 0, n = 0; i < this.length; i++) {
+            if (this[i] != this[index]) {
+                this[n++] = this[i];
+            }
+        }
+        this.length -= 1;
+    };
+
+    function updateZeppelinEChartsSeries() {
+        $("#zeppelin-echarts-series tr:gt(0)").remove();
+        for (var index = 0; index < serieConfigs.length; index++) {
+            var cfg = serieConfigs[index];
+            $("#zeppelin-echarts-series").append(
+                    "<tr><td>" + index
+                    + "<td>" + cfg.name
+                    + "<td>" + cfg.type
+                    + "<td>" + cfg.xAxis
+                    + "<td>" + cfg.yAxis
+                    + "<td><button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
+                    + "</tr>");
+        }
+        $("button[name='zeppelin-echarts-serie-delete']").each(function () {
+            $(this).click(function () {
+                var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html())
+                serieConfigs.del(serieIndex)
+                $(this).parents("tr").remove()
+                updateZeppelinEChartsSeries()
+            })
+        })
+    }
+
+    $("#zeppin-echarts-refresh-graphic").click(function () {
+        drawChart(false, graphicBodyObj, buildGraphicOption(option));
+    });
+
+    $("#zeppin-echarts-add-serie").click(function () {
+        serieConfigs.push({
+            "index": serieConfigs.length,
+            "name": $("#zeppelin-echarts-serie-name").val(),
+            "type": $("#zeppelin-echarts-type").val(),
+            "xAxis": $("#zeppelin-echarts-xaxis").val(),
+            "yAxis": $("#zeppelin-echarts-yaxis").val(),
+        });
+        updateZeppelinEChartsSeries();
+    });
+
+    option = {
+        title: {
+            text: "测试图表",
+            subtext: "测试图表2"
+        },
+        legend: {
+            right: 10,
+            data: []
+        },
+        xAxis: {
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        yAxis: {
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            },
+            scale: true
+        },
+        series: [{
+            name: '1990',
+            data: data[0],
+            type: 'scatter',
+            symbolSize: function (data) {
+                return Math.sqrt(data[2]) / 5e2;
+            },
+            label: {
+                emphasis: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(120, 36, 50, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(251, 118, 123)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(204, 46, 72)'
+                    }])
+                }
+            }
+        }, {
+            name: '2015',
+            data: data[1],
+            type: 'scatter',
+            symbolSize: function (data) {
+                return Math.sqrt(data[2]) / 5e2;
+            },
+            label: {
+                emphasis: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(129, 227, 238)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(25, 183, 207)'
+                    }])
+                }
+            }
+        }]
+    };
+
+    function drawChart(redraw, chart, option) {
+        if (redraw) {
+            if (chart && chart.dispose) {
+                chart.dispose();
+            }
+            chart = echarts.init(chart, "macarons");
+        }
+        chart.showLoading({text: "正在重新绘制图表,请稍候..."})
+        try {
+            chart.setOption(option, true)
+            chart.hideLoading();
+        } catch (e) {
+            chart.showLoading({text: "绘制图表出错了"});
+            console.log(e);
+        }
+        return chart;
+    }
+
+    $(document).ready(function () {
+        graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
+        graphicBodyObj = echarts.init(graphicBody, "macarons");
+        drawChart(false, graphicBodyObj, option);
+    });
+</script>
