@@ -1,5 +1,8 @@
 package org.apache.zeppelin.echarts;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.zeppelin.echarts.command.Command;
+import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
 import org.apache.zeppelin.interpreter.InterpreterResult;
@@ -12,16 +15,12 @@ import java.util.Properties;
  * Created by Ethan Xiao on 2017/1/9.
  */
 public class EChartsInterpreter extends Interpreter {
-	private final String CONCURRENT_EXECUTION_KEY = "zeppelin.echarts.concurrent.use";
-	private final String CONCURRENT_EXECUTION_COUNT = "zeppelin.echarts.concurrent.max_connection";
-	private final String ECHARTS_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.echarts";
-	private final String JQUERY_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.jquery";
-	private final String BOOTSTRAP_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap.style";
-	private final String BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap.theme.style";
-	private final String BOOTSTRAP_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap";
+
+	private PropertyGetter propertyGetter;
 
 	public EChartsInterpreter(Properties property) {
 		super(property);
+		this.propertyGetter = new PropertyGetter(this);
 	}
 
 	@Override
@@ -36,17 +35,12 @@ public class EChartsInterpreter extends Interpreter {
 
 	@Override
 	public InterpreterResult interpret(String cmd, InterpreterContext interpreterContext) {
-		StringBuilder content = new StringBuilder();
-		content.append("<script type=\"text/javascript\" src=\"").append(getEchartsURL()).append("\"></script>");
-		content.append("<script type=\"text/javascript\" src=\"").append(getJqeuryURL()).append("\"></script>");
-		//content.append("<link rel=\"stylesheet\" href=\"").append(getBootstrapStyleURL()).append("\" />");
-		//content.append("<link rel=\"stylesheet\" href=\"").append(getBootstrapThemeStyleURL()).append("\" />");
-		content.append("<script type=\"text/javascript\" src=\"").append(getBootstrapURL()).append("\"></script>");
-
-		content.append("<link rel=\"stylesheet\" href=\"/plugins/zeppelin-echarts/css/zeppelin-echarts.css\" />");
-		content.append("<script type=\"text/javascript\" src=\"/plugins/zeppelin-echarts/js/zeppelin-echarts.js\"></script>");
-		content.append(cmd);
-		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, content.toString());
+		try {
+			Command command = CommandParser.getInstance().parse(cmd);
+			return command.execute(this.propertyGetter, interpreterContext);
+		} catch (Throwable e) {
+			return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, ExceptionUtils.getFullStackTrace(e));
+		}
 	}
 
 	@Override
@@ -67,61 +61,9 @@ public class EChartsInterpreter extends Interpreter {
 	@Override
 	public Scheduler getScheduler() {
 		String schedulerName = EChartsInterpreter.class.getName() + this.hashCode();
-		return isConcurrentExecution() ?
+		return this.propertyGetter.isConcurrentExecution() ?
 				SchedulerFactory.singleton().createOrGetParallelScheduler(schedulerName,
-						getMaxConcurrentConnection())
+						this.propertyGetter.getMaxConcurrentConnection())
 				: SchedulerFactory.singleton().createOrGetFIFOScheduler(schedulerName);
-	}
-
-	boolean isConcurrentExecution() {
-		return Boolean.valueOf(getProperty(CONCURRENT_EXECUTION_KEY));
-	}
-
-	int getMaxConcurrentConnection() {
-		try {
-			return Integer.valueOf(getProperty(CONCURRENT_EXECUTION_COUNT));
-		} catch (Exception e) {
-			return 10;
-		}
-	}
-
-	String getEchartsURL() {
-		try {
-			return getProperty(ECHARTS_PLUGIN_EXECUTION_KEY);
-		} catch (Exception e) {
-			return "/plugins/echarts/echarts-3.3.2.min.js";
-		}
-	}
-
-	String getJqeuryURL() {
-		try {
-			return getProperty(JQUERY_PLUGIN_EXECUTION_KEY);
-		} catch (Exception e) {
-			return "/plugins/jquery/jquery-3.1.1.min.js";
-		}
-	}
-
-	String getBootstrapStyleURL() {
-		try {
-			return getProperty(BOOTSTRAP_STYLE_PLUGIN_EXECUTION_KEY);
-		} catch (Exception e) {
-			return "/plugins/bootstrap/3.3.0/css/bootstrap.min.css";
-		}
-	}
-
-	String getBootstrapThemeStyleURL() {
-		try {
-			return getProperty(BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY);
-		} catch (Exception e) {
-			return "/plugins/bootstrap/3.3.0/css/bootstrap-theme.min.css";
-		}
-	}
-
-	String getBootstrapURL() {
-		try {
-			return getProperty(BOOTSTRAP_PLUGIN_EXECUTION_KEY);
-		} catch (Exception e) {
-			return "/plugins/bootstrap/3.3.0/js/bootstrap.min.js";
-		}
 	}
 }
