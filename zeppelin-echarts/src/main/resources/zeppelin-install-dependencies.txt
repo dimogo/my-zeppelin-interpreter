@@ -1,0 +1,2 @@
+commons-collections:commons-collections:3.2.1
+org.apache.velocity:velocity:1.7
