@@ -1,5 +1,6 @@
 package org.apache.zeppelin.echarts.command;
 
+import org.apache.zeppelin.echarts.command.processor.EChartsProcessor;
 import org.apache.zeppelin.echarts.command.processor.Processor;
 import org.apache.zeppelin.echarts.command.reader.*;
 import org.apache.zeppelin.echarts.command.writer.*;
@@ -72,7 +73,6 @@ public class CommandBuilder {
 	 */
 	enum CommandOutputType {
 		angular(AngularWriter.class),
-		echarts(EChartsWriter.class),    //将内容以echarts图表输出
 		html(HTMLWriter.class),   //以HTML类型输出
 		image(ImageWriter.class),
 		svg(SVGWriter.class),
@@ -95,6 +95,7 @@ public class CommandBuilder {
 	处理命令名称
 	 */
 	enum CommandProcessType {
+		echarts(EChartsProcessor.class),    //将内容以echarts图表输出
 		;
 		private Class<? extends Processor> cls;
 

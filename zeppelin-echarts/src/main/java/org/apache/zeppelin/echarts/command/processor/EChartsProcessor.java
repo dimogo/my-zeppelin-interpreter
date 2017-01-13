@@ -1,8 +1,9 @@
-package org.apache.zeppelin.echarts.command.writer;
+package org.apache.zeppelin.echarts.command.processor;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.zeppelin.echarts.command.writer.Writer;
 import org.apache.zeppelin.echarts.utils.OutputCombiner;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
@@ -16,7 +17,7 @@ import java.util.Properties;
  * Created by Ethan Xiao on 2017/1/12.
  * Writer for ECharts
  */
-public class EChartsWriter extends Writer<String, InterpreterResult> {
+public class EChartsProcessor extends Processor<String, String> {
 
 	private VelocityEngine ve = new VelocityEngine();
 
@@ -25,10 +26,11 @@ public class EChartsWriter extends Writer<String, InterpreterResult> {
 	 */
 	private String html;
 
-	public EChartsWriter() {
+	public EChartsProcessor() {
 		Properties p = new Properties();
 		try {
 			p.load(this.getClass().getResourceAsStream("/velocity.properties"));
+			p.put("file.resource.loader.path", this.getClass().getResource("/vm").getPath());
 			ve.init(p);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -43,7 +45,7 @@ public class EChartsWriter extends Writer<String, InterpreterResult> {
 		this.html = body;
 	}
 
-	public InterpreterResult execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
+	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
 		Template template = ve.getTemplate("zeppelin-echarts-body.vm");
 		VelocityContext context = new VelocityContext();
 		context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
@@ -53,13 +55,7 @@ public class EChartsWriter extends Writer<String, InterpreterResult> {
 		context.put("ZeppelinEChartsBodyFoot", this.html);
 		StringWriter writer = new StringWriter();
 		template.merge(context, writer);
-		return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.TEXT, writer.toString());
+		return writer.toString();
 	}
 
-	public static void main(String[] args) {
-		EChartsWriter writer = new EChartsWriter();
-		String originData = null;
-		InterpreterResult result = writer.execute(originData, null, null);
-		System.out.println(result.toString());
-	}
 }
