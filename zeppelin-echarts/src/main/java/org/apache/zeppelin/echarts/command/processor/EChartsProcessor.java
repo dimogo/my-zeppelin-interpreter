@@ -3,6 +3,7 @@ package org.apache.zeppelin.echarts.command.processor;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.zeppelin.echarts.command.writer.Writer;
 import org.apache.zeppelin.echarts.utils.OutputCombiner;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
@@ -26,11 +27,17 @@ public class EChartsProcessor extends Processor<String, String> {
 	 */
 	private String html;
 
+	private String vmPath = this.getClass().getResource("/vm").getPath();
+
 	public EChartsProcessor() {
 		Properties p = new Properties();
 		try {
 			p.load(this.getClass().getResourceAsStream("/velocity.properties"));
-			p.put("file.resource.loader.path", this.getClass().getResource("/vm").getPath());
+			if (!p.containsKey("file.resource.loader.path")) {
+				p.put("file.resource.loader.path", vmPath);
+			} else {
+				vmPath = p.get("file.resource.loader.path").toString();
+			}
 			ve.init(p);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -46,16 +53,19 @@ public class EChartsProcessor extends Processor<String, String> {
 	}
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
-		Template template = ve.getTemplate("zeppelin-echarts-body.vm");
-		VelocityContext context = new VelocityContext();
-		context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
-		context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
-		context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
-		context.put("ZeppelinEChartsOriginJsonData", input);
-		context.put("ZeppelinEChartsBodyFoot", this.html);
-		StringWriter writer = new StringWriter();
-		template.merge(context, writer);
-		return writer.toString();
+		try {
+			Template template = ve.getTemplate("zeppelin-echarts-body.vm");
+			VelocityContext context = new VelocityContext();
+			context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
+			context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
+			context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
+			context.put("ZeppelinEChartsOriginJsonData", input);
+			context.put("ZeppelinEChartsBodyFoot", this.html);
+			StringWriter writer = new StringWriter();
+			template.merge(context, writer);
+			return writer.toString();
+		} catch (ResourceNotFoundException e) {
+			throw new RuntimeException("vm path:" + this.vmPath, e);
+		}
 	}
-
 }
