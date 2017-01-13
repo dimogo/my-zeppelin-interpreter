@@ -36,7 +36,7 @@ public class EChartsProcessor extends Processor<String, String> {
 			if (!p.containsKey("file.resource.loader.path")) {
 				p.put("file.resource.loader.path", vmPath);
 			} else {
-				vmPath = p.get("file.resource.loader.path").toString();
+				vmPath = (String)p.get("file.resource.loader.path");
 			}
 			ve.init(p);
 		} catch (IOException e) {
@@ -56,9 +56,9 @@ public class EChartsProcessor extends Processor<String, String> {
 		try {
 			Template template = ve.getTemplate("zeppelin-echarts-body.vm");
 			VelocityContext context = new VelocityContext();
-			context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
-			context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
-			context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
+			//context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
+			//context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
+			//context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
 			context.put("ZeppelinEChartsOriginJsonData", input);
 			context.put("ZeppelinEChartsBodyFoot", this.html);
 			StringWriter writer = new StringWriter();
@@ -67,5 +67,10 @@ public class EChartsProcessor extends Processor<String, String> {
 		} catch (ResourceNotFoundException e) {
 			throw new RuntimeException("vm path:" + this.vmPath, e);
 		}
+	}
+
+	public static void main(String[] args) {
+		EChartsProcessor processor = new EChartsProcessor();
+		System.out.println(processor.execute(null, null, null));
 	}
 }
