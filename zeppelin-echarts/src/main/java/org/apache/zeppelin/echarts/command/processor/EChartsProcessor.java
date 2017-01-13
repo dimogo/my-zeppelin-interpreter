@@ -27,7 +27,7 @@ public class EChartsProcessor extends Processor<String, String> {
 	 */
 	private String html;
 
-	private String vmPath = this.getClass().getResource("/vm").getPath();
+	private String vmPath = this.getClass().getResource("/").getPath();
 
 	public EChartsProcessor() {
 		Properties p = new Properties();
@@ -54,7 +54,7 @@ public class EChartsProcessor extends Processor<String, String> {
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
 		try {
-			Template template = ve.getTemplate("zeppelin-echarts-body.vm");
+			Template template = ve.getTemplate("/vm/zeppelin-echarts-body.vm");
 			VelocityContext context = new VelocityContext();
 			context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
 			context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
