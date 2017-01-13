@@ -171,8 +171,6 @@
         return seriesData;
     }
 
-    fillOriginDataOptionsFromStruct(orginData[0]);
-
     function buildGraphicOption(option) {
         var title = $("#zeppelin-echarts-title").val();
         var subtitle = $("#zeppelin-echarts-subtitle").val();
@@ -442,6 +440,7 @@
             console.log('all files loaded');
 
             $(document).ready(function () {
+                fillOriginDataOptionsFromStruct(orginData[0]);
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
                 drawChart(false, graphicBodyObj, option);
