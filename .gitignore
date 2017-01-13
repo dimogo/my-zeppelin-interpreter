@@ -2,3 +2,4 @@
 my-zeppelin-interpreter.iml
 zeppelin-echarts/zeppelin-echarts.iml
 zeppelin-echarts/target/*
+velocity.log
