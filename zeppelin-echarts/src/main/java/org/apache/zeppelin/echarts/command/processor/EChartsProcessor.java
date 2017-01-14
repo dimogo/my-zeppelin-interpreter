@@ -54,7 +54,7 @@ public class EChartsProcessor extends Processor<String, String> {
 	}
 
 	public void addPara(String name, String[] options, String body) {
-		if ("option".equalsIgnoreCase(name) && ArrayUtils.isNotEmpty(options)) {
+		if ("option".equalsIgnoreCase(name) && options != null && options.length > 0) {
 			if (options.length > 1) {
 				optionSettings.put(options[0], options[1]);
 			} else {
