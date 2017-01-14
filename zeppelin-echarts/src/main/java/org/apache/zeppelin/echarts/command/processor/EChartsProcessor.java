@@ -73,9 +73,9 @@ public class EChartsProcessor extends Processor<String, String> {
 		try {
 			Template template = ve.getTemplate("/vm/zeppelin-echarts-body.vm");
 			VelocityContext context = new VelocityContext();
-			//context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
-			//context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
-			//context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
+			context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
+			context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
+			context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
 			context.put("ZeppelinEChartsOriginJsonData", input);
 			context.put("ZeppelinEChartsBodyFoot", this.html);
 			context.put("ZeppelinEchartsOptionSettings", optionSettings);
@@ -87,11 +87,11 @@ public class EChartsProcessor extends Processor<String, String> {
 		}
 	}
 
-	public static void main(String[] args) {
-		EChartsProcessor processor = new EChartsProcessor();
-		processor.addPara("option", new String[]{"title.text"}, "\"test title\"");
-		processor.addPara("option", new String[]{"title.subtext"}, "\"test sub title\"");
-		System.out.println(processor.execute(null, null, null));
-	}
+	//public static void main(String[] args) {
+	//	EChartsProcessor processor = new EChartsProcessor();
+	//	processor.addPara("option", new String[]{"title.text"}, "\"test title\"");
+	//	processor.addPara("option", new String[]{"title.subtext"}, "\"test sub title\"");
+	//	System.out.println(processor.execute(null, null, null));
+	//}
 
 }
