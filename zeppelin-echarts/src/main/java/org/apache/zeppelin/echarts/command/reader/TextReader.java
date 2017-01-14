@@ -17,6 +17,10 @@ public class TextReader extends Reader<String, String> {
 		//没有输出
 	}
 
+	public void addPara(String name, String[] options, String body) {
+
+	}
+
 	public void setBody(String body) {
 		this.text = body;
 	}

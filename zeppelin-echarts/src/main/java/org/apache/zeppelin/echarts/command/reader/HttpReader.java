@@ -11,6 +11,10 @@ public class HttpReader extends Reader<String, String> {
 
 	}
 
+	public void addPara(String name, String[] options, String body) {
+
+	}
+
 	public void setBody(String body) {
 
 	}

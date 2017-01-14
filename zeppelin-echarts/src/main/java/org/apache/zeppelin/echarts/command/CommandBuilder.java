@@ -26,7 +26,8 @@ public class CommandBuilder {
 	 */
 	enum CommandType {
 		in,     //输入命令
-		process,    //处理命令
+		proc,    //处理命令
+		para,   //参数设置
 		out,    //输出命令
 		;
 
@@ -128,8 +129,10 @@ public class CommandBuilder {
 				command.addExecutor(type.getReader(cmds[1]), paras, body);
 			} else if (type == CommandType.out) {
 				command.addExecutor(type.getWriter(cmds[1]), paras, body);
-			} else if (type == CommandType.process) {
+			} else if (type == CommandType.proc) {
 				command.addExecutor(type.getProcessor(cmds[1]), paras, body);
+			} else if (type == CommandType.para) {
+				command.addPara(cmds[1], paras, body);
 			}
 		} catch (Exception e) {
 			throw e;

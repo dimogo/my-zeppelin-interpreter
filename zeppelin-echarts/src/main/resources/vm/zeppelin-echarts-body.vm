@@ -1,21 +1,17 @@
-<!--<script type="text/javascript" src="$ZeppelinEChartsJSUrl"></script>
-<script type="text/javascript" src="$ZeppelinEChartsJQueryUrl"></script>
-<script type="text/javascript" src="$ZeppelinEChartsBootstrapURL"></script>
-<link rel="stylesheet" href="/plugins/zeppelin-echarts/css/zeppelin-echarts.css" />
-<script type="text/javascript" src="/plugins/zeppelin-echarts/js/zeppelin-echarts.js"></script>
--->
 <div class="container-fluid zeppelin-echarts-example">
     <form class="form-horizontal" role="form">
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="zeppelin-echarts-title" placeholder="图表的主标题">
+                <input type="text" class="form-control" id="zeppelin-echarts-title" placeholder="图表的主标题"
+                #if ($ZeppelinEchartsTitle) value=$ZeppelinEchartsTitile" #else value="" #end >
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">副标题</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="zeppelin-echarts-subtitle" placeholder="图表的副标题">
+                <input type="text" class="form-control" id="zeppelin-echarts-subtitle" placeholder="图表的副标题"
+                #if ($ZeppelinEchartsSubTitle) "$ZeppelinEchartsSubTitle" #else "" #end >
             </div>
         </div>
         <div class="form-group row">
@@ -235,8 +231,8 @@
 
     option = {
         title: {
-            text: "测试图表",
-            subtext: "测试图表2"
+            text: #if ($ZeppelinEchartsTitle) "$ZeppelinEchartsTitile" #else "" #end,
+            subtext: #if ($ZeppelinEchartsSubTitle) "$ZeppelinEchartsSubTitle" #else "" #end,
         },
         legend: {
             right: 10,
@@ -257,54 +253,18 @@
             },
             scale: true
         },
-        series: [{
-            name: '1990',
-            data: [],
-            type: 'scatter',
-            symbolSize: function (data) {
-                return Math.sqrt(data[2]) / 5e2;
-            },
-            label: {
-                emphasis: {
-                    show: true,
-                    formatter: function (param) {
-                        return param.data[3];
-                    },
-                    position: 'top'
-                }
-            },
-            itemStyle: {
-                normal: {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(120, 36, 50, 0.5)',
-                    shadowOffsetY: 5
-                }
-            }
-        }, {
-            name: '2015',
-            data: [],
-            type: 'scatter',
-            symbolSize: function (data) {
-                return Math.sqrt(data[2]) / 5e2;
-            },
-            label: {
-                emphasis: {
-                    show: true,
-                    formatter: function (param) {
-                        return param.data[3];
-                    },
-                    position: 'top'
-                }
-            },
-            itemStyle: {
-                normal: {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(25, 100, 150, 0.5)',
-                    shadowOffsetY: 5
-                }
-            }
-        }]
+        series: []
     };
+
+    #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)
+        try {
+            #foreach($entry in $ZeppelinEchartsOptionSettings.entrySet())
+                option.$entry.key = $entry.value
+            #end
+        } catch (e) {
+            console.log("option settings error");
+        }
+    #end
 
     function drawChart(redraw, chart, option) {
         if (redraw) {
@@ -329,7 +289,7 @@
             var script = document.createElement('script');
             script.type = "text/javascript";
 
-            if (script.readyState){  //IE
+            if (script.readyState){
                 script.onreadystatechange = function() {
                     if (script.readyState == "loaded" ||
                             script.readyState == "complete") {
@@ -337,7 +297,7 @@
                         resolve('success: '+url);
                     }
                 };
-            } else {  //Others
+            } else {
                 script.onload = function() {
                     resolve('success: '+url);
                 };
@@ -347,7 +307,7 @@
                 reject(Error(url + 'load error!'));
             };
 
-            script.src = url;//+'?'+'time='+Date.parse(new Date());
+            script.src = url;
             document.body.appendChild(script);
 
         });
@@ -358,7 +318,7 @@
             var css = document.createElement('link');
             css.rel = "stylesheet";
 
-            if (css.readyState){  //IE
+            if (css.readyState){
                 css.onreadystatechange = function() {
                     if (css.readyState == "loaded" ||
                             css.readyState == "complete") {
@@ -366,7 +326,7 @@
                         resolve('success: '+url);
                     }
                 };
-            } else {  //Others
+            } else {
                 css.onload = function() {
                     resolve('success: '+url);
                 };
@@ -376,7 +336,7 @@
                 reject(Error(url + 'load error!'));
             };
 
-            css.href = url;//+'?'+'time='+Date.parse(new Date());
+            css.href = url;
             document.body.appendChild(css);
 
         });
@@ -386,14 +346,14 @@
         function continuer(verb, arg) {
             var result;
             try {
-                result = generator[verb](arg);  // 这个result是生成器的返回值，有value和done两个属性
+                result = generator[verb](arg);
             } catch (err) {
                 return Promise.reject(err);
             }
             if (result.done) {
                 return result.value;
             } else {
-                return Promise.resolve(result.value).then(onFulfilled, onRejected);  // result.value是promise对象
+                return Promise.resolve(result.value).then(onFulfilled, onRejected);
             }
         }
         var generator = generatorFunc();
@@ -402,15 +362,13 @@
         return onFulfilled();
     }
 
-    // loading
-    var jquery = '/plugins/jquery/jquery-3.1.1.min.js',
-            echarts   = '/plugins/echarts/echarts-3.3.2.min.js',
-            bootstrap = '/plugins/bootstrap/3.3.0/js/bootstrap.min.js',
+    var jquery = '$ZeppelinEChartsJQueryUrl',
+            echarts   = '$ZeppelinEChartsJSUrl',
+            bootstrap = '$ZeppelinEChartsBootstrapURL',
             zeppelinEchartsJS = '/plugins/zeppelin-echarts/js/zeppelin-echarts.js',
             zeppelinEchartsCSS = '/plugins/zeppelin-echarts/css/zeppelin-echarts.css'
             ;
 
-    // “串行”代码在这里
     spawn(function*() {
         try {
             yield getJS(jquery);

@@ -18,10 +18,30 @@ import java.util.List;
 public class Command {
 	private List<Executor> executors = new ArrayList<Executor>();
 
+	/**
+	 * 增加执行器
+	 * @param executor
+	 * @param paras
+	 * @param body
+	 */
 	public void addExecutor(Executor executor, String[] paras, String body) {
 		executor.setParameters(paras);
 		executor.setBody(body);
 		executors.add(executor);
+	}
+
+	/**
+	 * 向最后一个执行器添加参数
+	 * @param name
+	 * @param options
+	 * @param body
+	 */
+	public void addPara(String name, String[] options, String body) {
+		if (CollectionUtils.isEmpty(executors)) {
+			//没有执行器的情况下直接忽略参数
+			return;
+		}
+		executors.get(executors.size() - 1);
 	}
 
 	public InterpreterResult execute(PropertyGetter propertyGetter, InterpreterContext interpreterContext) {

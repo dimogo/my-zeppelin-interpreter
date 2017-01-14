@@ -20,6 +20,10 @@ public class HTMLWriter extends Writer<String, InterpreterResult> {
 		//没有参数
 	}
 
+	public void addPara(String name, String[] options, String body) {
+
+	}
+
 	public void setBody(String body) {
 		this.html = body;
 	}

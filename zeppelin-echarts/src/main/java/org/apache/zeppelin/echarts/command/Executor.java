@@ -18,6 +18,14 @@ public interface Executor<I, O> {
 	void setParameters(String[] parameters);
 
 	/**
+	 * 向执行器增加特定参数
+	 * @param name
+	 * @param options
+	 * @param body
+	 */
+	void addPara(String name, String[] options, String body);
+
+	/**
 	 * 设置执行器需要执行的内容
 	 * 内容是从zeppelin传入的紧跟当前命令行结束符至下一条命令开始前一个字符
 	 * 不是所有命令都需要传入执行内容

@@ -1,5 +1,6 @@
 package org.apache.zeppelin.echarts.command.processor;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -12,6 +13,8 @@ import org.apache.zeppelin.interpreter.InterpreterResult;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -21,6 +24,7 @@ import java.util.Properties;
 public class EChartsProcessor extends Processor<String, String> {
 
 	private VelocityEngine ve = new VelocityEngine();
+	private Map<String, String> optionSettings = new HashMap<String, String>();
 
 	/**
 	 * 紧跟命令后的HTML代码,附加在前一条命令的结果后一起输出
@@ -48,25 +52,46 @@ public class EChartsProcessor extends Processor<String, String> {
 		//没有参数
 	}
 
+	public void addPara(String name, String[] options, String body) {
+		if ("option".equalsIgnoreCase(name) && ArrayUtils.isNotEmpty(options)) {
+			optionSettings.put(options[0], body);
+		}
+	}
+
 	public void setBody(String body) {
 		this.html = body;
 	}
 
+	/**
+	 * ECharts图表代码生成
+	 * @param input 输入的JSON格式原始数据
+	 * @param propertyGetter 解释器配置参数
+	 * @param interpreterContext
+	 * @return ECharts图表HTML代码
+	 */
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
 		try {
 			Template template = ve.getTemplate("/vm/zeppelin-echarts-body.vm");
 			VelocityContext context = new VelocityContext();
-			context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
-			context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
-			context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
+			//context.put("ZeppelinEChartsJSUrl", propertyGetter.getEchartsURL());
+			//context.put("ZeppelinEChartsJQueryUrl", propertyGetter.getJqeuryURL());
+			//context.put("ZeppelinEChartsBootstrapURL", propertyGetter.getBootstrapURL());
 			context.put("ZeppelinEChartsOriginJsonData", input);
 			context.put("ZeppelinEChartsBodyFoot", this.html);
+			context.put("ZeppelinEchartsOptionSettings", optionSettings);
 			StringWriter writer = new StringWriter();
 			template.merge(context, writer);
 			return writer.toString();
 		} catch (ResourceNotFoundException e) {
 			throw new RuntimeException("vm path:" + this.vmPath, e);
 		}
+	}
+
+	public static void main(String[] args) {
+		EChartsProcessor processor = new EChartsProcessor();
+		processor.addPara("option", new String[]{"title.text"}, "\"test title\"");
+		processor.addPara("option", new String[]{"title.subtext"}, "\"test sub title\"");
+		System.out.println(processor.execute(null, null, null));
 	}
 
 }
