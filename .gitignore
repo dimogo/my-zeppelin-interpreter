@@ -2,5 +2,5 @@
 my-zeppelin-interpreter.iml
 zeppelin-echarts/zeppelin-echarts.iml
 zeppelin-echarts/target/*
-velocity.log
+velocity.log*
 zeppelin-echarts/src/main/resources/velocity.properties
