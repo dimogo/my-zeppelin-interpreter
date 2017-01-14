@@ -24,7 +24,20 @@ public class CommandParserTest {
 		String text = result.message().get(0).getData();
 		Assert.assertEquals(text,
 				"\r\n<html><head></head>\r\n"
-				+ "<body></body>\r\n"
-				+ "</html>\r\n");
+				+ "<body></body>"
+				+ "</html>");
+	}
+
+	@Test
+	public void echarts() throws Exception {
+		String cmd = "%in html\r\n"
+				+ "%proc echarts\r\n"
+				+ "%para option title.text\r\n"
+				+ "\"test title\"\r\n"
+				+ "%para option title.subtext\r\n"
+				+ "\"test sub title\"\r\n"
+				+ "%out html";
+		Command command = CommandParser.getInstance().parse(cmd);
+		Assert.assertNotNull(command);
 	}
 }

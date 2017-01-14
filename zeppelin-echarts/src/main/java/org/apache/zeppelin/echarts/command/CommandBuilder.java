@@ -55,7 +55,7 @@ public class CommandBuilder {
 		text(TextReader.class),   //文本
 		http(HttpReader.class),   //http请求
 		intpr(InterpreterReader.class),  //已配置的其他interpreter,调用指定的解释器
-		json(JsonReader.class),   //JSON格式数据,将输入JSON数据理解为需要展现的数据
+		json(JsonReader.class),   //读入JSON格式数据并作为后续执行器的输入
 		;
 
 		private Class<? extends Reader> cls;
@@ -121,7 +121,7 @@ public class CommandBuilder {
 		String[] cmds = commandLine.split(" ");
 		String[] paras = null;
 		if (cmds.length > 2) {
-			paras = Arrays.copyOfRange(cmds, 2, cmds.length - 1);
+			paras = Arrays.copyOfRange(cmds, 2, cmds.length);
 		}
 		CommandType type = CommandType.valueOf(cmds[0]);
 		try {

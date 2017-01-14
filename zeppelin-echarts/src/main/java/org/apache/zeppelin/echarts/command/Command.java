@@ -2,6 +2,7 @@ package org.apache.zeppelin.echarts.command;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.zeppelin.echarts.command.processor.Processor;
 import org.apache.zeppelin.echarts.command.reader.Reader;
 import org.apache.zeppelin.echarts.command.writer.Writer;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
@@ -48,11 +49,12 @@ public class Command {
 		if (CollectionUtils.isEmpty(executors)) {
 			return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.NULL, "");
 		}
-		if (!(executors.get(0) instanceof Reader)) {
-			return new InterpreterResult(InterpreterResult.Code.ERROR, InterpreterResult.Type.NULL, "The first executor must be a reader");
+		if (!(executors.get(0) instanceof Reader) && !(executors.get(0) instanceof Processor)) {
+			return new InterpreterResult(InterpreterResult.Code.ERROR, InterpreterResult.Type.NULL,
+					"The first executor must be %in or %proc");
 		}
 		if (!(executors.get(executors.size() - 1) instanceof Writer)) {
-			return new InterpreterResult(InterpreterResult.Code.ERROR, InterpreterResult.Type.NULL, "The last executor must be a writer");
+			return new InterpreterResult(InterpreterResult.Code.ERROR, InterpreterResult.Type.NULL, "The last executor must be %out");
 		}
 		try {
 			Object output = null;

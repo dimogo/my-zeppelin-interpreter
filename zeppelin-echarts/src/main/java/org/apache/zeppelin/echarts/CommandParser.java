@@ -29,11 +29,14 @@ public class CommandParser {
 		int commandLength = 0;
 		int bodyIndex = 0;
 		int bodyLength = 0;
+		int bodyOffset = 0;
+		char bodyLastChart;
 		String commandLine = null;
 		String commandBody = null;
 		Command command = new Command();
 		while (cmd.indexOf(COMMAND_LINE_SEPARATOR_HEAD, commandIndex) == commandIndex) {
 			commandBody = null;
+			bodyOffset = 0;
 			commandIndex = cmd.indexOf(COMMAND_LINE_SEPARATOR_HEAD, commandIndex);
 			commandLength = cmd.indexOf(COMMAND_LINE_SEPARATOR_FOOT, commandIndex) - commandIndex;
 			if (commandLength < 0) {
@@ -55,7 +58,15 @@ public class CommandParser {
 				}
 			}
 			bodyLength -= bodyIndex;
-			commandBody = cmd.substring(bodyIndex, bodyIndex + bodyLength);
+			while (bodyLength > 0) {
+				bodyLastChart = cmd.charAt(bodyIndex + bodyLength - bodyOffset - 1);
+				if (bodyLastChart == '\r' || bodyLastChart == '\n') {
+					bodyOffset++;
+					continue;
+				}
+				break;
+			}
+			commandBody = bodyLength - bodyOffset <= 0 ? "" : cmd.substring(bodyIndex, bodyIndex + bodyLength - bodyOffset);
 			CommandBuilder.getInstance().build(command, commandLine, commandBody);
 		}
 		return command;
