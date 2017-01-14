@@ -1,6 +1,7 @@
 package org.apache.zeppelin.echarts.command.processor;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -54,7 +55,11 @@ public class EChartsProcessor extends Processor<String, String> {
 
 	public void addPara(String name, String[] options, String body) {
 		if ("option".equalsIgnoreCase(name) && ArrayUtils.isNotEmpty(options)) {
-			optionSettings.put(options[0], body);
+			if (options.length > 1) {
+				optionSettings.put(options[0], options[1]);
+			} else {
+				optionSettings.put(options[0], body);
+			}
 		}
 	}
 
@@ -86,12 +91,5 @@ public class EChartsProcessor extends Processor<String, String> {
 			throw new RuntimeException("vm path:" + this.vmPath, e);
 		}
 	}
-
-	//public static void main(String[] args) {
-	//	EChartsProcessor processor = new EChartsProcessor();
-	//	processor.addPara("option", new String[]{"title.text"}, "\"test title\"");
-	//	processor.addPara("option", new String[]{"title.subtext"}, "\"test sub title\"");
-	//	System.out.println(processor.execute(null, null, null));
-	//}
 
 }

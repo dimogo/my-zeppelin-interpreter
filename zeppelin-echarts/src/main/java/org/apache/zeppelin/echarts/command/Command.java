@@ -41,7 +41,7 @@ public class Command {
 			//没有执行器的情况下直接忽略参数
 			return;
 		}
-		executors.get(executors.size() - 1);
+		executors.get(executors.size() - 1).addPara(name, options, body);
 	}
 
 	public InterpreterResult execute(PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
