@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class CommandParserTest {
 	@Test
-	public void parse() throws Exception {
+	public void inout() throws Exception {
 		String cmd = "%in \t\t html\r\n\r\n"
 				+ "<html><head></head>\r\n"
 				+ "<body></body>\r\n"
@@ -36,6 +36,20 @@ public class CommandParserTest {
 				+ "\"test title\"\r\n"
 				+ "%para option title.subtext\r\n"
 				+ "\"test sub title\"\r\n"
+				+ "%out html";
+		Command command = CommandParser.getInstance().parse(cmd);
+		Assert.assertNotNull(command);
+	}
+
+	@Test
+	public void httpPost() throws Exception {
+		String cmd = "%in http post http://www.google.com\r\n"
+				+ "%para header Content-Type application/json\r\n"
+				+ "%para raw\r\n"
+				+ "{text:'test post json'}\r\n"
+				+ "%para conf SocketTimeout 30000\r\n"
+				+ "%para conf ConnectTimeout 30000\r\n"
+				+ "%para conf ConnectionRequestTimeout 30000\r\n"
 				+ "%out html";
 		Command command = CommandParser.getInstance().parse(cmd);
 		Assert.assertNotNull(command);
