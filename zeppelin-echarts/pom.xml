@@ -27,6 +27,10 @@
                     <groupId>commons-httpclient</groupId>
                     <artifactId>commons-httpclient</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.maven.wagon</groupId>
+                    <artifactId>wagon-http</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
