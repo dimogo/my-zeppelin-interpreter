@@ -46,7 +46,8 @@ public class CommandParserTest {
 		String cmd = "%in http post http://www.google.com\r\n"
 				+ "%para header Content-Type application/json\r\n"
 				+ "%para raw\r\n"
-				+ "{text:'test post json'}\r\n"
+				+ "{\"starts\":\"2017-01-01\",\n" +
+				"\"ends\":\"2017-12-31\"}"
 				+ "%para conf SocketTimeout 30000\r\n"
 				+ "%para conf ConnectTimeout 30000\r\n"
 				+ "%para conf ConnectionRequestTimeout 30000\r\n"
