@@ -56,15 +56,10 @@ public class Command {
 		if (!(executors.get(executors.size() - 1) instanceof Writer)) {
 			return new InterpreterResult(InterpreterResult.Code.ERROR, InterpreterResult.Type.NULL, "The last executor must be %out");
 		}
-		try {
-			Object output = null;
-			for (Executor executor : executors) {
-				output = executor.execute(output, propertyGetter, interpreterContext);
-			}
-			return (InterpreterResult)output;
-		} catch (Throwable e) {
-			throw new RuntimeException("execute command exception:", e);
-			//return new InterpreterResult(InterpreterResult.Code.ERROR, InterpreterResult.Type.NULL, ExceptionUtils.getFullStackTrace(e));
+		Object output = null;
+		for (Executor executor : executors) {
+			output = executor.execute(output, propertyGetter, interpreterContext);
 		}
+		return (InterpreterResult)output;
 	}
 }

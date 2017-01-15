@@ -39,7 +39,7 @@ public class EChartsInterpreter extends Interpreter {
 			Command command = CommandParser.getInstance().parse(cmd);
 			return command.execute(this.propertyGetter, interpreterContext);
 		} catch (Throwable e) {
-			return new InterpreterResult(InterpreterResult.Code.SUCCESS, InterpreterResult.Type.HTML, ExceptionUtils.getFullStackTrace(e));
+			throw new RuntimeException("execute command exception:", e);
 		}
 	}
 
