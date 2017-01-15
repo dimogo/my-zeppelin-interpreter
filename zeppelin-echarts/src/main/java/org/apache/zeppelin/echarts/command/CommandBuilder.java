@@ -1,7 +1,6 @@
 package org.apache.zeppelin.echarts.command;
 
-import org.apache.zeppelin.echarts.command.processor.EChartsProcessor;
-import org.apache.zeppelin.echarts.command.processor.Processor;
+import org.apache.zeppelin.echarts.command.processor.*;
 import org.apache.zeppelin.echarts.command.reader.*;
 import org.apache.zeppelin.echarts.command.writer.*;
 
@@ -97,6 +96,9 @@ public class CommandBuilder {
 	 */
 	enum CommandProcessType {
 		echarts(EChartsProcessor.class),    //将内容以echarts图表输出
+		json2str(Json2StringProcessor.class),   //将JSON对象转换成为字符串
+		str2json(String2JsonProcessor.class),   //将字符串转换成为JSON对象
+		selectjson(SelectJsonProcessor.class),  //从JSON对象中选择部分数据作为输出
 		;
 		private Class<? extends Processor> cls;
 
