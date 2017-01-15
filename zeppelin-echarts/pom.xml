@@ -22,6 +22,7 @@
             <artifactId>zeppelin-interpreter</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
+            <!--
             <exclusions>
                 <exclusion>
                     <groupId>commons-httpclient</groupId>
@@ -32,6 +33,7 @@
                     <artifactId>wagon-http</artifactId>
                 </exclusion>
             </exclusions>
+            -->
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>

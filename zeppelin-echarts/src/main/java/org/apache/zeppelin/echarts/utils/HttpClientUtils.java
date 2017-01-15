@@ -152,7 +152,7 @@ public class HttpClientUtils {
 	public static String sendRequest(HttpRequestBase request, RequestConfig requestConfig) {
 		String url = request.getURI().toString();
 		if (url.startsWith("https://")) {
-			return sendHttps(request, requestConfig);
+			return null;// sendHttps(request, requestConfig);
 		}
 		return sendHttp(request, requestConfig);
 	}
@@ -200,36 +200,36 @@ public class HttpClientUtils {
 	 * @param requestConfig
 	 * @return
 	 */
-	public static String sendHttps(HttpRequestBase request, RequestConfig requestConfig) {
-		CloseableHttpClient httpClient = null;
-		CloseableHttpResponse response = null;
-		HttpEntity entity = null;
-		String responseContent = null;
-		try {
-			// 创建默认的httpClient实例.
-			PublicSuffixMatcher publicSuffixMatcher = PublicSuffixMatcherLoader.load(new URL(request.getURI().toString()));
-			DefaultHostnameVerifier hostnameVerifier = new DefaultHostnameVerifier(publicSuffixMatcher);
-			httpClient = HttpClients.custom().setSSLHostnameVerifier(hostnameVerifier).build();
-			request.setConfig(requestConfig);
-			// 执行请求
-			response = httpClient.execute(request);
-			entity = response.getEntity();
-			responseContent = EntityUtils.toString(entity, "UTF-8");
-		} catch (Exception e) {
-			throw new RuntimeException("https request error:" + request.getURI(), e);
-		} finally {
-			try {
-				// 关闭连接,释放资源
-				if (response != null) {
-					response.close();
-				}
-				if (httpClient != null) {
-					httpClient.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return responseContent;
-	}
+	//public static String sendHttps(HttpRequestBase request, RequestConfig requestConfig) {
+	//	CloseableHttpClient httpClient = null;
+	//	CloseableHttpResponse response = null;
+	//	HttpEntity entity = null;
+	//	String responseContent = null;
+	//	try {
+	//		// 创建默认的httpClient实例.
+	//		PublicSuffixMatcher publicSuffixMatcher = PublicSuffixMatcherLoader.load(new URL(request.getURI().toString()));
+	//		DefaultHostnameVerifier hostnameVerifier = new DefaultHostnameVerifier(publicSuffixMatcher);
+	//		httpClient = HttpClients.custom().setSSLHostnameVerifier(hostnameVerifier).build();
+	//		request.setConfig(requestConfig);
+	//		// 执行请求
+	//		response = httpClient.execute(request);
+	//		entity = response.getEntity();
+	//		responseContent = EntityUtils.toString(entity, "UTF-8");
+	//	} catch (Exception e) {
+	//		throw new RuntimeException("https request error:" + request.getURI(), e);
+	//	} finally {
+	//		try {
+	//			// 关闭连接,释放资源
+	//			if (response != null) {
+	//				response.close();
+	//			}
+	//			if (httpClient != null) {
+	//				httpClient.close();
+	//			}
+	//		} catch (IOException e) {
+	//			e.printStackTrace();
+	//		}
+	//	}
+	//	return responseContent;
+	//}
 }
