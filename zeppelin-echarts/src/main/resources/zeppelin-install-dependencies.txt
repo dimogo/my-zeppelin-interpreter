@@ -3,3 +3,4 @@ org.apache.velocity:velocity:1.7
 commons-lang:commons-lang:2.5
 org.apache.httpcomponents:httpclient:4.5.2
 org.apache.httpcomponents:httpmime:4.5.2
+com.alibaba:fastjson:1.2.23
