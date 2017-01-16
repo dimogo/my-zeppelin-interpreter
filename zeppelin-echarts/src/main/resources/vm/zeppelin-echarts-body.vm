@@ -145,7 +145,7 @@
 
     function buildSerieDataByOrigin(originData) {
         var seriesData = new Array();
-        for (var dataIndex in originData) {
+        for (var dataIndex = 0; dataIndex < originData.length; dataIndex++) {
             var data = originData[dataIndex];
             for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs.length; serieConfigIndex++) {
                 var serieConfig = serieConfigs[serieConfigIndex]
@@ -253,7 +253,15 @@
             },
             scale: true
         },
-        series: []
+        series: [
+                #foreach($seriesIndex in [0...$seriesSize])
+                    {
+                        name:"$seriesIndex",
+                        type:"line",
+                        data:[]
+                    }
+                #end
+        ]
     };
 
     #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)

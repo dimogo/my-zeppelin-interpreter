@@ -26,6 +26,7 @@ public class EChartsProcessor extends Processor<String, String> {
 
 	private VelocityEngine ve = new VelocityEngine();
 	private Map<String, String> optionSettings = new HashMap<String, String>();
+	private int seriesCount = 0;
 
 	/**
 	 * 紧跟命令后的HTML代码,附加在前一条命令的结果后一起输出
@@ -50,7 +51,9 @@ public class EChartsProcessor extends Processor<String, String> {
 	}
 
 	public void setParameters(String[] parameters) {
-		//没有参数
+		if (parameters.length > 0) {
+			this.seriesCount = Integer.parseInt(parameters[0]);
+		}
 	}
 
 	public void addPara(String name, String[] options, String body) {
@@ -84,6 +87,7 @@ public class EChartsProcessor extends Processor<String, String> {
 			context.put("ZeppelinEChartsOriginJsonData", input);
 			context.put("ZeppelinEChartsBodyFoot", this.html);
 			context.put("ZeppelinEchartsOptionSettings", optionSettings);
+			context.put("ZeppelinEchartsSeriesCount", optionSettings);
 			StringWriter writer = new StringWriter();
 			template.merge(context, writer);
 			return writer.toString();
