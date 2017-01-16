@@ -319,11 +319,19 @@
     });
 
     $("#zeppin-echarts-add-serie").click(function () {
+        var selected = $("#zeppelin-echarts-selected-fields").val();
+        var fields = "";
+        for (var i = 0; i < selected.length; i++) {
+            if (i > 0) {
+                fields += ","
+            }
+            fields += fields[selected[i]]
+        }
         serieConfigs.push({
             "index": serieConfigs.length,
             "name": $("#zeppelin-echarts-serie-name").val(),
             "type": $("#zeppelin-echarts-type").val(),
-            "fields": $("#zeppelin-echarts-fields").val(),
+            "fields": $("#zeppelin-echarts-selected-fields").val(),
             "xAxisIndex": $("#zeppelin-echarts-xaxis").val(),
             "yAxisIndex": $("#zeppelin-echarts-yaxis").val()
         });
