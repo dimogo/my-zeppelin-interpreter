@@ -4,7 +4,7 @@
             <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="zeppelin-echarts-title" placeholder="图表的主标题"
+            <input type="text" class="form-control" id="zeppelin-echarts-title" placeholder="图表的主标题"
                 #if ($ZeppelinEchartsTitle) value=$ZeppelinEchartsTitile" #else value="" #end >
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">副标题</label>
@@ -37,10 +37,11 @@
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="inputEmail3" placeholder="图表的宽度">
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">横坐标字段</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">横坐标序号</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-xaxis" class="form-control">
+                    <option value="0" selected>0</option>
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-2 control-label">横坐标类型</label>
@@ -60,10 +61,11 @@
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="inputEmail3" placeholder="图表的高度">
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">纵坐标字段</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">纵坐标序号</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-yaxis" class="form-control">
+                    <option value="0" selected>0</option>
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-2 control-label">纵坐标类型</label>
@@ -79,29 +81,58 @@
         </div>
 </div>
 <div class="row">
+    <div class="col-sm-5">
+        <select name="from" id="zeppelin-echarts-selectable-fields" class="form-control" size="13"
+                multiple="multiple">
+        </select>
+    </div>
+
+    <div class="col-sm-2">
+        <button type="button" id="zeppelin-echarts-fields-move-to-up"
+                class="btn btn-default btn-block">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+        </button>
+        <button type="button" id="zeppelin-echarts-fields-all-to-right"
+                class="btn btn-default btn-block">
+            <i class="glyphicon glyphicon-forward"></i>
+        </button>
+        <button type="button" id="zeppelin-echarts-fields-to-right"
+                class="btn btn-default btn-block">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </button>
+        <button type="button" id="zeppelin-echarts-fields-to-left"
+                class="btn btn-default btn-block">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+        </button>
+        <button type="button" id="zeppelin-echarts-fields-all-to-left"
+                class="btn btn-default btn-block">
+            <i class="glyphicon glyphicon-backward"></i>
+        </button>
+        <button type="button" id="zeppelin-echarts-fields-move-to-down"
+                class="btn btn-default btn-block">
+            <i class="glyphicon glyphicon-chevron-down"></i>
+        </button>
+    </div>
+
+    <div class="col-sm-5">
+        <select name="to" id="zeppelin-echarts-selected-fields" class="form-control"
+                size="13" multiple="multiple"></select>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-12">
         <table id="zeppelin-echarts-series" class="table table-bordered">
             <tr>
                 <td>#
                 <td>名称
                 <td>类型
-                <td>横坐标字段
-                <td>纵坐标字段
+                <td>字段及顺序
                 <td>
             </tr>
         </table>
     </div>
 </div>
 <div class="row">
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Remember me
-                </label>
-            </div>
-        </div>
-    </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-12">
             <button type="button" id="zeppin-echarts-add-serie" class="btn btn-success">增加系列</button>
@@ -117,14 +148,17 @@
 </div>
 </div>
 <script language="javascript">
-    #if ($ZeppelinEChartsOriginJsonData)
-    var orginData = $ZeppelinEChartsOriginJsonData;
-    #else
-    var orginData = [];
-    #end
+        #if ($ZeppelinEChartsOriginJsonData)
+        var orginData = $ZeppelinEChartsOriginJsonData;
+        #else
+        var orginData = [];
+        #end
     var graphicBody = null;
     var graphicBodyObj = null;
     var serieConfigs = new Array();
+        #foreach($serie in $ZeppelinEchartsSerieList)
+        serieConfigs.push($serie.toString();
+        #end
     option = {
         title: {
             text: "",
@@ -152,20 +186,16 @@
         series: [
             #foreach($seriesIndex in [1..$ZeppelinEchartsSeriesCount])
                 {
-                    name:"$seriesIndex",
-                    type:"line",
-                    data:[]
+                    name: "$seriesIndex",
+                    type: "line",
+                    data: []
                 }
-            #end
-        ]
+            #end]
     };
 
     function fillOriginDataOptionsFromStruct(data) {
-        $("#zeppelin-echarts-xaxis").append("<option value=''></option>");
-        $("#zeppelin-echarts-yaxis").append("<option value=''></option>");
         for (var key in data) {
-            $("#zeppelin-echarts-xaxis").append("<option value='" + key + "'>" + key + "</option>");
-            $("#zeppelin-echarts-yaxis").append("<option value='" + key + "'>" + key + "</option>");
+            $("#zeppelin-echarts-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
         }
     }
 
@@ -192,9 +222,15 @@
                     });
                 }
                 serie = seriesData[serieConfig.index];
+                if (serieConfig.fields.indexOf(",") == -1) {
+                    serie.data.push(data[serieConfig.fields]);
+                    continue;
+                }
                 var objData = new Array();
-                objData.push(data[serieConfig.xAxis]);
-                objData.push(data[serieConfig.yAxis]);
+                var fieldArray = serieConfig.fields.split(",");
+                for (var i = 0; i < fieldArray.length; i++) {
+                    objData.push(data[fieldArray[i]]);
+                }
                 serie.data.push(objData);
             }
         }
@@ -233,8 +269,7 @@
                     "<tr><td>" + index
                     + "<td>" + cfg.name
                     + "<td>" + cfg.type
-                    + "<td>" + cfg.xAxis
-                    + "<td>" + cfg.yAxis
+                    + "<td>" + cfg.fields
                     + "<td><button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
@@ -247,7 +282,38 @@
             })
         })
     }
-
+    $("#zeppelin-echarts-fields-to-right").click(function () {
+        var selected = $("#zeppelin-echarts-selectable-fields").val();
+        for (var i = 0; i < selected.length; i++) {
+            $("#zeppelin-echarts-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
+        }
+        for (var i = 0; i < selected.length; i++) {
+            $("#zeppelin-echarts-selectable-fields option[value='" + selected[i] + "']").remove();
+        }
+    });
+    $("#zeppelin-echarts-fields-to-left").click(function () {
+        var selected = $("#zeppelin-echarts-selected-fields").val();
+        for (var i = 0; i < selected.length; i++) {
+            $("#zeppelin-echarts-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
+        }
+        for (var i = 0; i < selected.length; i++) {
+            $("#zeppelin-echarts-selected-fields option[value='" + selected[i] + "']").remove();
+        }
+    });
+    $("#zeppelin-echarts-fields-all-to-right").click(function () {
+        var selected = $("#zeppelin-echarts-selectable-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#zeppelin-echarts-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#zeppelin-echarts-selectable-fields option").remove();
+    });
+    $("#zeppelin-echarts-fields-all-to-left").click(function () {
+        var selected = $("#zeppelin-echarts-selected-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#zeppelin-echarts-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#zeppelin-echarts-selected-fields option").remove();
+    });
     $("#zeppin-echarts-refresh-graphic").click(function () {
         drawChart(false, graphicBodyObj, buildGraphicOption(option));
     });
@@ -257,13 +323,14 @@
             "index": serieConfigs.length,
             "name": $("#zeppelin-echarts-serie-name").val(),
             "type": $("#zeppelin-echarts-type").val(),
-            "xAxis": $("#zeppelin-echarts-xaxis").val(),
-            "yAxis": $("#zeppelin-echarts-yaxis").val(),
+            "fields": $("#zeppelin-echarts-fields").val(),
+            "xAxisIndex": $("#zeppelin-echarts-xaxis").val(),
+            "yAxisIndex": $("#zeppelin-echarts-yaxis").val()
         });
         updateZeppelinEChartsSeries();
     });
 
-    #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)
+        #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)
         try {
             #foreach($entry in $ZeppelinEchartsOptionSettings.entrySet())
                 option.$entry.key = $entry.value
@@ -271,7 +338,7 @@
         } catch (e) {
             console.error("option settings error");
         }
-    #end
+        #end
 
     function drawChart(redraw, chart, option) {
         if (redraw) {
@@ -292,25 +359,25 @@
     }
 
     function getJS(url) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             var script = document.createElement('script');
             script.type = "text/javascript";
 
-            if (script.readyState){
-                script.onreadystatechange = function() {
+            if (script.readyState) {
+                script.onreadystatechange = function () {
                     if (script.readyState == "loaded" ||
                             script.readyState == "complete") {
                         script.onreadystatechange = null;
-                        resolve('success: '+url);
+                        resolve('success: ' + url);
                     }
                 };
             } else {
-                script.onload = function() {
-                    resolve('success: '+url);
+                script.onload = function () {
+                    resolve('success: ' + url);
                 };
             }
 
-            script.onerror = function() {
+            script.onerror = function () {
                 reject(Error(url + 'load error!'));
             };
 
@@ -321,25 +388,25 @@
     }
 
     function getCSS(url) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             var css = document.createElement('link');
             css.rel = "stylesheet";
 
-            if (css.readyState){
-                css.onreadystatechange = function() {
+            if (css.readyState) {
+                css.onreadystatechange = function () {
                     if (css.readyState == "loaded" ||
                             css.readyState == "complete") {
                         css.onreadystatechange = null;
-                        resolve('success: '+url);
+                        resolve('success: ' + url);
                     }
                 };
             } else {
-                css.onload = function() {
-                    resolve('success: '+url);
+                css.onload = function () {
+                    resolve('success: ' + url);
                 };
             }
 
-            css.onerror = function() {
+            css.onerror = function () {
                 reject(Error(url + 'load error!'));
             };
 
@@ -363,6 +430,7 @@
                 return Promise.resolve(result.value).then(onFulfilled, onRejected);
             }
         }
+
         var generator = generatorFunc();
         var onFulfilled = continuer.bind(continuer, "next");
         var onRejected = continuer.bind(continuer, "throw");
@@ -370,13 +438,14 @@
     }
 
     var jquery = '$ZeppelinEChartsJQueryUrl',
-            echarts   = '$ZeppelinEChartsJSUrl',
+            echarts = '$ZeppelinEChartsJSUrl',
             bootstrap = '$ZeppelinEChartsBootstrapURL',
             zeppelinEchartsJS = '/plugins/zeppelin-echarts/js/zeppelin-echarts.js',
             zeppelinEchartsCSS = '/plugins/zeppelin-echarts/css/zeppelin-echarts.css'
             ;
 
-    spawn(function*() {
+    spawn(function * ()
+    {
         try {
             yield getJS(jquery);
             console.log('jquery has loaded');
@@ -392,6 +461,7 @@
 
             $(document).ready(function () {
                 fillOriginDataOptionsFromStruct(orginData[0]);
+                updateZeppelinEChartsSeries();
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
                 drawChart(false, graphicBodyObj, option);
@@ -399,7 +469,9 @@
         } catch (err) {
             console.log(err);
         }
-    });
+    }
+    )
+    ;
 </script>
 #if ($ZeppelinEChartsBodyFoot)
     $ZeppelinEChartsBodyFoot
