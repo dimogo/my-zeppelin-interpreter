@@ -37,14 +37,14 @@
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="inputEmail3" placeholder="图表的宽度">
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">横坐标序号</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">x轴</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-xaxis" class="form-control">
                     <option value="0" selected>0</option>
                 </select>
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">横坐标类型</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">x轴值类型</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-xaxis-type" class="form-control">
@@ -61,14 +61,14 @@
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="inputEmail3" placeholder="图表的高度">
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">纵坐标序号</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">y轴</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-yaxis" class="form-control">
                     <option value="0" selected>0</option>
                 </select>
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">纵坐标类型</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">y轴值类型</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-yaxis-type" class="form-control">
@@ -127,6 +127,8 @@
                 <td>名称
                 <td>类型
                 <td>字段及顺序
+                <td>x轴
+                <td>y轴
                 <td>
             </tr>
         </table>
@@ -270,6 +272,8 @@
                     + "<td>" + cfg.name
                     + "<td>" + cfg.type
                     + "<td>" + cfg.fields
+                    + "<td>" + cfg.xAxis
+                    + "<td>" + cfg.yAxis
                     + "<td><button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
@@ -319,13 +323,13 @@
     });
 
     $("#zeppin-echarts-add-serie").click(function () {
-        var selected = $("#zeppelin-echarts-selected-fields").val();
+        var selected = $("#zeppelin-echarts-selected-fields option");
         var fields = "";
         for (var i = 0; i < selected.length; i++) {
             if (i > 0) {
                 fields += ","
             }
-            fields += fields[selected[i]]
+            fields += fields[selected[i].value]
         }
         serieConfigs.push({
             "index": serieConfigs.length,
