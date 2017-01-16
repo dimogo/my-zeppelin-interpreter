@@ -254,7 +254,7 @@
             scale: true
         },
         series: [
-                #foreach($seriesIndex in [0...$seriesSize])
+                #foreach($seriesIndex in [0...$ZeppelinEchartsSeriesCount])
                     {
                         name:"$seriesIndex",
                         type:"line",
