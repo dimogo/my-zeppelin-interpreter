@@ -220,6 +220,8 @@
                     seriesData.push({
                         "name": serieConfig.name,
                         "type": serieConfig.type,
+                        "xAxisIndex": serieConfig.xAxisIndex,
+                        "yAxisIndex": serieConfig.yAxisIndex,
                         "data": new Array()
                     });
                 }
@@ -272,8 +274,8 @@
                     + "<td>" + cfg.name
                     + "<td>" + cfg.type
                     + "<td>" + cfg.fields
-                    + "<td>" + cfg.xAxis
-                    + "<td>" + cfg.yAxis
+                    + "<td>" + cfg.xAxisIndex
+                    + "<td>" + cfg.yAxisIndex
                     + "<td><button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
