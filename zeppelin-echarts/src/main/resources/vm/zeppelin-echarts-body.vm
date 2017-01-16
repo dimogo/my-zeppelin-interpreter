@@ -157,7 +157,7 @@
     var graphicBodyObj = null;
     var serieConfigs = new Array();
         #foreach($serie in $ZeppelinEchartsSerieList)
-        serieConfigs.push($serie.toString();
+        serieConfigs.push($serie.toString());
         #end
     option = {
         title: {
