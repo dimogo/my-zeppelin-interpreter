@@ -87,7 +87,7 @@ public class EChartsProcessor extends Processor<String, String> {
 			context.put("ZeppelinEChartsOriginJsonData", input);
 			context.put("ZeppelinEChartsBodyFoot", this.html);
 			context.put("ZeppelinEchartsOptionSettings", optionSettings);
-			context.put("ZeppelinEchartsSeriesCount", optionSettings);
+			context.put("ZeppelinEchartsSeriesCount", this.seriesCount);
 			StringWriter writer = new StringWriter();
 			template.merge(context, writer);
 			return writer.toString();
