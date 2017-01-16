@@ -125,6 +125,40 @@
     var graphicBody = null;
     var graphicBodyObj = null;
     var serieConfigs = new Array();
+    option = {
+        title: {
+            text: "",
+            subtext: "",
+        },
+        legend: {
+            right: 10,
+            data: []
+        },
+        xAxis: {
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        yAxis: {
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            },
+            scale: true
+        },
+        series: [
+            #foreach($seriesIndex in [1..$ZeppelinEchartsSeriesCount])
+                {
+                    name:"$seriesIndex",
+                    type:"line",
+                    data:[]
+                }
+            #end
+        ]
+    };
 
     function fillOriginDataOptionsFromStruct(data) {
         $("#zeppelin-echarts-xaxis").append("<option value=''></option>");
@@ -228,41 +262,6 @@
         });
         updateZeppelinEChartsSeries();
     });
-
-    option = {
-        title: {
-            text: "",
-            subtext: "",
-        },
-        legend: {
-            right: 10,
-            data: []
-        },
-        xAxis: {
-            splitLine: {
-                lineStyle: {
-                    type: 'dashed'
-                }
-            }
-        },
-        yAxis: {
-            splitLine: {
-                lineStyle: {
-                    type: 'dashed'
-                }
-            },
-            scale: true
-        },
-        series: [
-                #foreach($seriesIndex in [0...$ZeppelinEchartsSeriesCount])
-                    {
-                        name:"$seriesIndex",
-                        type:"line",
-                        data:[]
-                    }
-                #end
-        ]
-    };
 
     #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)
         try {

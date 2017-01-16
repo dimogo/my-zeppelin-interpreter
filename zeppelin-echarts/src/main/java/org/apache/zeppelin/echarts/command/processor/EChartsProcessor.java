@@ -26,7 +26,7 @@ public class EChartsProcessor extends Processor<String, String> {
 
 	private VelocityEngine ve = new VelocityEngine();
 	private Map<String, String> optionSettings = new HashMap<String, String>();
-	private int seriesCount = 0;
+	private int seriesCount = 1;
 
 	/**
 	 * 紧跟命令后的HTML代码,附加在前一条命令的结果后一起输出
