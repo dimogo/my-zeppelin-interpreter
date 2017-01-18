@@ -105,7 +105,7 @@ public class EChartsProcessor extends Processor<String, String> {
 			if ("admin".equalsIgnoreCase(options[0])) {
 				this.adminConsole = "enable".equalsIgnoreCase(options[1]);
 			}
-			if ("user".equalsIgnoreCase(options[1])) {
+			if ("user".equalsIgnoreCase(options[0])) {
 				this.userConsole = "enable".equalsIgnoreCase(options[1]);
 			}
 		}

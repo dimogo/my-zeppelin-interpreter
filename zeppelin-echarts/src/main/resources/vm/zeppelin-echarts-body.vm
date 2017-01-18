@@ -572,9 +572,9 @@
             console.log('all files loaded');
 
             $(document).ready(function () {
-                #if($ZeppelinEChartsAdminConsole)
+                #if($ZeppelinEChartsAdminConsole == false)
                     $("#zeppelin-echarts-console").hide();
-                #elseif ($ZeppelinEChartsUserConsole)
+                #elseif ($ZeppelinEChartsUserConsole == false)
                     if (location.search == "asiframe") {
                         $("#zeppelin-echarts-console").hide();
                     }
