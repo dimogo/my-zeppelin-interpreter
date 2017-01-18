@@ -171,26 +171,29 @@
         xAxis: [
             #foreach($xAxisIndex in [1..$ZeppelinECahrtsXAxisCount])
                 {
-                    #if($xAxisIndex == 0)
-                        splitLine: {
+                    splitLine: {
+                        #if($xAxisIndex == 0)
+                            show: true,
                             lineStyle: {
                                 type: 'dashed'
                             }
-                        },
-                    #end
+                        #else
+                            show: false
+                        #end},
                     type: 'category'
                 },
             #end],
         yAxis: [
             #foreach($yAxisIndex in [1..$ZeppelinECahrtsYAxisCount])
                 {
-                    #if($yAxisIndex == 0)
-                        splitLine: {
+                    splitLine: {
+                        #if($yAxisIndex == 0)
                             lineStyle: {
                                 type: 'dashed'
                             }
-                        },
-                    #end
+                        #else
+                            show: false
+                        #end},
                     scale: true,
                     type: 'value'
                 },
@@ -204,6 +207,43 @@
                 }
             #end]
     };
+
+    function fillXY(option) {
+        if (option.xAxis && option.xAxis.length > 0) {
+            for (var i = 0; i < option.xAxis.length; i++) {
+                $("#zeppelin-echarts-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "</option>");
+            }
+            $("#zeppelin-echarts-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
+            $("#zeppelin-echarts-xaxis").change(function () {
+                $("#zeppelin-echarts-xaxis-type option:selected").attr("selected", false);
+                var i = parseInt($(this).val());
+                $("#zeppelin-echarts-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
+            });
+            $("#zeppelin-echarts-xaxis-type").change(function () {
+                var type = $("#zeppelin-echarts-xaxis-type option:selected").val();
+                var index = $("#zeppelin-echarts-xaxis option:selected").val();
+                $("#zeppelin-echarts-xaxis option:selected").text(index + "-" + type);
+                option.xAxis[index].type = type;
+            });
+        }
+        if (option.yAxis && option.yAxis.length > 0) {
+            for (var i = 0; i < option.yAxis.length; i++) {
+                $("#zeppelin-echarts-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
+            }
+            $("#zeppelin-echarts-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
+            $("#zeppelin-echarts-yaxis").change(function () {
+                $("#zeppelin-echarts-yaxis-type option:selected").attr("selected", false);
+                var i = parseInt($(this).val());
+                $("#zeppelin-echarts-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
+            });
+            $("#zeppelin-echarts-yaxis-type").change(function () {
+                var type = $("#zeppelin-echarts-yaxis-type option:selected").val();
+                var index = $("#zeppelin-echarts-yaxis option:selected").val();
+                $("#zeppelin-echarts-yaxis option:selected").text(index + "-" + type);
+                option.yAxis[index].type = type;
+            });
+        }
+    }
 
     function fillOriginDataOptionsFromStruct(data) {
         $("#zeppelin-echarts-selected-fields option").remove();
@@ -525,6 +565,7 @@
             console.log('all files loaded');
 
             $(document).ready(function () {
+                fillXY(option);
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 updateZeppelinEChartsSeries();
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
