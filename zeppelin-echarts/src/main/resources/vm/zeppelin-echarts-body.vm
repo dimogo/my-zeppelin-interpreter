@@ -349,7 +349,7 @@
             "index": serieConfigs.length,
             "name": $("#zeppelin-echarts-serie-name").val(),
             "type": $("#zeppelin-echarts-type").val(),
-            "fields": $("#zeppelin-echarts-selected-fields").val(),
+            "fields": fields,
             "xAxisIndex": $("#zeppelin-echarts-xaxis").val(),
             "yAxisIndex": $("#zeppelin-echarts-yaxis").val()
         });
