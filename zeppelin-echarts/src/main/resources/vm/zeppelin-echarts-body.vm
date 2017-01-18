@@ -582,6 +582,7 @@
                 updateZeppelinEChartsSeries();
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
+                $(window).resize(function(){graphicBodyObj.resize()});
                 drawChart(false, graphicBodyObj, buildGraphicOption(option));
             });
         } catch (err) {
