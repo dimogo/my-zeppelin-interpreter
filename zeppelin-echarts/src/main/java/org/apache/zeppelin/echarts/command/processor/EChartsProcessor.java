@@ -24,6 +24,8 @@ public class EChartsProcessor extends Processor<String, String> {
 	private int yAxisCount = 1;
 	private String width = null;
 	private String height = null;
+	private boolean adminConsole = true;
+	private boolean userConsole = false;
 	private List<Serie> serieList = new LinkedList<Serie>();
 
 	/**
@@ -99,6 +101,13 @@ public class EChartsProcessor extends Processor<String, String> {
 			this.width = options[0];
 		} else if ("height".equalsIgnoreCase(name) && options != null && options.length > 0) {
 			this.height = options[0];
+		} else if ("console".equalsIgnoreCase(name) && options != null && options.length >= 2) {
+			if ("admin".equalsIgnoreCase(options[0])) {
+				this.adminConsole = "enable".equalsIgnoreCase(options[1]);
+			}
+			if ("user".equalsIgnoreCase(options[1])) {
+				this.userConsole = "enable".equalsIgnoreCase(options[1]);
+			}
 		}
 	}
 
@@ -129,6 +138,8 @@ public class EChartsProcessor extends Processor<String, String> {
 			context.put("ZeppelinEchartsSerieList", this.serieList);
 			context.put("ZeppelinECahrtsWidth", this.width);
 			context.put("ZeppelinECahrtsHeight", this.height);
+			context.put("ZeppelinEChartsAdminConsole", this.adminConsole);
+			context.put("ZeppelinEChartsUserConsole", this.userConsole);
 			StringWriter writer = new StringWriter();
 			template.merge(context, writer);
 			return writer.toString();

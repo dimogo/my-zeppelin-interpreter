@@ -1,5 +1,5 @@
 <div class="container-fluid zeppelin-echarts-example">
-    <form class="form-horizontal" role="form">
+    <div id="zeppelin-echarts-console">
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
 
@@ -34,13 +34,13 @@
 
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="zeppelin-echarts-graphic-width" placeholder="图表的宽度"
-                #if($ZeppelinECahrtsWidth) value="$ZeppelinECahrtsWidth" #end>
+                    #if($ZeppelinECahrtsWidth) value="$ZeppelinECahrtsWidth" #end>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
 
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="zeppelin-echarts-graphic-height" placeholder="图表的高度"
-                #if($ZeppelinECahrtsHeight) value="$ZeppelinECahrtsHeight" #end>
+                    #if($ZeppelinECahrtsHeight) value="$ZeppelinECahrtsHeight" #end>
             </div>
         </div>
         <div class="form-group row">
@@ -77,75 +77,74 @@
                 </select>
             </div>
         </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <select name="from" id="zeppelin-echarts-selectable-fields" class="form-control" size="13"
-                multiple="multiple">
-        </select>
-    </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <select name="from" id="zeppelin-echarts-selectable-fields" class="form-control" size="13"
+                        multiple="multiple">
+                </select>
+            </div>
 
-    <div class="col-sm-2">
-        <button type="button" id="zeppelin-echarts-fields-move-to-up"
-                class="btn btn-default btn-block">
-            <i class="glyphicon glyphicon-chevron-up"></i>
-        </button>
-        <button type="button" id="zeppelin-echarts-fields-all-to-right"
-                class="btn btn-default btn-block">
-            <i class="glyphicon glyphicon-forward"></i>
-        </button>
-        <button type="button" id="zeppelin-echarts-fields-to-right"
-                class="btn btn-default btn-block">
-            <i class="glyphicon glyphicon-chevron-right"></i>
-        </button>
-        <button type="button" id="zeppelin-echarts-fields-to-left"
-                class="btn btn-default btn-block">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-        </button>
-        <button type="button" id="zeppelin-echarts-fields-all-to-left"
-                class="btn btn-default btn-block">
-            <i class="glyphicon glyphicon-backward"></i>
-        </button>
-        <button type="button" id="zeppelin-echarts-fields-move-to-down"
-                class="btn btn-default btn-block">
-            <i class="glyphicon glyphicon-chevron-down"></i>
-        </button>
-    </div>
+            <div class="col-sm-2">
+                <button type="button" id="zeppelin-echarts-fields-move-to-up"
+                        class="btn btn-default btn-block">
+                    <i class="glyphicon glyphicon-chevron-up"></i>
+                </button>
+                <button type="button" id="zeppelin-echarts-fields-all-to-right"
+                        class="btn btn-default btn-block">
+                    <i class="glyphicon glyphicon-forward"></i>
+                </button>
+                <button type="button" id="zeppelin-echarts-fields-to-right"
+                        class="btn btn-default btn-block">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </button>
+                <button type="button" id="zeppelin-echarts-fields-to-left"
+                        class="btn btn-default btn-block">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </button>
+                <button type="button" id="zeppelin-echarts-fields-all-to-left"
+                        class="btn btn-default btn-block">
+                    <i class="glyphicon glyphicon-backward"></i>
+                </button>
+                <button type="button" id="zeppelin-echarts-fields-move-to-down"
+                        class="btn btn-default btn-block">
+                    <i class="glyphicon glyphicon-chevron-down"></i>
+                </button>
+            </div>
 
-    <div class="col-sm-5">
-        <select name="to" id="zeppelin-echarts-selected-fields" class="form-control"
-                size="13" multiple="multiple"></select>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <table id="zeppelin-echarts-series" class="table table-bordered">
-            <tr>
-                <td>#
-                <td>名称
-                <td>类型
-                <td>字段及顺序
-                <td>x轴
-                <td>y轴
-                <td>操作
-            </tr>
-        </table>
-    </div>
-</div>
-<div class="row">
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-12">
-            <button type="button" id="zeppin-echarts-add-serie" class="btn btn-success">增加系列</button>
-            <button type="button" id="zeppin-echarts-refresh-graphic" class="btn btn-success">刷新图表</button>
+            <div class="col-sm-5">
+                <select name="to" id="zeppelin-echarts-selected-fields" class="form-control"
+                        size="13" multiple="multiple"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="zeppelin-echarts-series" class="table table-bordered">
+                    <tr>
+                        <td>#
+                        <td>名称
+                        <td>类型
+                        <td>字段及顺序
+                        <td>x轴
+                        <td>y轴
+                        <td>操作
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-12">
+                    <button type="button" id="zeppin-echarts-add-serie" class="btn btn-success">增加系列</button>
+                    <button type="button" id="zeppin-echarts-refresh-graphic" class="btn btn-success">刷新图表</button>
+                </div>
+            </div>
         </div>
     </div>
-    </form>
-</div>
-<div class="row">
-    <div id="zeppelin-echarts-graphic-container" class="col-sm-12">
-        <div id="zeppelin-echarts-graphic-body" class="zeppelin-echarts-main"></div>
+    <div class="row">
+        <div id="zeppelin-echarts-graphic-container" class="col-sm-12">
+            <div id="zeppelin-echarts-graphic-body" class="zeppelin-echarts-main"></div>
+        </div>
     </div>
-</div>
 </div>
 <script language="javascript">
         #if ($ZeppelinEChartsOriginJsonData)
@@ -573,6 +572,13 @@
             console.log('all files loaded');
 
             $(document).ready(function () {
+                #if($ZeppelinEChartsAdminConsole)
+                    $("#zeppelin-echarts-console").hide();
+                #elseif ($ZeppelinEChartsUserConsole)
+                    if (location.search == "asiframe") {
+                        $("#zeppelin-echarts-console").hide();
+                    }
+                #end
                 #if($ZeppelinECahrtsWidth) $("#zeppelin-echarts-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
                 #if($ZeppelinECahrtsHeight) $("#zeppelin-echarts-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
                 $("#zeppelin-echarts-title").val(option.title.text);
@@ -582,7 +588,9 @@
                 updateZeppelinEChartsSeries();
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
-                $(window).resize(function(){graphicBodyObj.resize()});
+                $(window).resize(function () {
+                    graphicBodyObj.resize()
+                });
                 drawChart(false, graphicBodyObj, buildGraphicOption(option));
             });
         } catch (err) {
