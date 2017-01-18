@@ -20,6 +20,8 @@ public class EChartsProcessor extends Processor<String, String> {
 	private VelocityEngine ve = new VelocityEngine();
 	private Map<String, String> optionSettings = new HashMap<String, String>();
 	private int seriesCount = 1;
+	private int xAxisCount = 1;
+	private int yAxisCount = 1;
 	private List<Serie> serieList = new LinkedList<Serie>();
 
 	/**
@@ -51,6 +53,14 @@ public class EChartsProcessor extends Processor<String, String> {
 		if (parameters.length > 0) {
 			this.seriesCount = Integer.parseInt(parameters[0]);
 		}
+		if (parameters.length > 1) {
+			//xAxis
+			this.xAxisCount = Integer.parseInt(parameters[1]);
+		}
+		if (parameters.length > 2) {
+			//yAxis
+			this.yAxisCount = Integer.parseInt(parameters[2]);
+		}
 	}
 
 	public void addPara(String name, String[] options, String body) {
@@ -73,6 +83,16 @@ public class EChartsProcessor extends Processor<String, String> {
 				serie.yAxisIndex = Integer.parseInt(options[5]);
 			}
 			this.serieList.add(serie);
+
+			int max = 0;
+			for (Serie s : serieList) {
+				if (max < s.index) {
+					max = s.index;
+				}
+			}
+			if (max > seriesCount) {
+				seriesCount = max;
+			}
 		}
 	}
 
@@ -98,6 +118,8 @@ public class EChartsProcessor extends Processor<String, String> {
 			context.put("ZeppelinEChartsBodyFoot", this.html);
 			context.put("ZeppelinEchartsOptionSettings", optionSettings);
 			context.put("ZeppelinEchartsSeriesCount", this.seriesCount);
+			context.put("ZeppelinECahrtsXAxisCount", this.xAxisCount);
+			context.put("ZeppelinECahrtsYAxisCount", this.yAxisCount);
 			context.put("ZeppelinEchartsSerieList", this.serieList);
 			StringWriter writer = new StringWriter();
 			template.merge(context, writer);

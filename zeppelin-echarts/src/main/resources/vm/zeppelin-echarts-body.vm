@@ -170,21 +170,33 @@
             right: 10,
             data: []
         },
-        xAxis: {
-            splitLine: {
-                lineStyle: {
-                    type: 'dashed'
-                }
-            }
-        },
-        yAxis: {
-            splitLine: {
-                lineStyle: {
-                    type: 'dashed'
-                }
-            },
-            scale: true
-        },
+        xAxis: [
+            #foreach($xAxisIndex in [1..$ZeppelinECahrtsXAxisCount])
+                {
+                    #if($xAxisIndex == 0)
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                    #end
+                    type: 'category'
+                },
+            #end],
+        yAxis: [
+            #foreach($yAxisIndex in [1..$ZeppelinECahrtsYAxisCount])
+                {
+                    #if($yAxisIndex == 0)
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    },
+                    #end
+                    scale: true,
+                    type: 'value'
+                },
+            #end],
         series: [
             #foreach($seriesIndex in [1..$ZeppelinEchartsSeriesCount])
                 {
