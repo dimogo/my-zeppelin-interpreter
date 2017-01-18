@@ -30,21 +30,26 @@
                     <option value="scatter">散点图</option>
                 </select>
             </div>
-        </div>
-        <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 control-label">宽度</label>
 
             <div class="col-sm-2">
                 <input type="text" class="form-control" id="inputEmail3" placeholder="图表的宽度">
             </div>
-            <label for="inputEmail3" class="col-sm-1 control-label">x轴</label>
+            <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="图表的高度">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 control-label">x序号</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-xaxis" class="form-control">
                     <option value="0" selected>0</option>
                 </select>
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">x轴值类型</label>
+            <label for="inputEmail3" class="col-sm-1 control-label">x类型</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-xaxis-type" class="form-control">
@@ -54,21 +59,14 @@
                     <option value="log">对数</option>
                 </select>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
-
-            <div class="col-sm-2">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="图表的高度">
-            </div>
-            <label for="inputEmail3" class="col-sm-1 control-label">y轴</label>
+            <label for="inputEmail3" class="col-sm-1 control-label">y序号</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-yaxis" class="form-control">
                     <option value="0" selected>0</option>
                 </select>
             </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">y轴值类型</label>
+            <label for="inputEmail3" class="col-sm-1 control-label">y类型</label>
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-yaxis-type" class="form-control">
