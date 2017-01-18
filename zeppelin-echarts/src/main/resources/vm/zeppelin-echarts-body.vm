@@ -258,8 +258,8 @@
         var subtitle = $("#zeppelin-echarts-subtitle").val();
         option.title.text = title;
         option.title.subtext = subtitle;
-        option.xAxis.type = $("#zeppelin-echarts-xaxis-type").val();
-        option.yAxis.type = $("#zeppelin-echarts-yaxis-type").val();
+        //option.xAxis.type = $("#zeppelin-echarts-xaxis-type").val();
+        //option.yAxis.type = $("#zeppelin-echarts-yaxis-type").val();
         option.series = buildSerieDataByOrigin(orginData);
         option.legend.data = buildLegendDataBySerieConfigs(serieConfigs);
         return option;
@@ -490,7 +490,7 @@
                 updateZeppelinEChartsSeries();
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
-                drawChart(false, graphicBodyObj, option);
+                drawChart(false, graphicBodyObj, buildGraphicOption(option));
             });
         } catch (err) {
             console.log(err);
