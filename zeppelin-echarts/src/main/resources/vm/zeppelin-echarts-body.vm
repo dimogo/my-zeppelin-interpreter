@@ -343,7 +343,7 @@
             if (i > 0) {
                 fields += ","
             }
-            fields += fields[selected[i].value]
+            fields += selected[i].value
         }
         serieConfigs.push({
             "index": serieConfigs.length,
