@@ -15,6 +15,11 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 control-label">系列名称</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="zeppelin-echarts-serie-name" placeholder="图表系列名称">
+            </div>
             <label for="inputEmail3" class="col-sm-1 control-label">图表</label>
 
             <div class="col-sm-2">
@@ -24,11 +29,6 @@
                     <option value="line">折线图</option>
                     <option value="scatter">散点图</option>
                 </select>
-            </div>
-            <label for="inputEmail3" class="col-sm-2 control-label">系列名称</label>
-
-            <div class="col-sm-2">
-                <input type="text" class="form-control" id="zeppelin-echarts-serie-name" placeholder="图表系列名称">
             </div>
         </div>
         <div class="form-group row">
@@ -129,7 +129,7 @@
                 <td>字段及顺序
                 <td>x轴
                 <td>y轴
-                <td>
+                <td>操作
             </tr>
         </table>
     </div>
@@ -187,11 +187,11 @@
             #foreach($yAxisIndex in [1..$ZeppelinECahrtsYAxisCount])
                 {
                     #if($yAxisIndex == 0)
-                    splitLine: {
-                        lineStyle: {
-                            type: 'dashed'
-                        }
-                    },
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
                     #end
                     scale: true,
                     type: 'value'
@@ -208,6 +208,8 @@
     };
 
     function fillOriginDataOptionsFromStruct(data) {
+        $("#zeppelin-echarts-selected-fields option").remove();
+        $("#zeppelin-echarts-selectable-fields option").remove();
         for (var key in data) {
             $("#zeppelin-echarts-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
         }
@@ -258,8 +260,6 @@
         var subtitle = $("#zeppelin-echarts-subtitle").val();
         option.title.text = title;
         option.title.subtext = subtitle;
-        //option.xAxis.type = $("#zeppelin-echarts-xaxis-type").val();
-        //option.yAxis.type = $("#zeppelin-echarts-yaxis-type").val();
         option.series = buildSerieDataByOrigin(orginData);
         option.legend.data = buildLegendDataBySerieConfigs(serieConfigs);
         return option;
@@ -288,7 +288,9 @@
                     + "<td>" + cfg.fields
                     + "<td>" + cfg.xAxisIndex
                     + "<td>" + cfg.yAxisIndex
-                    + "<td><button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
+                    + "<td><button name=\"zeppelin-echarts-serie-edit\" type=\"button\" class=\"btn btn-default\">修改</button>&nbsp;&nbsp;"
+                    + "<button name=\"zeppelin-echarts-serie-update\" type=\"button\" class=\"btn btn-primary\">更新</button>&nbsp;&nbsp;"
+                    + "<button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
         $("button[name='zeppelin-echarts-serie-delete']").each(function () {
@@ -297,8 +299,46 @@
                 serieConfigs.del(serieIndex)
                 $(this).parents("tr").remove()
                 updateZeppelinEChartsSeries()
-            })
-        })
+            });
+
+        });
+        $("button[name='zeppelin-echarts-serie-edit']").each(function () {
+            $(this).click(function () {
+                var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
+                $("#zeppelin-echarts-type option[value='" + serieConfigs[serieIndex].type + "']").attr('selected', true);
+                $("#zeppelin-echarts-serie-name").val(serieConfigs[serieIndex].name);
+                $("#zeppelin-echarts-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
+                $("#zeppelin-echarts-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
+                var fieldArray = serieConfigs[serieIndex].fields.split(",");
+                for (var i = 0; i < fieldArray.length; i++) {
+                    $("#zeppelin-echarts-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
+                    $("#zeppelin-echarts-selectable-fields option[value='" + fieldArray[i] + "']").remove();
+                }
+            });
+        });
+        $("button[name='zeppelin-echarts-serie-update']").each(function () {
+            $(this).click(function () {
+                var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
+                var selected = $("#zeppelin-echarts-selected-fields option");
+                var fields = "";
+                for (var i = 0; i < selected.length; i++) {
+                    if (i > 0) {
+                        fields += ","
+                    }
+                    fields += selected[i].value;
+                }
+                serieConfigs[serieIndex] = {
+                    "index": serieIndex,
+                    "name": $("#zeppelin-echarts-serie-name").val(),
+                    "type": $("#zeppelin-echarts-type").val(),
+                    "fields": fields,
+                    "xAxisIndex": $("#zeppelin-echarts-xaxis").val(),
+                    "yAxisIndex": $("#zeppelin-echarts-yaxis").val()
+                };
+                fillOriginDataOptionsFromStruct(orginData[0]);
+                updateZeppelinEChartsSeries();
+            });
+        });
     }
     $("#zeppelin-echarts-fields-to-right").click(function () {
         var selected = $("#zeppelin-echarts-selectable-fields").val();
