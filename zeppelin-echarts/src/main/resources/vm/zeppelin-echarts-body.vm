@@ -33,12 +33,14 @@
             <label for="inputEmail3" class="col-sm-1 control-label">宽度</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="图表的宽度">
+                <input type="text" class="form-control" id="zeppelin-echarts-graphic-width" placeholder="图表的宽度"
+                #if($ZeppelinECahrtsWidth) value="$ZeppelinECahrtsWidth" #end>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="图表的高度">
+                <input type="text" class="form-control" id="zeppelin-echarts-graphic-height" placeholder="图表的高度"
+                #if($ZeppelinECahrtsHeight) value="$ZeppelinECahrtsHeight" #end>
             </div>
         </div>
         <div class="form-group row">
@@ -46,7 +48,6 @@
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-xaxis" class="form-control">
-                    <option value="0" selected>0</option>
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">x类型</label>
@@ -63,7 +64,6 @@
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-yaxis" class="form-control">
-                    <option value="0" selected>0</option>
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">y类型</label>
@@ -172,7 +172,7 @@
             #foreach($xAxisIndex in [1..$ZeppelinECahrtsXAxisCount])
                 {
                     splitLine: {
-                        #if($xAxisIndex == 0)
+                        #if($xAxisIndex == 1)
                             show: true,
                             lineStyle: {
                                 type: 'dashed'
@@ -187,7 +187,7 @@
             #foreach($yAxisIndex in [1..$ZeppelinECahrtsYAxisCount])
                 {
                     splitLine: {
-                        #if($yAxisIndex == 0)
+                        #if($yAxisIndex == 1)
                             lineStyle: {
                                 type: 'dashed'
                             }
@@ -411,6 +411,14 @@
         $("#zeppelin-echarts-selected-fields option").remove();
     });
     $("#zeppin-echarts-refresh-graphic").click(function () {
+        var width = $("#zeppelin-echarts-graphic-width").val();
+        if (width != undefined && width != "") {
+            $("#zeppelin-echarts-graphic-body").css("width", width);
+        }
+        var height = $("#zeppelin-echarts-graphic-height").val();
+        if (height != undefined && width != "") {
+            $("#zeppelin-echarts-graphic-body").css("height", height);
+        }
         drawChart(false, graphicBodyObj, buildGraphicOption(option));
     });
 
@@ -565,6 +573,10 @@
             console.log('all files loaded');
 
             $(document).ready(function () {
+                #if($ZeppelinECahrtsWidth) $("#zeppelin-echarts-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
+                #if($ZeppelinECahrtsHeight) $("#zeppelin-echarts-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
+                $("#zeppelin-echarts-title").val(option.title.text);
+                $("#zeppelin-echarts-subtitle").val(option.title.subtext);
                 fillXY(option);
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 updateZeppelinEChartsSeries();
