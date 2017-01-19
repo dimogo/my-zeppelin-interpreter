@@ -574,7 +574,7 @@
                 #if($ZeppelinEChartsAdminConsole == false)
                     $("#zeppelin-echarts-console").hide();
                 #elseif ($ZeppelinEChartsUserConsole == false)
-                    if (location.search == "asiframe") {
+                    if (location.href.endsWith("?asIframe")) {
                         $("#zeppelin-echarts-console").hide();
                     }
                 #end
