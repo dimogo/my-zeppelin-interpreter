@@ -25,6 +25,7 @@
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-type" class="form-control">
                     <option value=""></option>
+                    <option value="pie">饼图</option>
                     <option value="bar">柱状图</option>
                     <option value="line">折线图</option>
                     <option value="scatter">散点图</option>
@@ -277,16 +278,25 @@
                     });
                 }
                 serie = seriesData[serieConfig.index];
-                if (serieConfig.fields.indexOf(",") == -1) {
-                    serie.data.push(data[serieConfig.fields]);
-                    continue;
+                if (serieConfig.type == "line" || serieConfig.type == "bar" || serieConfig.type == "scatter") {
+                    if (serieConfig.fields.indexOf(",") == -1) {
+                        serie.data.push(data[serieConfig.fields]);
+                        continue;
+                    }
+                    var objData = new Array();
+                    var fieldArray = serieConfig.fields.split(",");
+                    for (var i = 0; i < fieldArray.length; i++) {
+                        objData.push(data[fieldArray[i]]);
+                    }
+                    serie.data.push(objData);
+                } else if (serieConfig.type == "pie") {
+                    var fieldArray = serieConfig.fields.split(",");
+                    if (fieldArray.length == 1) {
+                        serie.data.push(data[serieConfig.fields]);
+                        continue;
+                    }
+                    serie.data.push({name:data[fieldArray[0]], value:data[fieldArray[1]]});
                 }
-                var objData = new Array();
-                var fieldArray = serieConfig.fields.split(",");
-                for (var i = 0; i < fieldArray.length; i++) {
-                    objData.push(data[fieldArray[i]]);
-                }
-                serie.data.push(objData);
             }
         }
         return seriesData;
@@ -346,9 +356,12 @@
                 $("#zeppelin-echarts-serie-name").val(serieConfigs[serieIndex].name);
                 $("#zeppelin-echarts-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
                 $("#zeppelin-echarts-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
+                fillOriginDataOptionsFromStruct(orginData[0]);
                 var fieldArray = serieConfigs[serieIndex].fields.split(",");
-                $("#zeppelin-echarts-selectable-fields option").remove();
                 for (var i = 0; i < fieldArray.length; i++) {
+                    if (fieldArray[i] == "") {
+                        break;
+                    }
                     $("#zeppelin-echarts-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
                     $("#zeppelin-echarts-selectable-fields option[value='" + fieldArray[i] + "']").remove();
                 }
