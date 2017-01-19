@@ -560,27 +560,16 @@
     spawn(function * ()
     {
         try {
-            if ($("script[src='" + jquery + "']").length === 0) {
-                yield getJS(jquery);
-                console.log('jquery has loaded');
-            }
-            if ($("script[src='" + echarts + "']").length === 0) {
-                yield getJS(echarts);
-                console.log('echarts has loaded');
-            }
-            if ($("script[src='" + bootstrap + "']").length === 0) {
-                yield getJS(bootstrap);
-                console.log('bootstrap has loaded');
-            }
-            if ($("script[src='" + zeppelinEchartsJS + "']").length === 0) {
-                yield getJS(zeppelinEchartsJS);
-                console.log('zeppelinEchartsJS has loaded');
-            }
-            if ($("link[href='" + zeppelinEchartsCSS + "']").length === 0) {
-                yield getCSS(zeppelinEchartsCSS);
-                console.log('zeppelinEchartsCSS has loaded');
-            }
-
+            yield getJS(jquery);
+            console.log('jquery has loaded');
+            yield getJS(echarts);
+            console.log('echarts has loaded');
+            yield getJS(bootstrap);
+            console.log('bootstrap has loaded');
+            yield getJS(zeppelinEchartsJS);
+            console.log('zeppelinEchartsJS has loaded');
+            yield getCSS(zeppelinEchartsCSS);
+            console.log('zeppelinEchartsCSS has loaded');
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
                     $("#zeppelin-echarts-console").hide();
