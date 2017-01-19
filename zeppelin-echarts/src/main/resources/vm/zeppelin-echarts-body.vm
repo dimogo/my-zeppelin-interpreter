@@ -253,10 +253,23 @@
         }
     }
 
-    function buildLegendDataBySerieConfigs() {
+    function buildLegendDataByOption(option) {
         var legendData = new Array();
-        for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs.length; serieConfigIndex++) {
-            legendData.push(serieConfigs[serieConfigIndex].name);
+        var addedName = false;
+        for (var serieIndex = 0; serieIndex < option.series.length; serieIndex++) {
+            addedName = false;
+            try {
+                var data = option.series[serieIndex].data;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].name) {
+                        legendData.push(data[i].name);
+                        addedName = true;
+                    }
+                }
+            } catch (e) {}
+            if (!addedName) {
+                legendData.push(option.series[serieIndex].name);
+            }
         }
         return legendData;
     }
@@ -308,7 +321,7 @@
         option.title.text = title;
         option.title.subtext = subtitle;
         option.series = buildSerieDataByOrigin(orginData);
-        option.legend.data = buildLegendDataBySerieConfigs(serieConfigs);
+        option.legend.data = buildLegendDataByOption(option);
         return option;
     }
 
