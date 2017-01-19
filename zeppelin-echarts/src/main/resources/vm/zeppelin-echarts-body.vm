@@ -265,7 +265,7 @@
         for (var dataIndex = 0; dataIndex < originData.length; dataIndex++) {
             var data = originData[dataIndex];
             for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs.length; serieConfigIndex++) {
-                var serieConfig = serieConfigs[serieConfigIndex]
+                var serieConfig = serieConfigs[serieConfigIndex];
                 var serie = undefined;
                 if (seriesData.length < serieConfig.index + 1) {
                     seriesData.push({
@@ -332,10 +332,10 @@
         }
         $("button[name='zeppelin-echarts-serie-delete']").each(function () {
             $(this).click(function () {
-                var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html())
-                serieConfigs.del(serieIndex)
-                $(this).parents("tr").remove()
-                updateZeppelinEChartsSeries()
+                var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
+                serieConfigs.del(serieIndex);
+                $(this).parents("tr").remove();
+                updateZeppelinEChartsSeries();
             });
 
         });
@@ -347,6 +347,7 @@
                 $("#zeppelin-echarts-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
                 $("#zeppelin-echarts-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
                 var fieldArray = serieConfigs[serieIndex].fields.split(",");
+                $("#zeppelin-echarts-selectable-fields option").remove();
                 for (var i = 0; i < fieldArray.length; i++) {
                     $("#zeppelin-echarts-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
                     $("#zeppelin-echarts-selectable-fields option[value='" + fieldArray[i] + "']").remove();
@@ -360,7 +361,7 @@
                 var fields = "";
                 for (var i = 0; i < selected.length; i++) {
                     if (i > 0) {
-                        fields += ","
+                        fields += ",";
                     }
                     fields += selected[i].value;
                 }
@@ -426,9 +427,9 @@
         var fields = "";
         for (var i = 0; i < selected.length; i++) {
             if (i > 0) {
-                fields += ","
+                fields += ",";
             }
-            fields += selected[i].value
+            fields += selected[i].value;
         }
         serieConfigs.push({
             "index": serieConfigs.length,
@@ -445,7 +446,7 @@
         #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)
         try {
             #foreach($entry in $ZeppelinEchartsOptionSettings.entrySet())
-                option.$entry.key = $entry.value
+                option.$entry.key = $entry.value;
             #end
         } catch (e) {
             console.error("option settings error");
@@ -459,9 +460,9 @@
             }
             chart = echarts.init(chart, "macarons");
         }
-        chart.showLoading({text: "正在重新绘制图表,请稍候..."})
+        chart.showLoading({text: "正在重新绘制图表,请稍候..."});
         try {
-            chart.setOption(option, true)
+            chart.setOption(option, true);
             chart.hideLoading();
         } catch (e) {
             chart.showLoading({text: "绘制图表出错了"});
@@ -559,17 +560,26 @@
     spawn(function * ()
     {
         try {
-            yield getJS(jquery);
-            console.log('jquery has loaded');
-            yield getJS(echarts);
-            console.log('echarts has loaded');
-            yield getJS(bootstrap);
-            console.log('bootstrap has loaded');
-            yield getJS(zeppelinEchartsJS);
-            console.log('zeppelinEchartsJS has loaded');
-            yield getCSS(zeppelinEchartsCSS);
-            console.log('zeppelinEchartsCSS has loaded');
-            console.log('all files loaded');
+            if ($("script[src='" + jquery + "']").length === 0) {
+                yield getJS(jquery);
+                console.log('jquery has loaded');
+            }
+            if ($("script[src='" + echarts + "']").length === 0) {
+                yield getJS(echarts);
+                console.log('echarts has loaded');
+            }
+            if ($("script[src='" + bootstrap + "']").length === 0) {
+                yield getJS(bootstrap);
+                console.log('bootstrap has loaded');
+            }
+            if ($("script[src='" + zeppelinEchartsJS + "']").length === 0) {
+                yield getJS(zeppelinEchartsJS);
+                console.log('zeppelinEchartsJS has loaded');
+            }
+            if ($("link[href='" + zeppelinEchartsCSS + "']").length === 0) {
+                yield getCSS(zeppelinEchartsCSS);
+                console.log('zeppelinEchartsCSS has loaded');
+            }
 
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
@@ -589,7 +599,7 @@
                 graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
                 $(window).resize(function () {
-                    graphicBodyObj.resize()
+                    graphicBodyObj.resize();
                 });
                 drawChart(false, graphicBodyObj, buildGraphicOption(option));
             });
