@@ -373,6 +373,10 @@
                 needAxis = true;
                 continue;
             }
+            if (option.series[i].type == "scatter") {
+                needAxis = true;
+                continue;
+            }
             if (option.series[i].type == "pie") {
                 pieSeries = pieSeries + 1;
             }
