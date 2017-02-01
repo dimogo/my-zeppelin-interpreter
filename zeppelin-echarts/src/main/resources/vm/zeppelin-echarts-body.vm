@@ -24,11 +24,12 @@
 
             <div class="col-sm-2">
                 <select id="zeppelin-echarts-type" class="form-control">
-                    <option value=""></option>
+                    <option value="" selected></option>
                     <option value="pie">饼图</option>
                     <option value="bar">柱状图</option>
                     <option value="line">折线图</option>
                     <option value="scatter">散点图</option>
+                    <option value="radar">雷达图</option>
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">宽度</label>
@@ -163,6 +164,9 @@
         title: {
             text: "",
             subtext: "",
+        },
+        tooltip: {
+            trigger: "item"
         },
         legend: {
             right: 10,
@@ -309,10 +313,103 @@
                         continue;
                     }
                     serie.data.push({name:data[fieldArray[0]], value:data[fieldArray[1]]});
+                } else if (serieConfig.type == 'radar') {
+                    var fieldArray = serieConfig.fields.split(",");
+                    for (var i = 0; i < fieldArray.length; i++) {
+                        var vector = serie.data[i];
+                        if (vector == undefined) {
+                            vector = {name:fieldArray[i], value: new Array()};
+                            serie.data.push(vector);
+                        }
+                        vector.value.push(data[fieldArray[i]]);
+                    }
                 }
             }
         }
         return seriesData;
+    }
+
+    function setRadarIndicator(option) {
+        //将每个系列中data[0]作为该系统的indicator
+        for (var i = 0; i < option.series.length; i++) {
+            if (option.series[i].type != 'radar') {
+                continue;
+            }
+            if (option.radar == undefined) {
+                option.radar = {};
+            }
+            if (option.radar.indicator == undefined) {
+                option.radar.indicator = new Array();
+            }
+            var indicatorList = option.series[i].data[0].value;
+            option.series[i].data.del(0);
+            var indicator = new Array();
+            for (var j = 0; j < indicatorList.length; j++) {
+                var data = option.series[i].data;
+                var max = 0;
+                for (var k = 0; k < data.length; k++) {
+                    if (data[k].value[j] > max) {
+                        max = data[k].value[j];
+                    }
+                }
+                option.radar.indicator.push({"name": "" + indicatorList[j], "max": max});
+            }
+        }
+    }
+    function checkOption(option) {
+        var hasRadar = false;
+        var needAxis = false;
+        var pieSeries = 0;
+        for (var i = 0; i < option.series.length; i++) {
+            if (option.series[i].type == "radar") {
+                hasRadar = true;
+                continue;
+            }
+            if (option.series[i].type == "line") {
+                needAxis = true;
+                continue;
+            }
+            if (option.series[i].type == "bar") {
+                needAxis = true;
+                continue;
+            }
+            if (option.series[i].type == "pie") {
+                pieSeries = pieSeries + 1;
+            }
+        }
+        if (pieSeries > 1) {
+            var width = 100/(pieSeries * 2 - 1);
+            var startSize = 0;
+            for (var i = 0; i < option.series.length; i++) {
+                if (option.series[i].type != "pie") {
+                    continue;
+                }
+                option.series[i].radius = [startSize + "%", (startSize + width) + "%"];
+                startSize = startSize + width * 2;
+            }
+        }
+        if (!hasRadar && option.radar != undefined) {
+            option.radar = undefined;
+        }
+        if (!needAxis) {
+            if (option.xAxis != undefined) {
+                option.xAxisback = option.xAxis;
+                option.xAxis = undefined;
+            }
+            if (option.yAxis != undefined) {
+                option.yAxisback = option.yAxis;
+                option.yAxis = undefined;
+            }
+        } else {
+            if (option.xAxisback != undefined) {
+                option.xAxis = option.xAxisback;
+                option.xAxisback = undefined;
+            }
+            if (option.yAxisback != undefined) {
+                option.yAxis = option.yAxisback;
+                option.yAxisback = undefined;
+            }
+        }
     }
 
     function buildGraphicOption(option) {
@@ -322,6 +419,8 @@
         option.title.subtext = subtitle;
         option.series = buildSerieDataByOrigin(orginData);
         option.legend.data = buildLegendDataByOption(option);
+        setRadarIndicator(option);
+        checkOption(option);
         return option;
     }
 
