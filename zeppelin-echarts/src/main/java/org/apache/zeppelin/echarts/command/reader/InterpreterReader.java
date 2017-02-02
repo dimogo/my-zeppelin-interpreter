@@ -1,11 +1,11 @@
 package org.apache.zeppelin.echarts.command.reader;
 
-import org.apache.commons.beanutils.BeanUtils;
+//import org.apache.commons.beanutils.BeanUtils;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
-import org.apache.zeppelin.interpreter.Interpreter;
+//import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
-import org.apache.zeppelin.interpreter.InterpreterResult;
-import org.apache.zeppelin.server.ZeppelinServer;
+//import org.apache.zeppelin.interpreter.InterpreterResult;
+//import org.apache.zeppelin.server.ZeppelinServer;
 
 /**
  * Created by Ethan Xiao on 2017/1/12.
@@ -29,15 +29,16 @@ public class InterpreterReader extends Reader<String, String> {
 	}
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
-		try {
-			InterpreterContext subContext = (InterpreterContext) BeanUtils.cloneBean(interpreterContext);
-			BeanUtils.setProperty(subContext, "replName", this.replName);
-			Interpreter interpreter = ZeppelinServer.notebook.getInterpreterFactory().getInterpreter(interpreterContext
-					.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), this.replName);
-			InterpreterResult rs = interpreter.interpret(this.body, subContext);
-			return rs.toString();
-		} catch (Exception e) {
-			throw new RuntimeException("call sub interpreter error:", e);
-		}
+		return null;
+		//try {
+		//	InterpreterContext subContext = (InterpreterContext) BeanUtils.cloneBean(interpreterContext);
+		//	BeanUtils.setProperty(subContext, "replName", this.replName);
+		//	Interpreter interpreter = ZeppelinServer.notebook.getInterpreterFactory().getInterpreter(interpreterContext
+		//			.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), this.replName);
+		//	InterpreterResult rs = interpreter.interpret(this.body, subContext);
+		//	return rs.toString();
+		//} catch (Exception e) {
+		//	throw new RuntimeException("call sub interpreter error:", e);
+		//}
 	}
 }
