@@ -33,7 +33,7 @@ public class InterpreterReader extends Reader<String, String> {
 			InterpreterContext subContext = (InterpreterContext) BeanUtils.cloneBean(interpreterContext);
 			BeanUtils.setProperty(subContext, "replName", this.replName);
 			Interpreter interpreter = ZeppelinServer.notebook.getInterpreterFactory().getInterpreter(interpreterContext
-					.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), subContext.getReplName());
+					.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), this.replName);
 			InterpreterResult rs = interpreter.interpret(this.body, subContext);
 			return rs.toString();
 		} catch (Exception e) {
