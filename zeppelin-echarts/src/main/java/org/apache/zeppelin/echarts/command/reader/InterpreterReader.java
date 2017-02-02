@@ -5,10 +5,7 @@ import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
 import org.apache.zeppelin.interpreter.InterpreterResult;
-import org.apache.zeppelin.interpreter.InterpreterResultMessage;
 import org.apache.zeppelin.server.ZeppelinServer;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by Ethan Xiao on 2017/1/12.
