@@ -5,6 +5,7 @@ import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
 import org.apache.zeppelin.interpreter.InterpreterResult;
+import org.apache.zeppelin.notebook.Notebook;
 import org.apache.zeppelin.server.ZeppelinServer;
 
 /**
@@ -32,7 +33,8 @@ public class InterpreterReader extends Reader<String, String> {
 		try {
 			InterpreterContext subContext = (InterpreterContext) BeanUtils.cloneBean(interpreterContext);
 			BeanUtils.setProperty(subContext, "replName", this.replName);
-			Interpreter interpreter = ZeppelinServer.notebook.getInterpreterFactory().getInterpreter(interpreterContext
+			Notebook notebook = ZeppelinServer.notebook;
+			Interpreter interpreter = notebook.getInterpreterFactory().getInterpreter(interpreterContext
 					.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), this.replName);
 			InterpreterResult rs = interpreter.interpret(this.body, subContext);
 			return rs.toString();
