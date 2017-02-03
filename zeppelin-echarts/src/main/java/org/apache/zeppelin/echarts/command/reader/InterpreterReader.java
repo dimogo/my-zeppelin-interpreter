@@ -1,6 +1,6 @@
 package org.apache.zeppelin.echarts.command.reader;
 
-import org.apache.commons.beanutils.BeanUtils;
+//import org.apache.commons.beanutils.BeanUtils;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
@@ -33,7 +33,6 @@ public class InterpreterReader extends Reader<String, String> {
 			InterpreterContext subContext = new InterpreterContext(
 					interpreterContext.getNoteId(),
 					interpreterContext.getParagraphId(),
-					this.replName,
 					interpreterContext.getParagraphTitle(),
 					interpreterContext.getParagraphText(),
 					interpreterContext.getAuthenticationInfo(),
