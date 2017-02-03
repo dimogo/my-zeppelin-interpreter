@@ -5,7 +5,6 @@ import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
 import org.apache.zeppelin.interpreter.InterpreterResult;
-import org.apache.zeppelin.notebook.Notebook;
 import org.apache.zeppelin.server.ZeppelinServer;
 
 /**
@@ -31,10 +30,22 @@ public class InterpreterReader extends Reader<String, String> {
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
 		try {
-			InterpreterContext subContext = (InterpreterContext) BeanUtils.cloneBean(interpreterContext);
-			BeanUtils.setProperty(subContext, "replName", this.replName);
-			Notebook notebook = ZeppelinServer.notebook;
-			Interpreter interpreter = notebook.getInterpreterFactory().getInterpreter(interpreterContext
+			InterpreterContext subContext = new InterpreterContext(
+					interpreterContext.getNoteId(),
+					interpreterContext.getParagraphId(),
+					this.replName,
+					interpreterContext.getParagraphTitle(),
+					interpreterContext.getParagraphText(),
+					interpreterContext.getAuthenticationInfo(),
+					interpreterContext.getConfig(),
+					interpreterContext.getGui(),
+					interpreterContext.getAngularObjectRegistry(),
+					interpreterContext.getResourcePool(),
+					interpreterContext.getRunners(),
+					interpreterContext.out
+			);
+			//BeanUtils.setProperty(subContext, "replName", this.replName);
+			Interpreter interpreter = ZeppelinServer.notebook.getInterpreterFactory().getInterpreter(interpreterContext
 					.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), this.replName);
 			InterpreterResult rs = interpreter.interpret(this.body, subContext);
 			return rs.toString();
