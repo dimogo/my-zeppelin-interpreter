@@ -4,8 +4,11 @@ package org.apache.zeppelin.echarts.command.reader;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
+import org.apache.zeppelin.interpreter.InterpreterFactory;
 import org.apache.zeppelin.interpreter.InterpreterResult;
+import org.apache.zeppelin.notebook.Notebook;
 import org.apache.zeppelin.server.ZeppelinServer;
+import org.apache.zeppelin.user.AuthenticationInfo;
 
 /**
  * Created by Ethan Xiao on 2017/1/12.
@@ -44,8 +47,11 @@ public class InterpreterReader extends Reader<String, String> {
 					interpreterContext.out
 			);
 			//BeanUtils.setProperty(subContext, "replName", this.replName);
-			Interpreter interpreter = ZeppelinServer.notebook.getInterpreterFactory().getInterpreter(interpreterContext
-					.getAuthenticationInfo().getUser(), interpreterContext.getNoteId(), this.replName);
+			Notebook notebook = ZeppelinServer.notebook;
+			InterpreterFactory interpreterFactory = notebook.getInterpreterFactory();
+			AuthenticationInfo authenticationInfo = interpreterContext.getAuthenticationInfo();
+			String user = authenticationInfo.getUser();
+			Interpreter interpreter = interpreterFactory.getInterpreter(user, interpreterContext.getNoteId(), this.replName);
 			InterpreterResult rs = interpreter.interpret(this.body, subContext);
 			return rs.toString();
 		} catch (Exception e) {

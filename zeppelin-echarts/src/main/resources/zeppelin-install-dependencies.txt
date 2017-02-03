@@ -4,3 +4,6 @@ commons-lang:commons-lang:2.5
 org.apache.httpcomponents:httpclient:4.5.2
 org.apache.httpcomponents:httpmime:4.5.2
 com.alibaba:fastjson:1.2.23
+commons-beanutils:commons-beanutils:1.9.3
+javax.ws.rs:javax.ws.rs-api:2.0
+org.eclipse.jetty:jetty-server:9.3.15.v20161220
