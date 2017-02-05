@@ -1,6 +1,7 @@
 package org.apache.zeppelin.echarts.command.reader;
 
-//import org.apache.commons.beanutils.BeanUtils;
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
@@ -32,30 +33,31 @@ public class InterpreterReader extends Reader<String, String> {
 	}
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
-		try {
-			InterpreterContext subContext = new InterpreterContext(
-					interpreterContext.getNoteId(),
-					interpreterContext.getParagraphId(),
-					interpreterContext.getParagraphTitle(),
-					interpreterContext.getParagraphText(),
-					interpreterContext.getAuthenticationInfo(),
-					interpreterContext.getConfig(),
-					interpreterContext.getGui(),
-					interpreterContext.getAngularObjectRegistry(),
-					interpreterContext.getResourcePool(),
-					interpreterContext.getRunners(),
-					interpreterContext.out
-			);
-			//BeanUtils.setProperty(subContext, "replName", this.replName);
-			Notebook notebook = ZeppelinServer.notebook;
-			InterpreterFactory interpreterFactory = notebook.getInterpreterFactory();
-			AuthenticationInfo authenticationInfo = interpreterContext.getAuthenticationInfo();
-			String user = authenticationInfo.getUser();
-			Interpreter interpreter = interpreterFactory.getInterpreter(user, interpreterContext.getNoteId(), this.replName);
-			InterpreterResult rs = interpreter.interpret(this.body, subContext);
-			return rs.toString();
-		} catch (Exception e) {
-			throw new RuntimeException("call sub interpreter error:", e);
-		}
+	//	try {
+	//		InterpreterContext subContext = new InterpreterContext(
+	//				interpreterContext.getNoteId(),
+	//				interpreterContext.getParagraphId(),
+	//				interpreterContext.getParagraphTitle(),
+	//				interpreterContext.getParagraphText(),
+	//				interpreterContext.getAuthenticationInfo(),
+	//				interpreterContext.getConfig(),
+	//				interpreterContext.getGui(),
+	//				interpreterContext.getAngularObjectRegistry(),
+	//				interpreterContext.getResourcePool(),
+	//				interpreterContext.getRunners(),
+	//				interpreterContext.out
+	//		);
+	//		//BeanUtils.setProperty(subContext, "replName", this.replName);
+	//		Notebook notebook = ZeppelinServer.notebook;
+	//		InterpreterFactory interpreterFactory = notebook.getInterpreterFactory();
+	//		AuthenticationInfo authenticationInfo = interpreterContext.getAuthenticationInfo();
+	//		String user = authenticationInfo.getUser();
+	//		Interpreter interpreter = interpreterFactory.getInterpreter(user, interpreterContext.getNoteId(), this.replName);
+	//		InterpreterResult rs = interpreter.interpret(this.body, subContext);
+//			return rs.toString();
+//		} catch (Exception e) {
+//			throw new RuntimeException("call sub interpreter error:", e);
+//		}
+		return JSON.toJSONString(interpreterContext);
 	}
 }
