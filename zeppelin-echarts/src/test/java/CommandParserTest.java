@@ -20,8 +20,8 @@ public class CommandParserTest {
 		InterpreterResult result = command.execute(null, null);
 		Assert.assertNotNull(result);
 		Assert.assertTrue(result.code() == InterpreterResult.Code.SUCCESS);
-		Assert.assertTrue(result.message().size() == 1);
-		String text = result.message().get(0).getData();
+		Assert.assertTrue(result.message().length() == 1);
+		String text = result.message();
 		Assert.assertEquals(text,
 				"\r\n<html><head></head>\r\n"
 				+ "<body></body>"
