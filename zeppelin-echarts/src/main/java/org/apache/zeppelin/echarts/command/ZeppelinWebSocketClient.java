@@ -2,8 +2,6 @@ package org.apache.zeppelin.echarts.command;
 
 import org.apache.zeppelin.notebook.repo.zeppelinhub.websocket.Client;
 import org.apache.zeppelin.notebook.repo.zeppelinhub.websocket.ZeppelinhubClient;
-import org.apache.zeppelin.notebook.socket.Message;
-import org.apache.zeppelin.rest.message.RunParagraphWithParametersRequest;
 
 /**
  * Created by Ethan Xiao on 2017/2/5.

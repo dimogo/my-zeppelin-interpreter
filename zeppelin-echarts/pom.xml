@@ -21,7 +21,7 @@
             <groupId>org.apache.zeppelin</groupId>
             <artifactId>zeppelin-interpreter</artifactId>
             <version>${project.version}</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
             <!--
             <exclusions>
                 <exclusion>
@@ -39,13 +39,13 @@
             <groupId>org.apache.zeppelin</groupId>
             <artifactId>zeppelin-server</artifactId>
             <version>${project.version}</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.zeppelin</groupId>
             <artifactId>zeppelin-zengine</artifactId>
             <version>${project.version}</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -72,20 +72,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.9.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.asynchttpclient</groupId>
             <artifactId>async-http-client</artifactId>
             <version>2.1.0-alpha2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <version>9.2.15.v20160210</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

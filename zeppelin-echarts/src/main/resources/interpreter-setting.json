@@ -45,6 +45,24 @@
         "propertyName": "zeppelin.echarts.plugin.url.bootstrap",
         "defaultValue": "/plugins/bootstrap/3.3.0/js/bootstrap.min.js",
         "description": "Javascript file URL of Bootstrap"
+      },
+      "zeppelin.websocket.url": {
+        "envName": null,
+        "propertyName": "zeppelin.websocket.url",
+        "defaultValue": "",
+        "description": "Web Socket URL of Zeppelin"
+      },
+      "zeppelin.websocket.max.frame.size": {
+        "envName": null,
+        "propertyName": "zeppelin.websocket.max.frame.size",
+        "defaultValue": "10240",
+        "description": "Web Socket Client Property: Max Frame Size"
+      },
+      "zeppelin.websocket.recv.msg.queue.size": {
+        "envName": null,
+        "propertyName": "zeppelin.websocket.recv.msg.queue.size",
+        "defaultValue": "50",
+        "description": "Receive Messages Queue Size"
       }
     },
     "editor": {
