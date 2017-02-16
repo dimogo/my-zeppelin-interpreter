@@ -1,26 +1,31 @@
 package org.apache.zeppelin.echarts.command.reader;
 
-import com.alibaba.fastjson.JSON;
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.zeppelin.echarts.command.WebSocketClient;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
-import org.apache.zeppelin.interpreter.Interpreter;
 import org.apache.zeppelin.interpreter.InterpreterContext;
-import org.apache.zeppelin.interpreter.InterpreterFactory;
-import org.apache.zeppelin.interpreter.InterpreterResult;
-import org.apache.zeppelin.notebook.Notebook;
-import org.apache.zeppelin.server.ZeppelinServer;
-import org.apache.zeppelin.user.AuthenticationInfo;
 
 /**
  * Created by Ethan Xiao on 2017/1/12.
  */
 public class InterpreterReader extends Reader<String, String> {
-	private String replName;
 	private String body;
 
+	private String noteBookId;
+	private String paragraphId;
+	private boolean run;
+
 	public void setParameters(String[] parameters) {
-		if (parameters != null && parameters.length > 0) {
-			this.replName = parameters[0];
+		if (parameters == null || parameters.length == 0) {
+			return;
+		}
+		noteBookId = parameters[0];
+		if (parameters.length > 1) {
+			paragraphId = parameters[1];
+		}
+		if (parameters.length > 2) {
+			try {
+				run = "run".equalsIgnoreCase(parameters[2]);
+			} catch (Exception e) {}
 		}
 	}
 
@@ -33,31 +38,20 @@ public class InterpreterReader extends Reader<String, String> {
 	}
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
-	//	try {
-	//		InterpreterContext subContext = new InterpreterContext(
-	//				interpreterContext.getNoteId(),
-	//				interpreterContext.getParagraphId(),
-	//				interpreterContext.getParagraphTitle(),
-	//				interpreterContext.getParagraphText(),
-	//				interpreterContext.getAuthenticationInfo(),
-	//				interpreterContext.getConfig(),
-	//				interpreterContext.getGui(),
-	//				interpreterContext.getAngularObjectRegistry(),
-	//				interpreterContext.getResourcePool(),
-	//				interpreterContext.getRunners(),
-	//				interpreterContext.out
-	//		);
-	//		//BeanUtils.setProperty(subContext, "replName", this.replName);
-	//		Notebook notebook = ZeppelinServer.notebook;
-	//		InterpreterFactory interpreterFactory = notebook.getInterpreterFactory();
-	//		AuthenticationInfo authenticationInfo = interpreterContext.getAuthenticationInfo();
-	//		String user = authenticationInfo.getUser();
-	//		Interpreter interpreter = interpreterFactory.getInterpreter(user, interpreterContext.getNoteId(), this.replName);
-	//		InterpreterResult rs = interpreter.interpret(this.body, subContext);
-//			return rs.toString();
-//		} catch (Exception e) {
-//			throw new RuntimeException("call sub interpreter error:", e);
-//		}
-		return JSON.toJSONString(interpreterContext);
+		if (noteBookId == null || paragraphId == null) {
+			throw new RuntimeException("noteBookId or paragraphId can not be null");
+		}
+		try {
+			WebSocketClient client = new WebSocketClient(propertyGetter.getWebSocketURL(), propertyGetter.getWebSocketMaxFrameSize(),
+					propertyGetter.getWebSocketRecvMsgQueueSize());
+			client.setPrincipal(interpreterContext.getAuthenticationInfo().getUser());
+			client.setTicket(interpreterContext.getAuthenticationInfo().getTicket());
+			if (run) {
+				return WebSocketClient.ResultUtil.getParagraphMsg(client.runParagraph(noteBookId, paragraphId, body));
+			}
+			return WebSocketClient.ResultUtil.getParagraphsMsg(client.getNote(noteBookId), paragraphId);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

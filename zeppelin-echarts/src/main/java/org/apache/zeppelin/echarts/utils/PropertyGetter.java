@@ -15,6 +15,10 @@ public class PropertyGetter {
 	private final String BOOTSTRAP_THEME_STYLE_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap.theme.style";
 	private final String BOOTSTRAP_PLUGIN_EXECUTION_KEY = "zeppelin.echarts.plugin.url.bootstrap";
 
+	private final String ZEPPELIN_WEBSOCKET_URL = "zeppelin.websocket.url";
+	private final String ZEPPELIN_WEBSOCKET_MAX_FRAME_SIZE = "zeppelin.websocket.max.frame.size";
+	private final String ZEPPELIN_WEBSOCKET_RECV_MSG_QUEUE_SIZE = "zeppelin.websocket.recv.msg.queue.size";
+
 	private Interpreter interpreter;
 
 	public PropertyGetter(Interpreter interpreter) {
@@ -70,6 +74,30 @@ public class PropertyGetter {
 			return this.interpreter.getProperty(BOOTSTRAP_PLUGIN_EXECUTION_KEY);
 		} catch (Exception e) {
 			return "/plugins/bootstrap/3.3.0/js/bootstrap.min.js";
+		}
+	}
+
+	public String getWebSocketURL() {
+		try {
+			return this.interpreter.getProperty(ZEPPELIN_WEBSOCKET_URL);
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	public int getWebSocketMaxFrameSize() {
+		try {
+			return Integer.parseInt(this.interpreter.getProperty(ZEPPELIN_WEBSOCKET_MAX_FRAME_SIZE));
+		} catch (Exception e) {
+			return 10240;
+		}
+	}
+
+	public int getWebSocketRecvMsgQueueSize() {
+		try {
+			return Integer.parseInt(this.interpreter.getProperty(ZEPPELIN_WEBSOCKET_RECV_MSG_QUEUE_SIZE));
+		} catch (Exception e) {
+			return 50;
 		}
 	}
 }

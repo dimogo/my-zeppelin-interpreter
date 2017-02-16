@@ -1,6 +1,7 @@
 package org.apache.zeppelin.echarts.command;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.zeppelin.notebook.socket.Message;
 import org.asynchttpclient.AsyncHttpClient;
@@ -71,6 +72,18 @@ public class WebSocketClient {
 		return message;
 	}
 
+	public void setPrincipal(String principal) {
+		this.principal = principal;
+	}
+
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
 	public Message newGetInterpreterSettings() {
 		return newMessage(Message.OP.GET_INTERPRETER_SETTINGS);
 	}
@@ -135,7 +148,7 @@ public class WebSocketClient {
 		return getMessage();
 	}
 
-	public JSONObject runParagaph(String noteId, String paragraphId, String paragraph) throws InterruptedException {
+	public JSONObject runParagraph(String noteId, String paragraphId, String paragraph) throws InterruptedException {
 		sendMessage(newGetNote(noteId));
 		sendMessage(newRunParagraph(paragraphId, paragraph));
 		while (true) {
@@ -150,45 +163,77 @@ public class WebSocketClient {
 	}
 
 	public static class ResultUtil {
-		public static String getParagraphsResult(JSONObject object, int index) {
-			return object.getJSONObject("data").getJSONObject("note").getJSONArray("paragraphs").getJSONObject(index)
-					.getJSONObject("result").getString("msg");
+		public static JSONArray getParagraphs(JSONObject object) {
+			return object.getJSONObject("data").getJSONObject("note").getJSONArray("paragraphs");
+		}
+
+		public static JSONObject getParagraphs(JSONObject object, String paragraphId) {
+			JSONArray paragraphs = getParagraphs(object);
+			for (int i = 0; i < paragraphs.size(); i++) {
+				if (paragraphId.equalsIgnoreCase(paragraphs.getJSONObject(i).getString("id"))) {
+					return paragraphs.getJSONObject(i);
+				}
+			}
+			throw new RuntimeException("can not found paragraph " + paragraphId);
+		}
+
+		public static JSONObject getParagraph(JSONObject object) {
+			return object.getJSONObject("data").getJSONObject("paragraph");
+		}
+
+		public static String getParagraphsMsg(JSONObject object, int index) {
+			return getParagraphs(object).getJSONObject(index).getJSONObject("result").getString("msg");
 		}
 
 		public static String getParagraphsCode(JSONObject object, int index) {
-			return object.getJSONObject("data").getJSONObject("note").getJSONArray("paragraphs").getJSONObject(index)
-					.getJSONObject("result").getString("code");
+			return getParagraphs(object).getJSONObject(index).getJSONObject("result").getString("code");
 		}
 
 		public static String getParagraphsType(JSONObject object, int index) {
-			return object.getJSONObject("data").getJSONObject("note").getJSONArray("paragraphs").getJSONObject(index)
-					.getJSONObject("result").getString("type");
+			return getParagraphs(object).getJSONObject(index).getJSONObject("result").getString("type");
 		}
 
-		public static String getParagraphResult(JSONObject object) {
-			return object.getJSONObject("data").getJSONObject("paragraph").getJSONObject("result").getString("msg");
+		public static String getParagraphsMsg(JSONObject object, String paragraphId) {
+			return getParagraphs(object, paragraphId).getJSONObject("result").getString("msg");
+		}
+
+		public static String getParagraphsCode(JSONObject object, String paragraphId) {
+			return getParagraphs(object, paragraphId).getJSONObject("result").getString("code");
+		}
+
+		public static String getParagraphsType(JSONObject object, String paragraphId) {
+			return getParagraphs(object, paragraphId).getJSONObject("result").getString("type");
+		}
+
+		public static String getParagraphMsg(JSONObject object) {
+			return getParagraph(object).getJSONObject("result").getString("msg");
 		}
 
 		public static String getParagraphCode(JSONObject object) {
-			return object.getJSONObject("data").getJSONObject("paragraph").getJSONObject("result").getString("code");
+			return getParagraph(object).getJSONObject("result").getString("code");
 		}
 
 		public static String getParagraphType(JSONObject object) {
-			return object.getJSONObject("data").getJSONObject("paragraph").getJSONObject("result").getString("type");
+			return getParagraph(object).getJSONObject("result").getString("type");
 		}
 	}
 
 	public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
 		WebSocketClient client = new WebSocketClient("ws://vpn.dimogo.com:8081/ws", 99999, 10);
 		JSONObject noteResults = client.getNote("2C78F5XN6");
-		System.out.println(ResultUtil.getParagraphsResult(noteResults, 0));
+		System.out.println(ResultUtil.getParagraphsMsg(noteResults, 0));
 		System.out.println(ResultUtil.getParagraphsCode(noteResults, 0));
 		System.out.println(ResultUtil.getParagraphsType(noteResults, 0));
 
-		JSONObject runResut = client.runParagaph("2C78F5XN6", "20170202-032801_1404276097", "%sh\necho 11");
-		System.out.println(ResultUtil.getParagraphResult(runResut));
-		System.out.println(ResultUtil.getParagraphCode(runResut));
-		System.out.println(ResultUtil.getParagraphType(runResut));
+		JSONObject paragraphResults = client.getNote("2C78F5XN6");
+		System.out.println(ResultUtil.getParagraphsMsg(paragraphResults, "20170202-032801_1404276097"));
+		System.out.println(ResultUtil.getParagraphsCode(paragraphResults, "20170202-032801_1404276097"));
+		System.out.println(ResultUtil.getParagraphsType(paragraphResults, "20170202-032801_1404276097"));
+
+		JSONObject runResult = client.runParagraph("2C78F5XN6", "20170202-032801_1404276097", "%sh\necho 12");
+		System.out.println(ResultUtil.getParagraphMsg(runResult));
+		System.out.println(ResultUtil.getParagraphCode(runResult));
+		System.out.println(ResultUtil.getParagraphType(runResult));
 		client.close();
 	}
 }
