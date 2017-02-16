@@ -1,9 +1,8 @@
-commons-collections:commons-collections:3.2.1
+##commons-collections:commons-collections:3.2.1
 org.apache.velocity:velocity:1.7
 commons-lang:commons-lang:2.5
 org.apache.httpcomponents:httpclient:4.5.2
 org.apache.httpcomponents:httpmime:4.5.2
 com.alibaba:fastjson:1.2.23
-commons-beanutils:commons-beanutils:1.9.3
 javax.ws.rs:javax.ws.rs-api:2.0
-org.eclipse.jetty:jetty-server:9.3.15.v20161220
+org.asynchttpclient:async-http-client:2.1.0-alpha2
