@@ -42,8 +42,11 @@ public class InterpreterReader extends Reader<String, String> {
 	}
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
-		if (noteBookId == null || paragraphId == null || replName == null) {
-			throw new RuntimeException("noteBookId, paragraphId or replName can not be null");
+		if (noteBookId == null || paragraphId == null) {
+			throw new RuntimeException("noteBookId or paragraphId can not be null");
+		}
+		if (run && replName == null) {
+			throw new RuntimeException("replName can not be null");
 		}
 		try {
 			WebSocketClient client = new WebSocketClient(propertyGetter.getWebSocketURL(), propertyGetter.getWebSocketMaxFrameSize(),
