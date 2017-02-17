@@ -13,6 +13,7 @@ public class InterpreterReader extends Reader<String, String> {
 	private String noteBookId;
 	private String paragraphId;
 	private boolean run;
+	private String replName;
 
 	public void setParameters(String[] parameters) {
 		if (parameters == null || parameters.length == 0) {
@@ -27,6 +28,9 @@ public class InterpreterReader extends Reader<String, String> {
 				run = "run".equalsIgnoreCase(parameters[2]);
 			} catch (Exception e) {}
 		}
+		if (parameters.length > 3) {
+			replName = parameters[3];
+		}
 	}
 
 	public void addPara(String name, String[] options, String body) {
@@ -38,8 +42,8 @@ public class InterpreterReader extends Reader<String, String> {
 	}
 
 	public String execute(String input, PropertyGetter propertyGetter, InterpreterContext interpreterContext) {
-		if (noteBookId == null || paragraphId == null) {
-			throw new RuntimeException("noteBookId or paragraphId can not be null");
+		if (noteBookId == null || paragraphId == null || replName == null) {
+			throw new RuntimeException("noteBookId, paragraphId or replName can not be null");
 		}
 		try {
 			WebSocketClient client = new WebSocketClient(propertyGetter.getWebSocketURL(), propertyGetter.getWebSocketMaxFrameSize(),
@@ -47,7 +51,7 @@ public class InterpreterReader extends Reader<String, String> {
 			client.setPrincipal(interpreterContext.getAuthenticationInfo().getUser());
 			client.setTicket(interpreterContext.getAuthenticationInfo().getTicket());
 			if (run) {
-				return WebSocketClient.ResultUtil.getParagraphMsg(client.runParagraph(noteBookId, paragraphId, body));
+				return WebSocketClient.ResultUtil.getParagraphMsg(client.runParagraph(noteBookId, paragraphId, "%" + replName + "\n" + body));
 			}
 			return WebSocketClient.ResultUtil.getParagraphsMsg(client.getNote(noteBookId), paragraphId);
 		} catch (Exception e) {
