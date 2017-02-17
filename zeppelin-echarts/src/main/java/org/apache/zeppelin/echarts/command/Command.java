@@ -1,7 +1,6 @@
 package org.apache.zeppelin.echarts.command;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.zeppelin.echarts.command.processor.Processor;
 import org.apache.zeppelin.echarts.command.reader.Reader;
 import org.apache.zeppelin.echarts.command.writer.Writer;
