@@ -98,6 +98,10 @@ public class CommandBuilder {
 		echarts(EChartsProcessor.class),    //将内容以echarts图表输出
 		json2str(Json2StringProcessor.class),   //将JSON对象转换成为字符串
 		str2json(String2JsonProcessor.class),   //将字符串转换成为JSON对象
+		json2table(Json2TableProcessor.class),  //将JSON数据转换成Table对象
+		str2table(String2TableProcessor.class), //将String转换成Table对象
+		table2json(Table2JsonProcessor.class),  //将Table对象转换成JSON对象
+		table2str(Table2StringProcessor.class), //将Table对象转换成String对象
 		selectjson(SelectJsonProcessor.class),  //从JSON对象中选择部分数据作为输出
 		;
 		private Class<? extends Processor> cls;
