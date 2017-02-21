@@ -1,6 +1,5 @@
 package org.apache.zeppelin.echarts;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.zeppelin.echarts.command.Command;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
 import org.apache.zeppelin.interpreter.Interpreter;

@@ -1,7 +1,6 @@
 package org.apache.zeppelin.echarts.command.reader;
 
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.zeppelin.echarts.utils.HttpClientUtils;
 import org.apache.zeppelin.echarts.utils.PropertyGetter;
