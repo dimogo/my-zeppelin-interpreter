@@ -548,7 +548,7 @@
         if (height != undefined && width != "") {
             $("#ze-graphic-body").css("height", height);
         }
-        drawChart(false, graphicBodyObj${ZeppelinEChartsParagraphId}, buildGraphicOption(option));
+        drawChart(false, graphicBodyObj${ZeppelinEChartsParagraphId}, buildGraphicOption(option${ZeppelinEChartsParagraphId}));
     });
 
     $("#zeppin-echarts-add-serie").click(function () {
