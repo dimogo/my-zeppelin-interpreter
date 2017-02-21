@@ -20,7 +20,7 @@ public class Table {
 			throw new RuntimeException("values is empty");
 		}
 		if (row.length != columns.length) {
-			throw new RuntimeException("columns count " + columns.length + " not equals values count");
+			throw new RuntimeException("columns count " + columns.length + " not equals values count " + row.length);
 		}
 		if (rows == null) {
 			rows = new LinkedList<>();
