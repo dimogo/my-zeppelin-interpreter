@@ -282,7 +282,7 @@
         var seriesData = new Array();
         for (var dataIndex = 0; dataIndex < originData.length; dataIndex++) {
             var data = originData[dataIndex];
-            for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs${ZeppelinEChartsParagraphId}.length}; serieConfigIndex++) {
+            for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs${ZeppelinEChartsParagraphId}.length; serieConfigIndex++) {
                 var serieConfig = serieConfigs${ZeppelinEChartsParagraphId}[serieConfigIndex];
                 var serie = undefined;
                 if (seriesData.length < serieConfig.index + 1) {
