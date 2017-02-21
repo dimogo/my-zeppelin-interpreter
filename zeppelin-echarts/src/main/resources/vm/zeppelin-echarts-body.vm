@@ -575,7 +575,7 @@
         #if ($ZeppelinEchartsOptionSettings && $ZeppelinEchartsOptionSettings.size() > 0)
         try {
             #foreach($entry in $ZeppelinEchartsOptionSettings.entrySet())
-                option.$entry.key = $entry.value;
+                option${ZeppelinEChartsParagraphId}.$entry.key = $entry.value;
             #end
         } catch (e) {
             console.error("option settings error");
