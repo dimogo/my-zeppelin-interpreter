@@ -140,6 +140,7 @@ public class EChartsProcessor extends Processor<String, String> {
 			context.put("ZeppelinECahrtsHeight", this.height);
 			context.put("ZeppelinEChartsAdminConsole", this.adminConsole);
 			context.put("ZeppelinEChartsUserConsole", this.userConsole);
+			context.put("ZeppelinEChartsParagraphId", interpreterContext.getParagraphId());
 			StringWriter writer = new StringWriter();
 			template.merge(context, writer);
 			return writer.toString();

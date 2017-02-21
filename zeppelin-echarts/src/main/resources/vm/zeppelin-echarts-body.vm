@@ -1,16 +1,16 @@
-<div class="container-fluid zeppelin-echarts-example">
-    <div id="zeppelin-echarts-console">
+<div id="z-e-paragraph-$ZeppelinEChartsParagraphId" class="container-fluid z-e-example">
+    <div id="z-e-console">
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
 
             <div class="col-sm-5">
-            <input type="text" class="form-control" id="zeppelin-echarts-title" placeholder="图表的主标题"
+            <input type="text" class="form-control" id="z-e-title" placeholder="图表的主标题"
                 #if ($ZeppelinEchartsTitle) value=$ZeppelinEchartsTitile" #else value="" #end >
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">副标题</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="zeppelin-echarts-subtitle" placeholder="图表的副标题"
+                <input type="text" class="form-control" id="z-e-subtitle" placeholder="图表的副标题"
                 #if ($ZeppelinEchartsSubTitle) "$ZeppelinEchartsSubTitle" #else "" #end >
             </div>
         </div>
@@ -18,12 +18,12 @@
             <label for="inputEmail3" class="col-sm-1 control-label">系列</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="zeppelin-echarts-serie-name" placeholder="图表系列名称">
+                <input type="text" class="form-control" id="z-e-serie-name" placeholder="图表系列名称">
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">图表</label>
 
             <div class="col-sm-2">
-                <select id="zeppelin-echarts-type" class="form-control">
+                <select id="z-e-type" class="form-control">
                     <option value="" selected></option>
                     <option value="pie">饼图</option>
                     <option value="bar">柱状图</option>
@@ -35,13 +35,13 @@
             <label for="inputEmail3" class="col-sm-1 control-label">宽度</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="zeppelin-echarts-graphic-width" placeholder="图表的宽度"
+                <input type="text" class="form-control" id="z-e-graphic-width" placeholder="图表的宽度"
                     #if($ZeppelinECahrtsWidth) value="$ZeppelinECahrtsWidth" #end>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="zeppelin-echarts-graphic-height" placeholder="图表的高度"
+                <input type="text" class="form-control" id="z-e-graphic-height" placeholder="图表的高度"
                     #if($ZeppelinECahrtsHeight) value="$ZeppelinECahrtsHeight" #end>
             </div>
         </div>
@@ -49,13 +49,13 @@
             <label for="inputEmail3" class="col-sm-1 control-label">x序号</label>
 
             <div class="col-sm-2">
-                <select id="zeppelin-echarts-xaxis" class="form-control">
+                <select id="z-e-xaxis" class="form-control">
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">x类型</label>
 
             <div class="col-sm-2">
-                <select id="zeppelin-echarts-xaxis-type" class="form-control">
+                <select id="z-e-xaxis-type" class="form-control">
                     <option value="value">数值</option>
                     <option value="category" selected>类目</option>
                     <option value="time">时间</option>
@@ -65,13 +65,13 @@
             <label for="inputEmail3" class="col-sm-1 control-label">y序号</label>
 
             <div class="col-sm-2">
-                <select id="zeppelin-echarts-yaxis" class="form-control">
+                <select id="z-e-yaxis" class="form-control">
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">y类型</label>
 
             <div class="col-sm-2">
-                <select id="zeppelin-echarts-yaxis-type" class="form-control">
+                <select id="z-e-yaxis-type" class="form-control">
                     <option value="value" selected>数值</option>
                     <option value="category">类目</option>
                     <option value="time">时间</option>
@@ -81,46 +81,46 @@
         </div>
         <div class="row">
             <div class="col-sm-5">
-                <select name="from" id="zeppelin-echarts-selectable-fields" class="form-control" size="13"
+                <select name="from" id="z-e-selectable-fields" class="form-control" size="13"
                         multiple="multiple">
                 </select>
             </div>
 
             <div class="col-sm-2">
-                <button type="button" id="zeppelin-echarts-fields-move-to-up"
+                <button type="button" id="z-e-fields-move-to-up"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-up"></i>
                 </button>
-                <button type="button" id="zeppelin-echarts-fields-all-to-right"
+                <button type="button" id="z-e-fields-all-to-right"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-forward"></i>
                 </button>
-                <button type="button" id="zeppelin-echarts-fields-to-right"
+                <button type="button" id="z-e-fields-to-right"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-right"></i>
                 </button>
-                <button type="button" id="zeppelin-echarts-fields-to-left"
+                <button type="button" id="z-e-fields-to-left"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-left"></i>
                 </button>
-                <button type="button" id="zeppelin-echarts-fields-all-to-left"
+                <button type="button" id="z-e-fields-all-to-left"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-backward"></i>
                 </button>
-                <button type="button" id="zeppelin-echarts-fields-move-to-down"
+                <button type="button" id="z-e-fields-move-to-down"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-down"></i>
                 </button>
             </div>
 
             <div class="col-sm-5">
-                <select name="to" id="zeppelin-echarts-selected-fields" class="form-control"
+                <select name="to" id="z-e-selected-fields" class="form-control"
                         size="13" multiple="multiple"></select>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <table id="zeppelin-echarts-series" class="table table-bordered">
+                <table id="z-e-series" class="table table-bordered">
                     <tr>
                         <td>#
                         <td>名称
@@ -136,31 +136,31 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-12">
-                    <button type="button" id="zeppin-echarts-add-serie" class="btn btn-success">增加系列</button>
-                    <button type="button" id="zeppin-echarts-refresh-graphic" class="btn btn-success">刷新图表</button>
+                    <button type="button" id="z-e-add-serie" class="btn btn-success">增加系列</button>
+                    <button type="button" id="z-e-refresh-graphic" class="btn btn-success">刷新图表</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div id="zeppelin-echarts-graphic-container" class="col-sm-12">
-            <div id="zeppelin-echarts-graphic-body" class="zeppelin-echarts-main"></div>
+        <div id="z-e-graphic-container" class="col-sm-12">
+            <div id="z-e-graphic-body" class="z-e-main"></div>
         </div>
     </div>
 </div>
 <script language="javascript">
         #if ($ZeppelinEChartsOriginJsonData)
-        var orginData = $ZeppelinEChartsOriginJsonData;
+        var orginData$ZeppelinEChartsParagraphId = $ZeppelinEChartsOriginJsonData;
         #else
-        var orginData = [];
+        var orginData$ZeppelinEChartsParagraphId = [];
         #end
-    var graphicBody = null;
-    var graphicBodyObj = null;
-    var serieConfigs = new Array();
+    var graphicBody$ZeppelinEChartsParagraphId = null;
+    var graphicBodyObj$ZeppelinEChartsParagraphId = null;
+    var serieConfigs$ZeppelinEChartsParagraphId = new Array();
         #foreach($serie in $ZeppelinEchartsSerieList)
-        serieConfigs.push($serie.toString());
+        serieConfigs$ZeppelinEChartsParagraphId.push($serie.toString());
         #end
-    option = {
+    option$ZeppelinEChartsParagraphId = {
         title: {
             text: "",
             subtext: "",
@@ -212,52 +212,54 @@
             #end]
     };
 
-    function fillXY(option) {
+    function fillXY(option, paragraphId) {
         if (option.xAxis && option.xAxis.length > 0) {
             for (var i = 0; i < option.xAxis.length; i++) {
-                $("#zeppelin-echarts-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "</option>");
+                $("#" + paragraphId + " #z-e-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" +
+                        (option.xAxis[i]
+                                .type ? option.xAxis[i].type : "category") + "</option>");
             }
-            $("#zeppelin-echarts-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
-            $("#zeppelin-echarts-xaxis").change(function () {
-                $("#zeppelin-echarts-xaxis-type option:selected").attr("selected", false);
+            $("#" + paragraphId + " #z-e-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
+            $("#" + paragraphId + " #z-e-xaxis").change(function () {
+                $("#" + paragraphId + " #z-e-xaxis-type option:selected").attr("selected", false);
                 var i = parseInt($(this).val());
-                $("#zeppelin-echarts-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
+                $("#" + paragraphId + " #z-e-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
             });
-            $("#zeppelin-echarts-xaxis-type").change(function () {
-                var type = $("#zeppelin-echarts-xaxis-type option:selected").val();
-                var index = $("#zeppelin-echarts-xaxis option:selected").val();
-                $("#zeppelin-echarts-xaxis option:selected").text(index + "-" + type);
+            $("#" + paragraphId + " #z-e-xaxis-type").change(function () {
+                var type = $("#" + paragraphId + " #z-e-xaxis-type option:selected").val();
+                var index = $("#" + paragraphId + " #z-e-xaxis option:selected").val();
+                $("#" + paragraphId + " #z-e-xaxis option:selected").text(index + "-" + type);
                 option.xAxis[index].type = type;
             });
         }
         if (option.yAxis && option.yAxis.length > 0) {
             for (var i = 0; i < option.yAxis.length; i++) {
-                $("#zeppelin-echarts-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
+                $("#" + paragraphId + " #z-e-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
             }
-            $("#zeppelin-echarts-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
-            $("#zeppelin-echarts-yaxis").change(function () {
-                $("#zeppelin-echarts-yaxis-type option:selected").attr("selected", false);
+            $("#" + paragraphId + " #z-e-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
+            $("#" + paragraphId + " #z-e-yaxis").change(function () {
+                $("#" + paragraphId + " #z-e-yaxis-type option:selected").attr("selected", false);
                 var i = parseInt($(this).val());
-                $("#zeppelin-echarts-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
+                $("#" + paragraphId + " #z-e-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
             });
-            $("#zeppelin-echarts-yaxis-type").change(function () {
-                var type = $("#zeppelin-echarts-yaxis-type option:selected").val();
-                var index = $("#zeppelin-echarts-yaxis option:selected").val();
-                $("#zeppelin-echarts-yaxis option:selected").text(index + "-" + type);
+            $("#" + paragraphId + " #z-e-yaxis-type").change(function () {
+                var type = $("#" + paragraphId + " #z-e-yaxis-type option:selected").val();
+                var index = $("#" + paragraphId + " #z-e-yaxis option:selected").val();
+                $("#" + paragraphId + " #z-e-yaxis option:selected").text(index + "-" + type);
                 option.yAxis[index].type = type;
             });
         }
     }
 
-    function fillOriginDataOptionsFromStruct(data) {
-        $("#zeppelin-echarts-selected-fields option").remove();
-        $("#zeppelin-echarts-selectable-fields option").remove();
+    function fillOriginDataOptionsFromStruct(data, paragraphId) {
+        $("#" + paragraphId + " #z-e-selected-fields option").remove();
+        $("#" + paragraphId + " #z-e-selectable-fields option").remove();
         for (var key in data) {
-            $("#zeppelin-echarts-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
+            $("#" + paragraphId + " #z-e-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
         }
     }
 
-    function buildLegendDataByOption(option) {
+    function buildLegendDataByOption(option, paragraphId) {
         var legendData = new Array();
         var addedName = false;
         for (var serieIndex = 0; serieIndex < option.series.length; serieIndex++) {
@@ -278,7 +280,7 @@
         return legendData;
     }
 
-    function buildSerieDataByOrigin(originData) {
+    function buildSerieDataByOrigin(originData, serieConfigs, paragraphId) {
         var seriesData = new Array();
         for (var dataIndex = 0; dataIndex < originData.length; dataIndex++) {
             var data = originData[dataIndex];
@@ -329,7 +331,7 @@
         return seriesData;
     }
 
-    function setRadarIndicator(option) {
+    function setRadarIndicator(option, paragraphId) {
         //将每个系列中data[0]作为该系统的indicator
         for (var i = 0; i < option.series.length; i++) {
             if (option.series[i].type != 'radar') {
@@ -356,7 +358,7 @@
             }
         }
     }
-    function checkOption(option) {
+    function checkOption(option, paragraphId) {
         var hasRadar = false;
         var needAxis = false;
         var pieSeries = 0;
@@ -416,9 +418,9 @@
         }
     }
 
-    function buildGraphicOption(option) {
-        var title = $("#zeppelin-echarts-title").val();
-        var subtitle = $("#zeppelin-echarts-subtitle").val();
+    function buildGraphicOption(option, paragraphId) {
+        var title = $("#" + paragraphId + " #z-e-title").val();
+        var subtitle = $("#" + paragraphId + " #z-e-subtitle").val();
         option.title.text = title;
         option.title.subtext = subtitle;
         option.series = buildSerieDataByOrigin(orginData);
@@ -440,23 +442,23 @@
         this.length -= 1;
     };
 
-    function updateZeppelinEChartsSeries() {
-        $("#zeppelin-echarts-series tr:gt(0)").remove();
+    function updateZeppelinEChartsSeries(paragraphId) {
+        $("#" + paragraphId + " #z-e-series tr:gt(0)").remove();
         for (var index = 0; index < serieConfigs.length; index++) {
             var cfg = serieConfigs[index];
-            $("#zeppelin-echarts-series").append(
+            $("#" + paragraphId + " #z-e-series").append(
                     "<tr><td>" + index
                     + "<td>" + cfg.name
                     + "<td>" + cfg.type
                     + "<td>" + cfg.fields
                     + "<td>" + cfg.xAxisIndex
                     + "<td>" + cfg.yAxisIndex
-                    + "<td><button name=\"zeppelin-echarts-serie-edit\" type=\"button\" class=\"btn btn-default\">修改</button>&nbsp;&nbsp;"
-                    + "<button name=\"zeppelin-echarts-serie-update\" type=\"button\" class=\"btn btn-primary\">更新</button>&nbsp;&nbsp;"
-                    + "<button name=\"zeppelin-echarts-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
+                    + "<td><button name=\"z-e-serie-edit\" type=\"button\" class=\"btn btn-default\">修改</button>&nbsp;&nbsp;"
+                    + "<button name=\"z-e-serie-update\" type=\"button\" class=\"btn btn-primary\">更新</button>&nbsp;&nbsp;"
+                    + "<button name=\"z-e-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
-        $("button[name='zeppelin-echarts-serie-delete']").each(function () {
+        $("#" + paragraphId + " button[name='z-e-serie-delete']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
                 serieConfigs.del(serieIndex);
@@ -465,28 +467,28 @@
             });
 
         });
-        $("button[name='zeppelin-echarts-serie-edit']").each(function () {
+        $("#" + paragraphId + " button[name='z-e-serie-edit']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                $("#zeppelin-echarts-type option[value='" + serieConfigs[serieIndex].type + "']").attr('selected', true);
-                $("#zeppelin-echarts-serie-name").val(serieConfigs[serieIndex].name);
-                $("#zeppelin-echarts-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
-                $("#zeppelin-echarts-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
+                $("#" + paragraphId + " #z-e-type option[value='" + serieConfigs[serieIndex].type + "']").attr('selected', true);
+                $("#" + paragraphId + " #z-e-serie-name").val(serieConfigs[serieIndex].name);
+                $("#" + paragraphId + " #z-e-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
+                $("#" + paragraphId + " #z-e-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 var fieldArray = serieConfigs[serieIndex].fields.split(",");
                 for (var i = 0; i < fieldArray.length; i++) {
                     if (fieldArray[i] == "") {
                         break;
                     }
-                    $("#zeppelin-echarts-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
-                    $("#zeppelin-echarts-selectable-fields option[value='" + fieldArray[i] + "']").remove();
+                    $("#" + paragraphId + " #z-e-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
+                    $("#" + paragraphId + " #z-e-selectable-fields option[value='" + fieldArray[i] + "']").remove();
                 }
             });
         });
-        $("button[name='zeppelin-echarts-serie-update']").each(function () {
+        $("#" + paragraphId + " button[name='z-e-serie-update']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                var selected = $("#zeppelin-echarts-selected-fields option");
+                var selected = $("#" + paragraphId + " #z-e-selected-fields option");
                 var fields = "";
                 for (var i = 0; i < selected.length; i++) {
                     if (i > 0) {
@@ -496,63 +498,63 @@
                 }
                 serieConfigs[serieIndex] = {
                     "index": serieIndex,
-                    "name": $("#zeppelin-echarts-serie-name").val(),
-                    "type": $("#zeppelin-echarts-type").val(),
+                    "name": $("#" + paragraphId + " #z-e-serie-name").val(),
+                    "type": $("#" + paragraphId + " #z-e-type").val(),
                     "fields": fields,
-                    "xAxisIndex": $("#zeppelin-echarts-xaxis").val(),
-                    "yAxisIndex": $("#zeppelin-echarts-yaxis").val()
+                    "xAxisIndex": $("#" + paragraphId + " #z-e-xaxis").val(),
+                    "yAxisIndex": $("#" + paragraphId + " #z-e-yaxis").val()
                 };
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 updateZeppelinEChartsSeries();
             });
         });
     }
-    $("#zeppelin-echarts-fields-to-right").click(function () {
-        var selected = $("#zeppelin-echarts-selectable-fields").val();
+    $("#$ZeppelinEChartsParagraphId #z-e-fields-to-right").click(function () {
+        var selected = $("#z-e-selectable-fields").val();
         for (var i = 0; i < selected.length; i++) {
-            $("#zeppelin-echarts-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
+            $("#z-e-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
         }
         for (var i = 0; i < selected.length; i++) {
-            $("#zeppelin-echarts-selectable-fields option[value='" + selected[i] + "']").remove();
-        }
-    });
-    $("#zeppelin-echarts-fields-to-left").click(function () {
-        var selected = $("#zeppelin-echarts-selected-fields").val();
-        for (var i = 0; i < selected.length; i++) {
-            $("#zeppelin-echarts-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
-        }
-        for (var i = 0; i < selected.length; i++) {
-            $("#zeppelin-echarts-selected-fields option[value='" + selected[i] + "']").remove();
+            $("#z-e-selectable-fields option[value='" + selected[i] + "']").remove();
         }
     });
-    $("#zeppelin-echarts-fields-all-to-right").click(function () {
-        var selected = $("#zeppelin-echarts-selectable-fields option");
+    $("#$ZeppelinEChartsParagraphId #z-e-fields-to-left").click(function () {
+        var selected = $("#z-e-selected-fields").val();
         for (var i = 0; i < selected.length; i++) {
-            $("#zeppelin-echarts-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+            $("#z-e-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
         }
-        $("#zeppelin-echarts-selectable-fields option").remove();
-    });
-    $("#zeppelin-echarts-fields-all-to-left").click(function () {
-        var selected = $("#zeppelin-echarts-selected-fields option");
         for (var i = 0; i < selected.length; i++) {
-            $("#zeppelin-echarts-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+            $("#z-e-selected-fields option[value='" + selected[i] + "']").remove();
         }
-        $("#zeppelin-echarts-selected-fields option").remove();
     });
-    $("#zeppin-echarts-refresh-graphic").click(function () {
-        var width = $("#zeppelin-echarts-graphic-width").val();
+    $("#$ZeppelinEChartsParagraphId #z-e-fields-all-to-right").click(function () {
+        var selected = $("#z-e-selectable-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#z-e-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#z-e-selectable-fields option").remove();
+    });
+    $("#$ZeppelinEChartsParagraphId #z-e-fields-all-to-left").click(function () {
+        var selected = $("#z-e-selected-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#z-e-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#z-e-selected-fields option").remove();
+    });
+    $("#$ZeppelinEChartsParagraphId #z-e-refresh-graphic").click(function () {
+        var width = $("#z-e-graphic-width").val();
         if (width != undefined && width != "") {
-            $("#zeppelin-echarts-graphic-body").css("width", width);
+            $("#z-e-graphic-body").css("width", width);
         }
-        var height = $("#zeppelin-echarts-graphic-height").val();
+        var height = $("#z-e-graphic-height").val();
         if (height != undefined && width != "") {
-            $("#zeppelin-echarts-graphic-body").css("height", height);
+            $("#z-e-graphic-body").css("height", height);
         }
         drawChart(false, graphicBodyObj, buildGraphicOption(option));
     });
 
-    $("#zeppin-echarts-add-serie").click(function () {
-        var selected = $("#zeppelin-echarts-selected-fields option");
+    $("#$ZeppelinEChartsParagraphId #z-e-add-serie").click(function () {
+        var selected = $("#z-e-selected-fields option");
         var fields = "";
         for (var i = 0; i < selected.length; i++) {
             if (i > 0) {
@@ -562,11 +564,11 @@
         }
         serieConfigs.push({
             "index": serieConfigs.length,
-            "name": $("#zeppelin-echarts-serie-name").val(),
-            "type": $("#zeppelin-echarts-type").val(),
+            "name": $("#z-e-serie-name").val(),
+            "type": $("#z-e-type").val(),
             "fields": fields,
-            "xAxisIndex": $("#zeppelin-echarts-xaxis").val(),
-            "yAxisIndex": $("#zeppelin-echarts-yaxis").val()
+            "xAxisIndex": $("#z-e-xaxis").val(),
+            "yAxisIndex": $("#z-e-yaxis").val()
         });
         fillOriginDataOptionsFromStruct(orginData[0]);
         updateZeppelinEChartsSeries();
@@ -701,20 +703,20 @@
             console.log('zeppelinEchartsCSS has loaded');
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
-                    $("#zeppelin-echarts-console").hide();
+                    $("#$ZeppelinEChartsParagraphId #z-e-console").hide();
                 #elseif ($ZeppelinEChartsUserConsole == false)
                     if (location.href.endsWith("?asIframe")) {
-                        $("#zeppelin-echarts-console").hide();
+                        $("#$ZeppelinEChartsParagraphId #z-e-console").hide();
                     }
                 #end
-                #if($ZeppelinECahrtsWidth) $("#zeppelin-echarts-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
-                #if($ZeppelinECahrtsHeight) $("#zeppelin-echarts-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
-                $("#zeppelin-echarts-title").val(option.title.text);
-                $("#zeppelin-echarts-subtitle").val(option.title.subtext);
-                fillXY(option);
+                #if($ZeppelinECahrtsWidth) $("#$ZeppelinEChartsParagraphId #z-e-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
+                #if($ZeppelinECahrtsHeight) $("#$ZeppelinEChartsParagraphId #z-e-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
+                $("#$ZeppelinEChartsParagraphId #z-e-title").val(option$ZeppelinEChartsParagraphId.title.text);
+                $("#$ZeppelinEChartsParagraphId #z-e-subtitle").val(option$ZeppelinEChartsParagraphId.title.subtext);
+                fillXY(option$ZeppelinEChartsParagraphId);
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 updateZeppelinEChartsSeries();
-                graphicBody = document.getElementById('zeppelin-echarts-graphic-body');
+                graphicBody = document.getElementById('z-e-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
                 $(window).resize(function () {
                     graphicBodyObj.resize();
