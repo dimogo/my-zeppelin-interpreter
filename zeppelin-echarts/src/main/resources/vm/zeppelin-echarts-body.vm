@@ -1,4 +1,4 @@
-<div class="container-fluid ze-example">
+<div id="ze-paragraph-${ZeppelinEChartsParagraphId}" class="container-fluid ze-example">
     <div id="ze-console">
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
@@ -150,17 +150,17 @@
 </div>
 <script language="javascript">
         #if ($ZeppelinEChartsOriginJsonData)
-        var orginData$ZeppelinEChartsParagraphId = $ZeppelinEChartsOriginJsonData;
+        var orginData${ZeppelinEChartsParagraphId} = $ZeppelinEChartsOriginJsonData;
         #else
-        var orginData$ZeppelinEChartsParagraphId = [];
+        var orginData${ZeppelinEChartsParagraphId} = [];
         #end
-    var graphicBody$ZeppelinEChartsParagraphId = null;
-    var graphicBodyObj$ZeppelinEChartsParagraphId = null;
-    var serieConfigs$ZeppelinEChartsParagraphId = new Array();
+    var graphicBody${ZeppelinEChartsParagraphId} = null;
+    var graphicBodyObj${ZeppelinEChartsParagraphId} = null;
+    var serieConfigs${ZeppelinEChartsParagraphId} = new Array();
         #foreach($serie in $ZeppelinEchartsSerieList)
-        serieConfigs$ZeppelinEChartsParagraphId.push($serie.toString());
+        serieConfigs${ZeppelinEChartsParagraphId}.push($serie.toString());
         #end
-    option$ZeppelinEChartsParagraphId = {
+    option${ZeppelinEChartsParagraphId} = {
         title: {
             text: "",
             subtext: "",
@@ -282,8 +282,8 @@
         var seriesData = new Array();
         for (var dataIndex = 0; dataIndex < originData.length; dataIndex++) {
             var data = originData[dataIndex];
-            for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs$ZeppelinEChartsParagraphId.length; serieConfigIndex++) {
-                var serieConfig = serieConfigs$ZeppelinEChartsParagraphId[serieConfigIndex];
+            for (var serieConfigIndex = 0; serieConfigIndex < serieConfigs${ZeppelinEChartsParagraphId}.length}; serieConfigIndex++) {
+                var serieConfig = serieConfigs${ZeppelinEChartsParagraphId}[serieConfigIndex];
                 var serie = undefined;
                 if (seriesData.length < serieConfig.index + 1) {
                     seriesData.push({
@@ -421,7 +421,7 @@
         var subtitle = $("#ze-subtitle").val();
         option.title.text = title;
         option.title.subtext = subtitle;
-        option.series = buildSerieDataByOrigin(orginData$ZeppelinEChartsParagraphId);
+        option.series = buildSerieDataByOrigin(orginData${ZeppelinEChartsParagraphId});
         option.legend.data = buildLegendDataByOption(option);
         setRadarIndicator(option);
         checkOption(option);
@@ -442,8 +442,8 @@
 
     function updateZeppelinEChartsSeries() {
         $("#ze-series tr:gt(0)").remove();
-        for (var index = 0; index < serieConfigs$ZeppelinEChartsParagraphId.length; index++) {
-            var cfg = serieConfigs$ZeppelinEChartsParagraphId[index];
+        for (var index = 0; index < serieConfigs${ZeppelinEChartsParagraphId}.length; index++) {
+            var cfg = serieConfigs${ZeppelinEChartsParagraphId}[index];
             $("#ze-series").append(
                     "<tr><td>" + index
                     + "<td>" + cfg.name
@@ -459,7 +459,7 @@
         $("button[name='ze-serie-delete']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                serieConfigs$ZeppelinEChartsParagraphId.del(serieIndex);
+                serieConfigs${ZeppelinEChartsParagraphId}.del(serieIndex);
                 $(this).parents("tr").remove();
                 updateZeppelinEChartsSeries();
             });
@@ -468,12 +468,12 @@
         $("button[name='ze-serie-edit']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                $("#ze-type option[value='" + serieConfigs$ZeppelinEChartsParagraphId[serieIndex].type + "']").attr('selected', true);
-                $("#ze-serie-name").val(serieConfigs$ZeppelinEChartsParagraphId[serieIndex].name);
-                $("#ze-xaxis option[value='" + serieConfigs$ZeppelinEChartsParagraphId[serieIndex].xAxisIndex + "']").attr('selected', true);
-                $("#ze-yaxis option[value='" + serieConfigs$ZeppelinEChartsParagraphId[serieIndex].yAxisIndex + "']").attr('selected', true);
-                fillOriginDataOptionsFromStruct(orginData$ZeppelinEChartsParagraphId[0]);
-                var fieldArray = serieConfigs$ZeppelinEChartsParagraphId[serieIndex].fields.split(",");
+                $("#ze-type option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].type + "']").attr('selected', true);
+                $("#ze-serie-name").val(serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].name);
+                $("#ze-xaxis option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].xAxisIndex + "']").attr('selected', true);
+                $("#ze-yaxis option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].yAxisIndex + "']").attr('selected', true);
+                fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0]);
+                var fieldArray = serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].fields.split(",");
                 for (var i = 0; i < fieldArray.length; i++) {
                     if (fieldArray[i] == "") {
                         break;
@@ -494,7 +494,7 @@
                     }
                     fields += selected[i].value;
                 }
-                serieConfigs$ZeppelinEChartsParagraphId[serieIndex] = {
+                serieConfigs${ZeppelinEChartsParagraphId}[serieIndex] = {
                     "index": serieIndex,
                     "name": $("#ze-serie-name").val(),
                     "type": $("#ze-type").val(),
@@ -502,7 +502,7 @@
                     "xAxisIndex": $("#ze-xaxis").val(),
                     "yAxisIndex": $("#ze-yaxis").val()
                 };
-                fillOriginDataOptionsFromStruct(orginData$ZeppelinEChartsParagraphId[0]);
+                fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0]);
                 updateZeppelinEChartsSeries();
             });
         });
@@ -548,7 +548,7 @@
         if (height != undefined && width != "") {
             $("#ze-graphic-body").css("height", height);
         }
-        drawChart(false, graphicBodyObj$ZeppelinEChartsParagraphId, buildGraphicOption(option));
+        drawChart(false, graphicBodyObj${ZeppelinEChartsParagraphId}, buildGraphicOption(option));
     });
 
     $("#zeppin-echarts-add-serie").click(function () {
@@ -560,15 +560,15 @@
             }
             fields += selected[i].value;
         }
-        serieConfigs$ZeppelinEChartsParagraphId.push({
-            "index": serieConfigs$ZeppelinEChartsParagraphId.length,
+        serieConfigs${ZeppelinEChartsParagraphId}.push({
+            "index": serieConfigs${ZeppelinEChartsParagraphId}.length,
             "name": $("#ze-serie-name").val(),
             "type": $("#ze-type").val(),
             "fields": fields,
             "xAxisIndex": $("#ze-xaxis").val(),
             "yAxisIndex": $("#ze-yaxis").val()
         });
-        fillOriginDataOptionsFromStruct(orginData$ZeppelinEChartsParagraphId[0]);
+        fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0]);
         updateZeppelinEChartsSeries();
     });
 
@@ -709,17 +709,17 @@
                 #end
                 #if($ZeppelinECahrtsWidth) $("#ze-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
                 #if($ZeppelinECahrtsHeight) $("#ze-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
-                $("#ze-title").val(option$ZeppelinEChartsParagraphId.title.text);
-                $("#ze-subtitle").val(option$ZeppelinEChartsParagraphId.title.subtext);
-                fillXY(option$ZeppelinEChartsParagraphId);
-                fillOriginDataOptionsFromStruct(orginData$ZeppelinEChartsParagraphId[0]);
+                $("#ze-title").val(option${ZeppelinEChartsParagraphId}.title.text);
+                $("#ze-subtitle").val(option${ZeppelinEChartsParagraphId}.title.subtext);
+                fillXY(option${ZeppelinEChartsParagraphId});
+                fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0]);
                 updateZeppelinEChartsSeries();
-                graphicBody$ZeppelinEChartsParagraphId = document.getElementById('ze-graphic-body');
-                graphicBodyObj$ZeppelinEChartsParagraphId = echarts.init(graphicBody$ZeppelinEChartsParagraphId, "macarons");
+                graphicBody${ZeppelinEChartsParagraphId} = document.getElementById('ze-graphic-body');
+                graphicBodyObj${ZeppelinEChartsParagraphId} = echarts.init(graphicBody${ZeppelinEChartsParagraphId}, "macarons");
                 $(window).resize(function () {
-                    graphicBodyObj$ZeppelinEChartsParagraphId.resize();
+                    graphicBodyObj${ZeppelinEChartsParagraphId}.resize();
                 });
-                drawChart(false, graphicBodyObj$ZeppelinEChartsParagraphId, buildGraphicOption(option$ZeppelinEChartsParagraphId));
+                drawChart(false, graphicBodyObj${ZeppelinEChartsParagraphId}, buildGraphicOption(option${ZeppelinEChartsParagraphId}));
             });
         } catch (err) {
             console.log(err);
