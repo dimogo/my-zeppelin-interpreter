@@ -1,16 +1,16 @@
-<div id="z-e-paragraph-$ZeppelinEChartsParagraphId" class="container-fluid z-e-example">
-    <div id="z-e-console">
+<div class="container-fluid ze-example">
+    <div id="ze-console">
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 control-label">主标题</label>
 
             <div class="col-sm-5">
-            <input type="text" class="form-control" id="z-e-title" placeholder="图表的主标题"
+            <input type="text" class="form-control" id="ze-title" placeholder="图表的主标题"
                 #if ($ZeppelinEchartsTitle) value=$ZeppelinEchartsTitile" #else value="" #end >
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">副标题</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="z-e-subtitle" placeholder="图表的副标题"
+                <input type="text" class="form-control" id="ze-subtitle" placeholder="图表的副标题"
                 #if ($ZeppelinEchartsSubTitle) "$ZeppelinEchartsSubTitle" #else "" #end >
             </div>
         </div>
@@ -18,12 +18,12 @@
             <label for="inputEmail3" class="col-sm-1 control-label">系列</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="z-e-serie-name" placeholder="图表系列名称">
+                <input type="text" class="form-control" id="ze-serie-name" placeholder="图表系列名称">
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">图表</label>
 
             <div class="col-sm-2">
-                <select id="z-e-type" class="form-control">
+                <select id="ze-type" class="form-control">
                     <option value="" selected></option>
                     <option value="pie">饼图</option>
                     <option value="bar">柱状图</option>
@@ -35,13 +35,13 @@
             <label for="inputEmail3" class="col-sm-1 control-label">宽度</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="z-e-graphic-width" placeholder="图表的宽度"
+                <input type="text" class="form-control" id="ze-graphic-width" placeholder="图表的宽度"
                     #if($ZeppelinECahrtsWidth) value="$ZeppelinECahrtsWidth" #end>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">高度</label>
 
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="z-e-graphic-height" placeholder="图表的高度"
+                <input type="text" class="form-control" id="ze-graphic-height" placeholder="图表的高度"
                     #if($ZeppelinECahrtsHeight) value="$ZeppelinECahrtsHeight" #end>
             </div>
         </div>
@@ -49,13 +49,13 @@
             <label for="inputEmail3" class="col-sm-1 control-label">x序号</label>
 
             <div class="col-sm-2">
-                <select id="z-e-xaxis" class="form-control">
+                <select id="ze-xaxis" class="form-control">
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">x类型</label>
 
             <div class="col-sm-2">
-                <select id="z-e-xaxis-type" class="form-control">
+                <select id="ze-xaxis-type" class="form-control">
                     <option value="value">数值</option>
                     <option value="category" selected>类目</option>
                     <option value="time">时间</option>
@@ -65,13 +65,13 @@
             <label for="inputEmail3" class="col-sm-1 control-label">y序号</label>
 
             <div class="col-sm-2">
-                <select id="z-e-yaxis" class="form-control">
+                <select id="ze-yaxis" class="form-control">
                 </select>
             </div>
             <label for="inputEmail3" class="col-sm-1 control-label">y类型</label>
 
             <div class="col-sm-2">
-                <select id="z-e-yaxis-type" class="form-control">
+                <select id="ze-yaxis-type" class="form-control">
                     <option value="value" selected>数值</option>
                     <option value="category">类目</option>
                     <option value="time">时间</option>
@@ -81,46 +81,46 @@
         </div>
         <div class="row">
             <div class="col-sm-5">
-                <select name="from" id="z-e-selectable-fields" class="form-control" size="13"
+                <select name="from" id="ze-selectable-fields" class="form-control" size="13"
                         multiple="multiple">
                 </select>
             </div>
 
             <div class="col-sm-2">
-                <button type="button" id="z-e-fields-move-to-up"
+                <button type="button" id="ze-fields-move-to-up"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-up"></i>
                 </button>
-                <button type="button" id="z-e-fields-all-to-right"
+                <button type="button" id="ze-fields-all-to-right"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-forward"></i>
                 </button>
-                <button type="button" id="z-e-fields-to-right"
+                <button type="button" id="ze-fields-to-right"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-right"></i>
                 </button>
-                <button type="button" id="z-e-fields-to-left"
+                <button type="button" id="ze-fields-to-left"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-left"></i>
                 </button>
-                <button type="button" id="z-e-fields-all-to-left"
+                <button type="button" id="ze-fields-all-to-left"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-backward"></i>
                 </button>
-                <button type="button" id="z-e-fields-move-to-down"
+                <button type="button" id="ze-fields-move-to-down"
                         class="btn btn-default btn-block">
                     <i class="glyphicon glyphicon-chevron-down"></i>
                 </button>
             </div>
 
             <div class="col-sm-5">
-                <select name="to" id="z-e-selected-fields" class="form-control"
+                <select name="to" id="ze-selected-fields" class="form-control"
                         size="13" multiple="multiple"></select>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <table id="z-e-series" class="table table-bordered">
+                <table id="ze-series" class="table table-bordered">
                     <tr>
                         <td>#
                         <td>名称
@@ -136,31 +136,31 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-12">
-                    <button type="button" id="z-e-add-serie" class="btn btn-success">增加系列</button>
-                    <button type="button" id="z-e-refresh-graphic" class="btn btn-success">刷新图表</button>
+                    <button type="button" id="zeppin-echarts-add-serie" class="btn btn-success">增加系列</button>
+                    <button type="button" id="zeppin-echarts-refresh-graphic" class="btn btn-success">刷新图表</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div id="z-e-graphic-container" class="col-sm-12">
-            <div id="z-e-graphic-body" class="z-e-main"></div>
+        <div id="ze-graphic-container" class="col-sm-12">
+            <div id="ze-graphic-body" class="ze-main"></div>
         </div>
     </div>
 </div>
 <script language="javascript">
         #if ($ZeppelinEChartsOriginJsonData)
-        var orginData$ZeppelinEChartsParagraphId = $ZeppelinEChartsOriginJsonData;
+        var orginData = $ZeppelinEChartsOriginJsonData;
         #else
-        var orginData$ZeppelinEChartsParagraphId = [];
+        var orginData = [];
         #end
-    var graphicBody$ZeppelinEChartsParagraphId = null;
-    var graphicBodyObj$ZeppelinEChartsParagraphId = null;
-    var serieConfigs$ZeppelinEChartsParagraphId = new Array();
+    var graphicBody = null;
+    var graphicBodyObj = null;
+    var serieConfigs = new Array();
         #foreach($serie in $ZeppelinEchartsSerieList)
-        serieConfigs$ZeppelinEChartsParagraphId.push($serie.toString());
+        serieConfigs.push($serie.toString());
         #end
-    option$ZeppelinEChartsParagraphId = {
+    option = {
         title: {
             text: "",
             subtext: "",
@@ -212,54 +212,52 @@
             #end]
     };
 
-    function fillXY(option, paragraphId) {
+    function fillXY(option) {
         if (option.xAxis && option.xAxis.length > 0) {
             for (var i = 0; i < option.xAxis.length; i++) {
-                $("#" + paragraphId + " #z-e-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" +
-                        (option.xAxis[i]
-                                .type ? option.xAxis[i].type : "category") + "</option>");
+                $("#ze-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "</option>");
             }
-            $("#" + paragraphId + " #z-e-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
-            $("#" + paragraphId + " #z-e-xaxis").change(function () {
-                $("#" + paragraphId + " #z-e-xaxis-type option:selected").attr("selected", false);
+            $("#ze-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
+            $("#ze-xaxis").change(function () {
+                $("#ze-xaxis-type option:selected").attr("selected", false);
                 var i = parseInt($(this).val());
-                $("#" + paragraphId + " #z-e-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
+                $("#ze-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
             });
-            $("#" + paragraphId + " #z-e-xaxis-type").change(function () {
-                var type = $("#" + paragraphId + " #z-e-xaxis-type option:selected").val();
-                var index = $("#" + paragraphId + " #z-e-xaxis option:selected").val();
-                $("#" + paragraphId + " #z-e-xaxis option:selected").text(index + "-" + type);
+            $("#ze-xaxis-type").change(function () {
+                var type = $("#ze-xaxis-type option:selected").val();
+                var index = $("#ze-xaxis option:selected").val();
+                $("#ze-xaxis option:selected").text(index + "-" + type);
                 option.xAxis[index].type = type;
             });
         }
         if (option.yAxis && option.yAxis.length > 0) {
             for (var i = 0; i < option.yAxis.length; i++) {
-                $("#" + paragraphId + " #z-e-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
+                $("#ze-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
             }
-            $("#" + paragraphId + " #z-e-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
-            $("#" + paragraphId + " #z-e-yaxis").change(function () {
-                $("#" + paragraphId + " #z-e-yaxis-type option:selected").attr("selected", false);
+            $("#ze-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
+            $("#ze-yaxis").change(function () {
+                $("#ze-yaxis-type option:selected").attr("selected", false);
                 var i = parseInt($(this).val());
-                $("#" + paragraphId + " #z-e-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
+                $("#ze-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
             });
-            $("#" + paragraphId + " #z-e-yaxis-type").change(function () {
-                var type = $("#" + paragraphId + " #z-e-yaxis-type option:selected").val();
-                var index = $("#" + paragraphId + " #z-e-yaxis option:selected").val();
-                $("#" + paragraphId + " #z-e-yaxis option:selected").text(index + "-" + type);
+            $("#ze-yaxis-type").change(function () {
+                var type = $("#ze-yaxis-type option:selected").val();
+                var index = $("#ze-yaxis option:selected").val();
+                $("#ze-yaxis option:selected").text(index + "-" + type);
                 option.yAxis[index].type = type;
             });
         }
     }
 
-    function fillOriginDataOptionsFromStruct(data, paragraphId) {
-        $("#" + paragraphId + " #z-e-selected-fields option").remove();
-        $("#" + paragraphId + " #z-e-selectable-fields option").remove();
+    function fillOriginDataOptionsFromStruct(data) {
+        $("#ze-selected-fields option").remove();
+        $("#ze-selectable-fields option").remove();
         for (var key in data) {
-            $("#" + paragraphId + " #z-e-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
+            $("#ze-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
         }
     }
 
-    function buildLegendDataByOption(option, paragraphId) {
+    function buildLegendDataByOption(option) {
         var legendData = new Array();
         var addedName = false;
         for (var serieIndex = 0; serieIndex < option.series.length; serieIndex++) {
@@ -280,7 +278,7 @@
         return legendData;
     }
 
-    function buildSerieDataByOrigin(originData, serieConfigs, paragraphId) {
+    function buildSerieDataByOrigin(originData) {
         var seriesData = new Array();
         for (var dataIndex = 0; dataIndex < originData.length; dataIndex++) {
             var data = originData[dataIndex];
@@ -331,7 +329,7 @@
         return seriesData;
     }
 
-    function setRadarIndicator(option, paragraphId) {
+    function setRadarIndicator(option) {
         //将每个系列中data[0]作为该系统的indicator
         for (var i = 0; i < option.series.length; i++) {
             if (option.series[i].type != 'radar') {
@@ -358,7 +356,7 @@
             }
         }
     }
-    function checkOption(option, paragraphId) {
+    function checkOption(option) {
         var hasRadar = false;
         var needAxis = false;
         var pieSeries = 0;
@@ -418,9 +416,9 @@
         }
     }
 
-    function buildGraphicOption(option, paragraphId) {
-        var title = $("#" + paragraphId + " #z-e-title").val();
-        var subtitle = $("#" + paragraphId + " #z-e-subtitle").val();
+    function buildGraphicOption(option) {
+        var title = $("#ze-title").val();
+        var subtitle = $("#ze-subtitle").val();
         option.title.text = title;
         option.title.subtext = subtitle;
         option.series = buildSerieDataByOrigin(orginData);
@@ -442,23 +440,23 @@
         this.length -= 1;
     };
 
-    function updateZeppelinEChartsSeries(paragraphId) {
-        $("#" + paragraphId + " #z-e-series tr:gt(0)").remove();
+    function updateZeppelinEChartsSeries() {
+        $("#ze-series tr:gt(0)").remove();
         for (var index = 0; index < serieConfigs.length; index++) {
             var cfg = serieConfigs[index];
-            $("#" + paragraphId + " #z-e-series").append(
+            $("#ze-series").append(
                     "<tr><td>" + index
                     + "<td>" + cfg.name
                     + "<td>" + cfg.type
                     + "<td>" + cfg.fields
                     + "<td>" + cfg.xAxisIndex
                     + "<td>" + cfg.yAxisIndex
-                    + "<td><button name=\"z-e-serie-edit\" type=\"button\" class=\"btn btn-default\">修改</button>&nbsp;&nbsp;"
-                    + "<button name=\"z-e-serie-update\" type=\"button\" class=\"btn btn-primary\">更新</button>&nbsp;&nbsp;"
-                    + "<button name=\"z-e-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
+                    + "<td><button name=\"ze-serie-edit\" type=\"button\" class=\"btn btn-default\">修改</button>&nbsp;&nbsp;"
+                    + "<button name=\"ze-serie-update\" type=\"button\" class=\"btn btn-primary\">更新</button>&nbsp;&nbsp;"
+                    + "<button name=\"ze-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
-        $("#" + paragraphId + " button[name='z-e-serie-delete']").each(function () {
+        $("button[name='ze-serie-delete']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
                 serieConfigs.del(serieIndex);
@@ -467,28 +465,28 @@
             });
 
         });
-        $("#" + paragraphId + " button[name='z-e-serie-edit']").each(function () {
+        $("button[name='ze-serie-edit']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                $("#" + paragraphId + " #z-e-type option[value='" + serieConfigs[serieIndex].type + "']").attr('selected', true);
-                $("#" + paragraphId + " #z-e-serie-name").val(serieConfigs[serieIndex].name);
-                $("#" + paragraphId + " #z-e-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
-                $("#" + paragraphId + " #z-e-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
+                $("#ze-type option[value='" + serieConfigs[serieIndex].type + "']").attr('selected', true);
+                $("#ze-serie-name").val(serieConfigs[serieIndex].name);
+                $("#ze-xaxis option[value='" + serieConfigs[serieIndex].xAxisIndex + "']").attr('selected', true);
+                $("#ze-yaxis option[value='" + serieConfigs[serieIndex].yAxisIndex + "']").attr('selected', true);
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 var fieldArray = serieConfigs[serieIndex].fields.split(",");
                 for (var i = 0; i < fieldArray.length; i++) {
                     if (fieldArray[i] == "") {
                         break;
                     }
-                    $("#" + paragraphId + " #z-e-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
-                    $("#" + paragraphId + " #z-e-selectable-fields option[value='" + fieldArray[i] + "']").remove();
+                    $("#ze-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
+                    $("#ze-selectable-fields option[value='" + fieldArray[i] + "']").remove();
                 }
             });
         });
-        $("#" + paragraphId + " button[name='z-e-serie-update']").each(function () {
+        $("button[name='ze-serie-update']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                var selected = $("#" + paragraphId + " #z-e-selected-fields option");
+                var selected = $("#ze-selected-fields option");
                 var fields = "";
                 for (var i = 0; i < selected.length; i++) {
                     if (i > 0) {
@@ -498,63 +496,63 @@
                 }
                 serieConfigs[serieIndex] = {
                     "index": serieIndex,
-                    "name": $("#" + paragraphId + " #z-e-serie-name").val(),
-                    "type": $("#" + paragraphId + " #z-e-type").val(),
+                    "name": $("#ze-serie-name").val(),
+                    "type": $("#ze-type").val(),
                     "fields": fields,
-                    "xAxisIndex": $("#" + paragraphId + " #z-e-xaxis").val(),
-                    "yAxisIndex": $("#" + paragraphId + " #z-e-yaxis").val()
+                    "xAxisIndex": $("#ze-xaxis").val(),
+                    "yAxisIndex": $("#ze-yaxis").val()
                 };
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 updateZeppelinEChartsSeries();
             });
         });
     }
-    $("#$ZeppelinEChartsParagraphId #z-e-fields-to-right").click(function () {
-        var selected = $("#z-e-selectable-fields").val();
+    $("#ze-fields-to-right").click(function () {
+        var selected = $("#ze-selectable-fields").val();
         for (var i = 0; i < selected.length; i++) {
-            $("#z-e-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
+            $("#ze-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
         }
         for (var i = 0; i < selected.length; i++) {
-            $("#z-e-selectable-fields option[value='" + selected[i] + "']").remove();
-        }
-    });
-    $("#$ZeppelinEChartsParagraphId #z-e-fields-to-left").click(function () {
-        var selected = $("#z-e-selected-fields").val();
-        for (var i = 0; i < selected.length; i++) {
-            $("#z-e-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
-        }
-        for (var i = 0; i < selected.length; i++) {
-            $("#z-e-selected-fields option[value='" + selected[i] + "']").remove();
+            $("#ze-selectable-fields option[value='" + selected[i] + "']").remove();
         }
     });
-    $("#$ZeppelinEChartsParagraphId #z-e-fields-all-to-right").click(function () {
-        var selected = $("#z-e-selectable-fields option");
+    $("#ze-fields-to-left").click(function () {
+        var selected = $("#ze-selected-fields").val();
         for (var i = 0; i < selected.length; i++) {
-            $("#z-e-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+            $("#ze-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
         }
-        $("#z-e-selectable-fields option").remove();
-    });
-    $("#$ZeppelinEChartsParagraphId #z-e-fields-all-to-left").click(function () {
-        var selected = $("#z-e-selected-fields option");
         for (var i = 0; i < selected.length; i++) {
-            $("#z-e-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+            $("#ze-selected-fields option[value='" + selected[i] + "']").remove();
         }
-        $("#z-e-selected-fields option").remove();
     });
-    $("#$ZeppelinEChartsParagraphId #z-e-refresh-graphic").click(function () {
-        var width = $("#z-e-graphic-width").val();
+    $("#ze-fields-all-to-right").click(function () {
+        var selected = $("#ze-selectable-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#ze-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#ze-selectable-fields option").remove();
+    });
+    $("#ze-fields-all-to-left").click(function () {
+        var selected = $("#ze-selected-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#ze-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#ze-selected-fields option").remove();
+    });
+    $("#zeppin-echarts-refresh-graphic").click(function () {
+        var width = $("#ze-graphic-width").val();
         if (width != undefined && width != "") {
-            $("#z-e-graphic-body").css("width", width);
+            $("#ze-graphic-body").css("width", width);
         }
-        var height = $("#z-e-graphic-height").val();
+        var height = $("#ze-graphic-height").val();
         if (height != undefined && width != "") {
-            $("#z-e-graphic-body").css("height", height);
+            $("#ze-graphic-body").css("height", height);
         }
         drawChart(false, graphicBodyObj, buildGraphicOption(option));
     });
 
-    $("#$ZeppelinEChartsParagraphId #z-e-add-serie").click(function () {
-        var selected = $("#z-e-selected-fields option");
+    $("#zeppin-echarts-add-serie").click(function () {
+        var selected = $("#ze-selected-fields option");
         var fields = "";
         for (var i = 0; i < selected.length; i++) {
             if (i > 0) {
@@ -564,11 +562,11 @@
         }
         serieConfigs.push({
             "index": serieConfigs.length,
-            "name": $("#z-e-serie-name").val(),
-            "type": $("#z-e-type").val(),
+            "name": $("#ze-serie-name").val(),
+            "type": $("#ze-type").val(),
             "fields": fields,
-            "xAxisIndex": $("#z-e-xaxis").val(),
-            "yAxisIndex": $("#z-e-yaxis").val()
+            "xAxisIndex": $("#ze-xaxis").val(),
+            "yAxisIndex": $("#ze-yaxis").val()
         });
         fillOriginDataOptionsFromStruct(orginData[0]);
         updateZeppelinEChartsSeries();
@@ -703,20 +701,20 @@
             console.log('zeppelinEchartsCSS has loaded');
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
-                    $("#$ZeppelinEChartsParagraphId #z-e-console").hide();
+                    $("#ze-console").hide();
                 #elseif ($ZeppelinEChartsUserConsole == false)
                     if (location.href.endsWith("?asIframe")) {
-                        $("#$ZeppelinEChartsParagraphId #z-e-console").hide();
+                        $("#ze-console").hide();
                     }
                 #end
-                #if($ZeppelinECahrtsWidth) $("#$ZeppelinEChartsParagraphId #z-e-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
-                #if($ZeppelinECahrtsHeight) $("#$ZeppelinEChartsParagraphId #z-e-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
-                $("#$ZeppelinEChartsParagraphId #z-e-title").val(option$ZeppelinEChartsParagraphId.title.text);
-                $("#$ZeppelinEChartsParagraphId #z-e-subtitle").val(option$ZeppelinEChartsParagraphId.title.subtext);
-                fillXY(option$ZeppelinEChartsParagraphId);
+                #if($ZeppelinECahrtsWidth) $("#ze-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
+                #if($ZeppelinECahrtsHeight) $("#ze-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
+                $("#ze-title").val(option.title.text);
+                $("#ze-subtitle").val(option.title.subtext);
+                fillXY(option);
                 fillOriginDataOptionsFromStruct(orginData[0]);
                 updateZeppelinEChartsSeries();
-                graphicBody = document.getElementById('z-e-graphic-body');
+                graphicBody = document.getElementById('ze-graphic-body');
                 graphicBodyObj = echarts.init(graphicBody, "macarons");
                 $(window).resize(function () {
                     graphicBodyObj.resize();
