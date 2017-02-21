@@ -208,7 +208,7 @@
                     name: "$seriesIndex",
                     type: "line",
                     data: []
-                }
+                },
             #end]
     };
 
