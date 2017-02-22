@@ -11,8 +11,8 @@ Array.prototype.del = function (index) {
 }
 
 function buildGraphicOption(option, orginData, paragraphId, serieConfigs) {
-    var title = $("#" + paragraphId + " #ze-title").val();
-    var subtitle = $("#" + paragraphId + " #ze-subtitle").val();
+    var title = $("#ze-paragraph-" + paragraphId + " #ze-title").val();
+    var subtitle = $("#ze-paragraph-" + paragraphId + " #ze-subtitle").val();
     option.title.text = title;
     option.title.subtext = subtitle;
     option.series = buildSerieDataByOrigin(orginData, serieConfigs);
@@ -40,10 +40,10 @@ function drawChart(redraw, chart, option) {
 }
 
 function fillOriginDataOptionsFromStruct(data, paragraphId) {
-    $("#" + paragraphId + " #ze-selected-fields option").remove();
-    $("#" + paragraphId + " #ze-selectable-fields option").remove();
+    $("#ze-paragraph-" + paragraphId + " #ze-selected-fields option").remove();
+    $("#ze-paragraph-" + paragraphId + " #ze-selectable-fields option").remove();
     for (var key in data) {
-        $("#" + paragraphId + " #ze-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
+        $("#ze-paragraph-" + paragraphId + " #ze-selectable-fields").append("<option value='" + key + "'>" + key + "</option>");
     }
 }
 

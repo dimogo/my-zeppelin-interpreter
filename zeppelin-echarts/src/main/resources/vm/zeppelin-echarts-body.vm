@@ -215,45 +215,45 @@
     function fillXY${ZeppelinEChartsParagraphId}(option) {
         if (option.xAxis && option.xAxis.length > 0) {
             for (var i = 0; i < option.xAxis.length; i++) {
-                $("#${ZeppelinEChartsParagraphId} #ze-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "</option>");
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "</option>");
             }
-            $("#${ZeppelinEChartsParagraphId} #ze-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
-            $("#${ZeppelinEChartsParagraphId} #ze-xaxis").change(function () {
-                $("#${ZeppelinEChartsParagraphId} #ze-xaxis-type option:selected").attr("selected", false);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis-type option[value='" + (option.xAxis[0].type ? option.xAxis[0].type : "category") + "']").attr('selected', true);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis").change(function () {
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis-type option:selected").attr("selected", false);
                 var i = parseInt($(this).val());
-                $("#${ZeppelinEChartsParagraphId} #ze-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis-type option[value='" + (option.xAxis[i].type ? option.xAxis[i].type : "category") + "']").attr('selected', true);
             });
-            $("#${ZeppelinEChartsParagraphId} #ze-xaxis-type").change(function () {
-                var type = $("#${ZeppelinEChartsParagraphId} #ze-xaxis-type option:selected").val();
-                var index = $("#${ZeppelinEChartsParagraphId} #ze-xaxis option:selected").val();
-                $("#${ZeppelinEChartsParagraphId} #ze-xaxis option:selected").text(index + "-" + type);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis-type").change(function () {
+                var type = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis-type option:selected").val();
+                var index = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis option:selected").val();
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis option:selected").text(index + "-" + type);
                 option.xAxis[index].type = type;
             });
         }
         if (option.yAxis && option.yAxis.length > 0) {
             for (var i = 0; i < option.yAxis.length; i++) {
-                $("#${ZeppelinEChartsParagraphId} #ze-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis").append("<option value='" + i + "' " + (i == 0 ? "selected" : "") + ">" + i + "-" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "</option>");
             }
-            $("#${ZeppelinEChartsParagraphId} #ze-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
-            $("#${ZeppelinEChartsParagraphId} #ze-yaxis").change(function () {
-                $("#${ZeppelinEChartsParagraphId} #ze-yaxis-type option:selected").attr("selected", false);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis-type option[value='" + (option.yAxis[0].type ? option.yAxis[0].type : "value") + "']").attr("selected", true);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis").change(function () {
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis-type option:selected").attr("selected", false);
                 var i = parseInt($(this).val());
-                $("#${ZeppelinEChartsParagraphId} #ze-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis-type option[value='" + (option.yAxis[i].type ? option.yAxis[i].type : "value") + "']").attr('selected', true);
             });
-            $("#${ZeppelinEChartsParagraphId} #ze-yaxis-type").change(function () {
-                var type = $("#${ZeppelinEChartsParagraphId} #ze-yaxis-type option:selected").val();
-                var index = $("#${ZeppelinEChartsParagraphId} #ze-yaxis option:selected").val();
-                $("#${ZeppelinEChartsParagraphId} #ze-yaxis option:selected").text(index + "-" + type);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis-type").change(function () {
+                var type = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis-type option:selected").val();
+                var index = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis option:selected").val();
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis option:selected").text(index + "-" + type);
                 option.yAxis[index].type = type;
             });
         }
     }
 
     function updateZeppelinEChartsSeries() {
-        $("#${ZeppelinEChartsParagraphId} #ze-series tr:gt(0)").remove();
+        $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-series tr:gt(0)").remove();
         for (var index = 0; index < serieConfigs${ZeppelinEChartsParagraphId}.length; index++) {
             var cfg = serieConfigs${ZeppelinEChartsParagraphId}[index];
-            $("#${ZeppelinEChartsParagraphId} #ze-series").append(
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-series").append(
                     "<tr><td>" + index
                     + "<td>" + cfg.name
                     + "<td>" + cfg.type
@@ -265,7 +265,7 @@
                     + "<button name=\"ze-serie-delete\" type=\"button\" class=\"btn btn-danger\">删除</button>"
                     + "</tr>");
         }
-        $("#${ZeppelinEChartsParagraphId} button[name='ze-serie-delete']").each(function () {
+        $("#ze-paragraph-${ZeppelinEChartsParagraphId} button[name='ze-serie-delete']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
                 serieConfigs${ZeppelinEChartsParagraphId}.del(serieIndex);
@@ -274,28 +274,28 @@
             });
 
         });
-        $("#${ZeppelinEChartsParagraphId} button[name='ze-serie-edit']").each(function () {
+        $("#ze-paragraph-${ZeppelinEChartsParagraphId} button[name='ze-serie-edit']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                $("#${ZeppelinEChartsParagraphId} #ze-type option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].type + "']").attr('selected', true);
-                $("#${ZeppelinEChartsParagraphId} #ze-serie-name").val(serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].name);
-                $("#${ZeppelinEChartsParagraphId} #ze-xaxis option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].xAxisIndex + "']").attr('selected', true);
-                $("#${ZeppelinEChartsParagraphId} #ze-yaxis option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].yAxisIndex + "']").attr('selected', true);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-type option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].type + "']").attr('selected', true);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-serie-name").val(serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].name);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].xAxisIndex + "']").attr('selected', true);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis option[value='" + serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].yAxisIndex + "']").attr('selected', true);
                 fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0], ${ZeppelinEChartsParagraphId});
                 var fieldArray = serieConfigs${ZeppelinEChartsParagraphId}[serieIndex].fields.split(",");
                 for (var i = 0; i < fieldArray.length; i++) {
                     if (fieldArray[i] == "") {
                         break;
                     }
-                    $("#${ZeppelinEChartsParagraphId} #ze-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
-                    $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields option[value='" + fieldArray[i] + "']").remove();
+                    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields").append("<option value='" + fieldArray[i] + "'>" + fieldArray[i] + "</option>");
+                    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields option[value='" + fieldArray[i] + "']").remove();
                 }
             });
         });
-        $("#${ZeppelinEChartsParagraphId} button[name='ze-serie-update']").each(function () {
+        $("#ze-paragraph-${ZeppelinEChartsParagraphId} button[name='ze-serie-update']").each(function () {
             $(this).click(function () {
                 var serieIndex = parseInt($(this).parents("tr").children("td:eq(0)").html());
-                var selected = $("#${ZeppelinEChartsParagraphId} #ze-selected-fields option");
+                var selected = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields option");
                 var fields = "";
                 for (var i = 0; i < selected.length; i++) {
                     if (i > 0) {
@@ -305,63 +305,63 @@
                 }
                 serieConfigs${ZeppelinEChartsParagraphId}[serieIndex] = {
                     "index": serieIndex,
-                    "name": $("#${ZeppelinEChartsParagraphId} #ze-serie-name").val(),
-                    "type": $("#${ZeppelinEChartsParagraphId} #ze-type").val(),
+                    "name": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-serie-name").val(),
+                    "type": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-type").val(),
                     "fields": fields,
-                    "xAxisIndex": $("#${ZeppelinEChartsParagraphId} #ze-xaxis").val(),
-                    "yAxisIndex": $("#${ZeppelinEChartsParagraphId} #ze-yaxis").val()
+                    "xAxisIndex": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis").val(),
+                    "yAxisIndex": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis").val()
                 };
                 fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0], ${ZeppelinEChartsParagraphId});
                 updateZeppelinEChartsSeries();
             });
         });
     }
-    $("#${ZeppelinEChartsParagraphId} #ze-fields-to-right").click(function () {
-        var selected = $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields").val();
+    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-fields-to-right").click(function () {
+        var selected = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields").val();
         for (var i = 0; i < selected.length; i++) {
-            $("#${ZeppelinEChartsParagraphId} #ze-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
         }
         for (var i = 0; i < selected.length; i++) {
-            $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields option[value='" + selected[i] + "']").remove();
-        }
-    });
-    $("#${ZeppelinEChartsParagraphId} #ze-fields-to-left").click(function () {
-        var selected = $("#${ZeppelinEChartsParagraphId} #ze-selected-fields").val();
-        for (var i = 0; i < selected.length; i++) {
-            $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
-        }
-        for (var i = 0; i < selected.length; i++) {
-            $("#${ZeppelinEChartsParagraphId} #ze-selected-fields option[value='" + selected[i] + "']").remove();
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields option[value='" + selected[i] + "']").remove();
         }
     });
-    $("#${ZeppelinEChartsParagraphId} #ze-fields-all-to-right").click(function () {
-        var selected = $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields option");
+    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-fields-to-left").click(function () {
+        var selected = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields").val();
         for (var i = 0; i < selected.length; i++) {
-            $("#${ZeppelinEChartsParagraphId} #ze-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields").append("<option value='" + selected[i] + "'>" + selected[i] + "</option>");
         }
-        $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields option").remove();
-    });
-    $("#${ZeppelinEChartsParagraphId} #ze-fields-all-to-left").click(function () {
-        var selected = $("#${ZeppelinEChartsParagraphId} #ze-selected-fields option");
         for (var i = 0; i < selected.length; i++) {
-            $("#${ZeppelinEChartsParagraphId} #ze-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields option[value='" + selected[i] + "']").remove();
         }
-        $("#${ZeppelinEChartsParagraphId} #ze-selected-fields option").remove();
     });
-    $("#${ZeppelinEChartsParagraphId} #zeppin-echarts-refresh-graphic").click(function () {
-        var width = $("#${ZeppelinEChartsParagraphId} #ze-graphic-width").val();
+    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-fields-all-to-right").click(function () {
+        var selected = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields option").remove();
+    });
+    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-fields-all-to-left").click(function () {
+        var selected = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields option");
+        for (var i = 0; i < selected.length; i++) {
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selectable-fields").append("<option value='" + selected[i].value + "'>" + selected[i].text + "</option>");
+        }
+        $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields option").remove();
+    });
+    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #zeppin-echarts-refresh-graphic").click(function () {
+        var width = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-width").val();
         if (width != undefined && width != "") {
-            $("#${ZeppelinEChartsParagraphId} #ze-graphic-body").css("width", width);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-body").css("width", width);
         }
-        var height = $("#${ZeppelinEChartsParagraphId} #ze-graphic-height").val();
+        var height = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-height").val();
         if (height != undefined && width != "") {
-            $("#${ZeppelinEChartsParagraphId} #ze-graphic-body").css("height", height);
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-body").css("height", height);
         }
         drawChart(false, graphicBodyObj${ZeppelinEChartsParagraphId}, buildGraphicOption(option${ZeppelinEChartsParagraphId}, orginData${ZeppelinEChartsParagraphId}, ${ZeppelinEChartsParagraphId}, serieConfigs${ZeppelinEChartsParagraphId}));
     });
 
-    $("#${ZeppelinEChartsParagraphId} #zeppin-echarts-add-serie").click(function () {
-        var selected = $("#${ZeppelinEChartsParagraphId} #ze-selected-fields option");
+    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #zeppin-echarts-add-serie").click(function () {
+        var selected = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-selected-fields option");
         var fields = "";
         for (var i = 0; i < selected.length; i++) {
             if (i > 0) {
@@ -371,11 +371,11 @@
         }
         serieConfigs${ZeppelinEChartsParagraphId}.push({
             "index": serieConfigs${ZeppelinEChartsParagraphId}.length,
-            "name": $("#${ZeppelinEChartsParagraphId} #ze-serie-name").val(),
-            "type": $("#${ZeppelinEChartsParagraphId} #ze-type").val(),
+            "name": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-serie-name").val(),
+            "type": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-type").val(),
             "fields": fields,
-            "xAxisIndex": $("#${ZeppelinEChartsParagraphId} #ze-xaxis").val(),
-            "yAxisIndex": $("#${ZeppelinEChartsParagraphId} #ze-yaxis").val()
+            "xAxisIndex": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-xaxis").val(),
+            "yAxisIndex": $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-yaxis").val()
         });
         fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0], ${ZeppelinEChartsParagraphId});
         updateZeppelinEChartsSeries();
@@ -413,20 +413,20 @@
             console.log('zeppelinEchartsCSS has loaded');
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
-                    $("#${ZeppelinEChartsParagraphId} #ze-console").hide();
+                    $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-console").hide();
                 #elseif ($ZeppelinEChartsUserConsole == false)
                     if (location.href.endsWith("?asIframe")) {
-                        $("#${ZeppelinEChartsParagraphId} #ze-console").hide();
+                        $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-console").hide();
                     }
                 #end
-                #if($ZeppelinECahrtsWidth) $("#${ZeppelinEChartsParagraphId} #ze-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
-                #if($ZeppelinECahrtsHeight) $("#${ZeppelinEChartsParagraphId} #ze-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
-                $("#${ZeppelinEChartsParagraphId} #ze-title").val(option${ZeppelinEChartsParagraphId}.title.text);
-                $("#${ZeppelinEChartsParagraphId} #ze-subtitle").val(option${ZeppelinEChartsParagraphId}.title.subtext);
+                #if($ZeppelinECahrtsWidth) $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-body").css("width", "$ZeppelinECahrtsWidth"); #end
+                #if($ZeppelinECahrtsHeight) $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-body").css("height", "$ZeppelinECahrtsHeight"); #end
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-title").val(option${ZeppelinEChartsParagraphId}.title.text);
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-subtitle").val(option${ZeppelinEChartsParagraphId}.title.subtext);
                 fillXY${ZeppelinEChartsParagraphId}(option${ZeppelinEChartsParagraphId});
                 fillOriginDataOptionsFromStruct(orginData${ZeppelinEChartsParagraphId}[0], ${ZeppelinEChartsParagraphId});
                 updateZeppelinEChartsSeries();
-                graphicBody${ZeppelinEChartsParagraphId} = $("#${ZeppelinEChartsParagraphId} #ze-graphic-body")[0];
+                graphicBody${ZeppelinEChartsParagraphId} = $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-graphic-body")[0];
                 graphicBodyObj${ZeppelinEChartsParagraphId} = echarts.init(graphicBody${ZeppelinEChartsParagraphId}, "macarons");
                 $(window).resize(function () {
                     graphicBodyObj${ZeppelinEChartsParagraphId}.resize();
