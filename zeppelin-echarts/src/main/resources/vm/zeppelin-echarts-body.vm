@@ -492,16 +492,24 @@
     spawn${ZeppelinEChartsParagraphId}(function * ()
     {
         try {
-            yield getJS${ZeppelinEChartsParagraphId}(jquery${ZeppelinEChartsParagraphId});
-            console.log('jquery has loaded');
-            yield getJS${ZeppelinEChartsParagraphId}(echarts${ZeppelinEChartsParagraphId});
-            console.log('echarts has loaded');
+            if ($("script[src='" + jquery${ZeppelinEChartsParagraphId} + "']").length == 0) {
+                yield getJS${ZeppelinEChartsParagraphId}(jquery${ZeppelinEChartsParagraphId});
+                console.log('jquery has loaded');
+            }
+            if ($("script[src='" + echarts${ZeppelinEChartsParagraphId} + "']").length == 0) {
+                yield getJS${ZeppelinEChartsParagraphId}(echarts${ZeppelinEChartsParagraphId});
+                console.log('echarts has loaded');
+            }
             //yield getJS${ZeppelinEChartsParagraphId}(bootstrap${ZeppelinEChartsParagraphId});
             //console.log('bootstrap has loaded');
-            yield getJS${ZeppelinEChartsParagraphId}(zeppelinEchartsJS${ZeppelinEChartsParagraphId});
-            console.log('zeppelinEchartsJS has loaded');
-            yield getCSS${ZeppelinEChartsParagraphId}(zeppelinEchartsCSS${ZeppelinEChartsParagraphId});
-            console.log('zeppelinEchartsCSS has loaded');
+            if ($("script[src='" + zeppelinEchartsJS${ZeppelinEChartsParagraphId} + "']").length == 0) {
+                yield getJS${ZeppelinEChartsParagraphId}(zeppelinEchartsJS${ZeppelinEChartsParagraphId});
+                console.log('zeppelinEchartsJS has loaded');
+            }
+            if ($("style[href='" + zeppelinEchartsCSS${ZeppelinEChartsParagraphId} + "']").length == 0) {
+                yield getCSS${ZeppelinEChartsParagraphId}(zeppelinEchartsCSS${ZeppelinEChartsParagraphId});
+                console.log('zeppelinEchartsCSS has loaded');
+            }
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
                     $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-console").hide();
