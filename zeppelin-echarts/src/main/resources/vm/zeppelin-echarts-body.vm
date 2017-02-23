@@ -500,13 +500,11 @@
                 yield getJS${ZeppelinEChartsParagraphId}(echarts${ZeppelinEChartsParagraphId});
                 console.log('echarts has loaded');
             }
-            //yield getJS${ZeppelinEChartsParagraphId}(bootstrap${ZeppelinEChartsParagraphId});
-            //console.log('bootstrap has loaded');
             if ($("script[src='" + zeppelinEchartsJS${ZeppelinEChartsParagraphId} + "']").length == 0) {
                 yield getJS${ZeppelinEChartsParagraphId}(zeppelinEchartsJS${ZeppelinEChartsParagraphId});
                 console.log('zeppelinEchartsJS has loaded');
             }
-            if ($("style[href='" + zeppelinEchartsCSS${ZeppelinEChartsParagraphId} + "']").length == 0) {
+            if ($("link[href='" + zeppelinEchartsCSS${ZeppelinEChartsParagraphId} + "']").length == 0) {
                 yield getCSS${ZeppelinEChartsParagraphId}(zeppelinEchartsCSS${ZeppelinEChartsParagraphId});
                 console.log('zeppelinEchartsCSS has loaded');
             }
