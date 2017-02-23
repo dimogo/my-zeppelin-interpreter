@@ -477,7 +477,7 @@
             zeppelinEchartsCSS${ZeppelinEChartsParagraphId} = '/plugins/zeppelin-echarts/css/zeppelin-echarts.css'
             ;
 
-    spawn(function * ()
+    spawn${ZeppelinEChartsParagraphId}(function * ()
     {
         try {
             yield getJS${ZeppelinEChartsParagraphId}(jquery${ZeppelinEChartsParagraphId});
