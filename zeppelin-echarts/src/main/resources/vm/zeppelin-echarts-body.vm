@@ -492,22 +492,22 @@
     spawn${ZeppelinEChartsParagraphId}(function * ()
     {
         try {
-            if ($("script[src='" + jquery${ZeppelinEChartsParagraphId} + "']").length == 0) {
+            ##if ($("script[src='" + jquery${ZeppelinEChartsParagraphId} + "']").length == 0) {
                 yield getJS${ZeppelinEChartsParagraphId}(jquery${ZeppelinEChartsParagraphId});
                 console.log('jquery has loaded');
-            }
-            if ($("script[src='" + echarts${ZeppelinEChartsParagraphId} + "']").length == 0) {
+            ##}
+            ##if ($("script[src='" + echarts${ZeppelinEChartsParagraphId} + "']").length == 0) {
                 yield getJS${ZeppelinEChartsParagraphId}(echarts${ZeppelinEChartsParagraphId});
                 console.log('echarts has loaded');
-            }
-            if ($("script[src='" + zeppelinEchartsJS${ZeppelinEChartsParagraphId} + "']").length == 0) {
+            ##}
+            ##if ($("script[src='" + zeppelinEchartsJS${ZeppelinEChartsParagraphId} + "']").length == 0) {
                 yield getJS${ZeppelinEChartsParagraphId}(zeppelinEchartsJS${ZeppelinEChartsParagraphId});
                 console.log('zeppelinEchartsJS has loaded');
-            }
-            if ($("link[href='" + zeppelinEchartsCSS${ZeppelinEChartsParagraphId} + "']").length == 0) {
+            ##}
+            ##if ($("link[href='" + zeppelinEchartsCSS${ZeppelinEChartsParagraphId} + "']").length == 0) {
                 yield getCSS${ZeppelinEChartsParagraphId}(zeppelinEchartsCSS${ZeppelinEChartsParagraphId});
                 console.log('zeppelinEchartsCSS has loaded');
-            }
+            ##}
             $(document).ready(function () {
                 #if($ZeppelinEChartsAdminConsole == false)
                     $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-console").hide();
