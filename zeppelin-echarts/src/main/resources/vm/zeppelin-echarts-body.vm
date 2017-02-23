@@ -470,6 +470,18 @@
         return onFulfilled();
     }
 
+    try {
+        #if($ZeppelinEChartsAdminConsole == false)
+            $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-console").hide();
+        #elseif ($ZeppelinEChartsUserConsole == false)
+            if (location.href.endsWith("?asIframe")) {
+                $("#ze-paragraph-${ZeppelinEChartsParagraphId} #ze-console").hide();
+            }
+        #end
+    } catch (e) {
+
+    }
+
     var jquery${ZeppelinEChartsParagraphId} = '$ZeppelinEChartsJQueryUrl',
             echarts${ZeppelinEChartsParagraphId} = '$ZeppelinEChartsJSUrl',
             bootstrap${ZeppelinEChartsParagraphId} = '$ZeppelinEChartsBootstrapURL',
