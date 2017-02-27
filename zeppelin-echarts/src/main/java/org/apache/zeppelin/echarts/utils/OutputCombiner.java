@@ -1,6 +1,6 @@
 package org.apache.zeppelin.echarts.utils;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by Ethan Xiao on 2017/1/12.
