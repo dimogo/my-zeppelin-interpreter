@@ -6,3 +6,4 @@ org.apache.httpcomponents:httpmime:4.5.2
 com.alibaba:fastjson:1.2.23
 javax.ws.rs:javax.ws.rs-api:2.0
 org.asynchttpclient:async-http-client:2.1.0-alpha2
+org.apache.commons:commons-lang3:3.5
