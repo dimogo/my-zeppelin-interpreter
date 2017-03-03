@@ -10,6 +10,7 @@
     <version>0.7.0</version>
     <modules>
         <module>zeppelin-echarts</module>
+        <module>qiniu</module>
     </modules>
 
     <properties>
