@@ -54,9 +54,9 @@ public class InterpreterReader extends Reader<String, String> {
 			client.setPrincipal(interpreterContext.getAuthenticationInfo().getUser());
 			client.setTicket(interpreterContext.getAuthenticationInfo().getTicket());
 			if (run) {
-				return WebSocketClient.ResultUtil.getParagraphMsg(client.runParagraph(noteBookId, paragraphId, "%" + replName + "\n" + body));
+				return WebSocketClient.ResultUtil.getParagraphAllMessages(client.runParagraph(noteBookId, paragraphId, "%" + replName + "\n" + body));
 			}
-			return WebSocketClient.ResultUtil.getParagraphsMsg(client.getNote(noteBookId), paragraphId);
+			return WebSocketClient.ResultUtil.getParagraphAllMessages(client.getNote(noteBookId), paragraphId);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

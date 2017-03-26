@@ -1,8 +1,11 @@
 import org.apache.zeppelin.echarts.CommandParser;
 import org.apache.zeppelin.echarts.command.Command;
 import org.apache.zeppelin.interpreter.InterpreterResult;
+import org.apache.zeppelin.interpreter.InterpreterResultMessage;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * Created by Ethan Xiao on 2017/1/12.
@@ -20,9 +23,9 @@ public class CommandParserTest {
 		InterpreterResult result = command.execute(null, null);
 		Assert.assertNotNull(result);
 		Assert.assertTrue(result.code() == InterpreterResult.Code.SUCCESS);
-		Assert.assertTrue(result.message().length() == 1);
-		String text = result.message();
-		Assert.assertEquals(text,
+		Assert.assertTrue(result.message().size() == 1);
+		List<InterpreterResultMessage> resultList = result.message();
+		Assert.assertEquals(resultList.get(0).getData(),
 				"\r\n<html><head></head>\r\n"
 				+ "<body></body>"
 				+ "</html>");
