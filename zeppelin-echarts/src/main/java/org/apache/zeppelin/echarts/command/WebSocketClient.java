@@ -23,8 +23,8 @@ import java.util.concurrent.*;
  * Created by Ethan Xiao on 2017/2/5.
  */
 public class WebSocketClient {
-	private String principal = "admin";
-	private String ticket = "74d9a574-48bb-4cff-a06e-7db8aed8184e";
+	private String principal = "anonymous";
+	private String ticket = "anonymous";
 	private String roles = "";
 
 	private WebSocket websocket;
