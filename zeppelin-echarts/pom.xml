@@ -21,7 +21,7 @@
             <groupId>org.apache.zeppelin</groupId>
             <artifactId>zeppelin-interpreter</artifactId>
             <version>${project.version}</version>
-            <scope>provided,test</scope>
+            <scope>provided</scope>
             <!--
             <exclusions>
                 <exclusion>
@@ -39,13 +39,13 @@
             <groupId>org.apache.zeppelin</groupId>
             <artifactId>zeppelin-server</artifactId>
             <version>${project.version}</version>
-            <scope>provided,test</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.zeppelin</groupId>
             <artifactId>zeppelin-zengine</artifactId>
             <version>${project.version}</version>
-            <scope>provided,test</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>
