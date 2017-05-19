@@ -1,6 +1,5 @@
 .idea/*
-my-zeppelin-interpreter.iml
-zeppelin-echarts/zeppelin-echarts.iml
-zeppelin-echarts/target/*
+**/*.iml
+*/target/*
 velocity.log*
 zeppelin-echarts/src/main/resources/velocity.properties
